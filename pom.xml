@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.0.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.brycehan</groupId>
+    <artifactId>bryce-generator</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>bryce-generator</name>
+    <description>Generator project for Spring Boot</description>
+    <packaging>pom</packaging>
+
+    <!-- 版本属性 -->
+    <properties>
+        <!-- Java版本 -->
+        <java.version>17</java.version>
+        <!-- MybatisPlus -->
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
+        <!-- 实体转换器 -->
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
+        <dameng.version>8.1.2.141</dameng.version>
+        <clickhouse.version>0.3.2</clickhouse.version>
+        <!-- 工具 -->
+        <guava.version>31.1-jre</guava.version>
+        <fastjson.version>2.0.25</fastjson.version>
+        <hutool.version>5.8.15</hutool.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+    </properties>
+
+    <modules>
+        <module>bryce-generator-core</module>
+        <module>bryce-generator-boot-starter</module>
+        <module>bryce-generator-server</module>
+    </modules>
+    <!-- 依赖管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Generator核心组件 -->
+            <dependency>
+                <groupId>com.brycehan</groupId>
+                <artifactId>bryce-generator-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Generator Boot Starter组件 -->
+            <dependency>
+                <groupId>com.brycehan</groupId>
+                <artifactId>bryce-generator-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- Mybatis Plus框架 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- 实体转换器 -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <!-- 数据库驱动 -->
+            <dependency>
+                <groupId>com.oracle.database.jdbc</groupId>
+                <artifactId>ojdbc11</artifactId>
+                <version>${oracle-database.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.dameng</groupId>
+                <artifactId>DmJdbcDriver18</artifactId>
+                <version>${dameng.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ru.yandex.clickhouse</groupId>
+                <artifactId>clickhouse-jdbc</artifactId>
+                <version>${clickhouse.version}</version>
+            </dependency>
+            <!-- Guava库 -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- 糊涂工具 -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+    <!-- 构建 -->
+    <build>
+        <resources>
+            <!-- 编译时包含Mybatis XML文件 -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*Mapper.xml</include>
+                </includes>
+            </resource>
+            <!-- 编译时包含 resources 文件夹下资源 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <!-- 插件 -->
+        <plugins>
+            <!-- 编译 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${mapstruct.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

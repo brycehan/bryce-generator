@@ -1,0 +1,26 @@
+server:
+  port: 8100
+  servlet:
+    context-path: /gen
+
+spring:
+  profiles:
+    active: mysql
+
+mybatis-plus:
+  mapper-locations: classpath*:com/brycehan/generator/*/mapper/xml/*Mapper.xml
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: null
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 日志
+logging:
+  level:
+    com.brycehan.generator: debug
+    web: debug

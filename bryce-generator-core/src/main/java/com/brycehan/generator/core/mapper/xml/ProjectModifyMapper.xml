@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.brycehan.generator.core.mapper.ProjectModifyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.brycehan.generator.core.entity.ProjectModify">
+        <id column="id" property="id"/>
+        <result column="project_name" property="projectName"/>
+        <result column="project_code" property="projectCode"/>
+        <result column="project_package" property="projectPackage"/>
+        <result column="project_path" property="projectPath"/>
+        <result column="modify_project_name" property="modifyProjectName"/>
+        <result column="modify_project_code" property="modifyProjectCode"/>
+        <result column="modify_project_package" property="modifyProjectPackage"/>
+        <result column="exclusions" property="exclusions"/>
+        <result column="modify_suffix" property="modifySuffix"/>
+        <result column="modify_tmp_path" property="modifyTmpPath"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , project_name, project_code, project_package, project_path, modify_project_name, modify_project_code, modify_project_package, exclusions, modify_suffix, modify_tmp_path, create_time
+    </sql>
+
+</mapper>

@@ -1,0 +1,139 @@
+<template>
+  <el-dialog
+      v-model="visible"
+      title="源码下载"
+      :close-on-click-modal="false"
+  >
+    <el-form
+        ref="dataFormRef"
+        :model="dataForm"
+        :rules="rules"
+        label-width="100px"
+        @keyup.enter="handleSubmit()"
+    >
+      <el-row>
+        <el-col :span="12">
+          <el-form-item prop="projectName" label="项目名">
+            <el-input v-model="dataForm.projectName" disabled placeholder="项目名" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item prop="projectPath" label="项目路径">
+            <el-input v-model="dataForm.projectPath" disabled placeholder="项目路径" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item prop="projectCode" label="项目标识">
+            <el-input v-model="dataForm.projectCode" disabled placeholder="项目标识" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item prop="projectPackage" label="项目包名">
+            <el-input v-model="dataForm.projectPackage" disabled placeholder="项目包名" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-divider>变更后的信息</el-divider>
+      <el-form-item prop="modifyProjectName" label="项目名">
+        <el-input v-model="dataForm.modifyProjectName" placeholder="项目名" />
+      </el-form-item>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item prop="modifyProjectCode" label="项目标识">
+            <el-input v-model="dataForm.modifyProjectCode" placeholder="项目标识" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item prop="modifyProjectPackage" label="项目包名">
+            <el-input v-model="dataForm.modifyProjectPackage" placeholder="项目包名" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item prop="exclusions" label="排除文件">
+            <el-input v-model="dataForm.exclusions" placeholder="排除文件" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item prop="modifySuffix" label="变更文件">
+            <el-input v-model="dataForm.modifySuffix" placeholder="变更文件" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+    </el-form>
+    <template #footer>
+      <el-button @click="visible = false">取消</el-button>
+      <el-button type="primary" @click="handleSubmit()">下载</el-button>
+    </template>
+  </el-dialog>
+</template>
+
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import { getById, addOrUpdate, sourceDownload } from '@/api/projectModify'
+
+const visible = ref(false)
+const dataFormRef = ref()
+
+const dataForm = reactive({
+  id: '',
+  projectName: '',
+  projectPath: '',
+  projectCode: '',
+  projectPackage: '',
+  modifyProjectName: '',
+  modifyProjectCode: '',
+  modifyProjectPackage: '',
+  exclusions: 1,
+  modifySuffix: '',
+})
+
+const rules = reactive({
+  modifyProjectName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+  modifyProjectCode: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+  modifyProjectPackage: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+  exclusions: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+  modifySuffix: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+})
+
+const init = (id: string) => {
+  visible.value = true
+  dataForm.id = ''
+
+  // 重置表单数据
+  if (dataFormRef.value) {
+    dataFormRef.value.resetFields()
+  }
+
+  getProject(id)
+}
+
+const getProject = (id: string) => {
+  getById(id).then((res) => {
+    Object.assign(dataForm, res.data)
+  })
+}
+
+/** 保存 */
+const handleSubmit = () => {
+  dataFormRef.value.validate(async (valid: boolean) => {
+    if (!valid) {
+      return false
+    }
+
+    // 先保存
+    await addOrUpdate(dataForm)
+
+    // 源码下载
+    sourceDownload(dataForm.id)
+    visible.value = false
+  })
+}
+
+defineExpose({
+  init
+})
+</script>

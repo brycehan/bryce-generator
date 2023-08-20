@@ -1,0 +1,21 @@
+:root {
+  // 左侧菜单
+  --theme-menu-width: 200px;
+  --theme-menu-bg-color: #263238;
+  --theme-menu-text-color: #333;
+  --theme-menu-hover-color: var(--el-color-primary);
+  --theme-menu-hover-bg-color: var(--el-color-primary-light-9);
+
+  // logo
+  --theme-logo-text-color: white;
+  --theme-logo-text-fontsize: 18px;
+
+  // 顶部区域
+  --theme-header-height: 50px;
+  --theme-header-bg-color: #263238;
+  --theme-header-text-color: white;
+  --theme-header-hover-color: rgba(0, 0, 0, 0.1);
+
+  // 主区域
+  --theme-main-bg-color: #f0f2f5;
+}
