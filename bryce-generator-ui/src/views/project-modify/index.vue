@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
         <el-input v-model="state.queryForm.projectName" placeholder="项目名" />
@@ -18,10 +18,10 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-      <el-table-column prop="projectName" label="项目名" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="projectCode" label="项目标识" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="projectPackage" label="项目包名" show-overflow-tooltip header-align="center" align="center"></el-table-column>
-      <el-table-column prop="projectPath" label="项目路径" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+      <el-table-column label="项目名" prop="projectName" header-align="center" align="center"></el-table-column>
+      <el-table-column label="项目标识" prop="projectCode" header-align="center" align="center"></el-table-column>
+      <el-table-column label="项目包名" prop="projectPackage" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+      <el-table-column label="项目路径" prop="projectPath" show-overflow-tooltip header-align="center" align="center"></el-table-column>
       <el-table-column label="操作" fixed="right" header-align="center" align="center" width="180">
         <template #default="scope">
           <el-button type="success" link @click="handleDownload(scope.row.id)"

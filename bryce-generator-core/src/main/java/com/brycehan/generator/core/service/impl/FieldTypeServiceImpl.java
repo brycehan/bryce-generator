@@ -24,6 +24,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -98,16 +99,17 @@ public class FieldTypeServiceImpl extends BaseServiceImpl<FieldTypeMapper, Field
     }
 
     @Override
-    public List<String> getPackageNameByTableId(Long tableId) {
+    public Set<String> getPackageNameByTableId(Long tableId) {
         return this.fieldTypeMapper.getPackageNameByTableId(tableId);
     }
 
     @Override
     public List<String> getAttrTypeList() {
-        QueryWrapper<FieldType> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("distinct attr_type")
-                .orderByDesc("attr_type");
-        return this.baseMapper.selectObjs(queryWrapper).stream()
-                .map(item -> (String) item).toList();
+        LambdaQueryWrapper<FieldType> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.select(FieldType::getAttrType)
+                .orderByDesc(FieldType::getAttrType);
+
+        return this.listObjs(queryWrapper, Object::toString).stream()
+                .distinct().toList();
     }
 }

@@ -98,4 +98,9 @@ public class DmDbQuery implements DbQuery {
         return "column_key";
     }
 
+    @Override
+    public String fieldCharacterMaximumLength() {
+        return null;
+    }
+
 }

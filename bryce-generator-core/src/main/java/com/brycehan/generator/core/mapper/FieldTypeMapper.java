@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.brycehan.generator.core.entity.FieldType;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * 字段类型管理Mapper接口
@@ -21,6 +21,6 @@ public interface FieldTypeMapper extends BaseMapper<FieldType> {
      * @param tableId 表ID
      * @return 包名列表
      */
-    List<String> getPackageNameByTableId(Long tableId);
+    Set<String> getPackageNameByTableId(Long tableId);
 
 }

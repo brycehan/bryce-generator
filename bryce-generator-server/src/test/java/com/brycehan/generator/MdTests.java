@@ -1,4 +1,4 @@
-package com.brycehan.generator.server;
+package com.brycehan.generator;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;

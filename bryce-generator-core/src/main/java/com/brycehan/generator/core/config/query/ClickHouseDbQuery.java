@@ -71,4 +71,9 @@ public class ClickHouseDbQuery implements DbQuery {
         return "is_in_primary_key";
     }
 
+    @Override
+    public String fieldCharacterMaximumLength() {
+        return null;
+    }
+
 }

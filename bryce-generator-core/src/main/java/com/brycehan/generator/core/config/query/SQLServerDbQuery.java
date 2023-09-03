@@ -94,4 +94,10 @@ public class SQLServerDbQuery implements DbQuery {
     public String fieldKey() {
         return "column_key";
     }
+
+    @Override
+    public String fieldCharacterMaximumLength() {
+        return null;
+    }
+
 }

@@ -112,7 +112,7 @@ public class TablePageDto extends BasePageDto {
     /**
      * 基类ID
      */
-    private Long baseclassId;
+    private Long baseClassId;
 
     /**
      * 创建时间

@@ -14,9 +14,11 @@ import com.brycehan.generator.core.service.*;
 import com.brycehan.generator.core.util.TemplateUtils;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,10 +26,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -56,7 +55,7 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     @Override
     public Map<String, String> previewCode(Long tableId) {
-        Map<String, String> data = new HashMap<>();
+        Map<String, String> data = new LinkedHashMap<>();
         // 数据模型
         Map<String, Object> dataModel = getDataModel(tableId);
 
@@ -66,7 +65,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         for (TemplateVo template : generatorContent.getTemplates()) {
             dataModel.put("templateName", template.getTemplateName());
             String content = TemplateUtils.getContent(template.getTemplateContent(), dataModel);
-            String path = TemplateUtils.getContent(template.getGeneratorPath(), dataModel);
+            String path = template.getTemplateName();
             data.put(path, content);
         }
         return data;
@@ -160,8 +159,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         setBaseClass(dataModel, table);
 
         // 导入包的列表
-        List<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId());
-        dataModel.put("importList", importList);
+        Set<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId());
+        dataModel.put("importList", Sets.filter(importList, StringUtils::isNotBlank));
 
         // 表信息
         dataModel.put("tableName", table.getTableName());
@@ -206,23 +205,25 @@ public class GeneratorServiceImpl implements GeneratorService {
         // 查询列表
         List<TableField> queryList = new ArrayList<>();
         for (TableField field : table.getFieldList()) {
-            if (field.getPrimaryKey()) {
+            if (field.isPrimaryKey()) {
                 primaryKeys.add(field);
             }
-            if (field.getFormItem()) {
+            if (field.isFormItem()) {
                 formList.add(field);
             }
-            if (field.getGridItem()) {
+            if (field.isGridItem()) {
                 gridList.add(field);
             }
-            if (field.getQueryItem() == Boolean.TRUE) {
+            if (field.isQueryItem()) {
                 queryList.add(field);
             }
         }
         dataModel.put("primaryKeys", primaryKeys);
         dataModel.put("formList", formList);
         dataModel.put("gridList", gridList);
-        dataModel.put("queryList", queryList);
+        dataModel.put("queryList", queryList.stream()
+                .sorted(Comparator.comparing(TableField::getQueryType))
+                .toList());
     }
 
     /**
@@ -232,15 +233,12 @@ public class GeneratorServiceImpl implements GeneratorService {
      * @param table     表
      */
     private void setBaseClass(Map<String, Object> dataModel, Table table) {
-        if (table.getBaseclassId() == null) {
-            for (TableField field : table.getFieldList()) {
-                field.setBaseField(false);
-            }
+        if (table.getBaseClassId() == null) {
             return;
         }
 
         // 基类
-        BaseClass baseClass = this.baseClassService.getById(table.getBaseclassId());
+        BaseClass baseClass = this.baseClassService.getById(table.getBaseClassId());
         baseClass.setPackageName(baseClass.getPackageName());
         dataModel.put("baseClass", baseClass);
 

@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
         <el-input v-model="state.queryForm.tableName" placeholder="表名" />
@@ -19,14 +19,13 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-      <el-table-column prop="tableName" label="表名" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="tableComment" label="表说明" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="className" label="类名" header-align="center" align="center"></el-table-column>
-      <el-table-column label="操作" fixed="right" header-align="center" align="center" width="250">
+      <el-table-column label="表名" prop="tableName" header-align="center" align="center"></el-table-column>
+      <el-table-column label="表说明" prop="tableComment" header-align="center" align="center"></el-table-column>
+      <el-table-column label="类名" prop="className" header-align="center" align="center"></el-table-column>
+      <el-table-column label="操作" fixed="right" header-align="center" align="center" width="280">
         <template #default="scope">
-          <el-button type="success" link @click="handleGenerator(scope.row.id)"
-            >生成代码</el-button
-          >
+          <el-button type="success" link @click="handleGenerator(scope.row.id)">生成代码</el-button>
+          <el-button type="info" link @click="handlePreview(scope.row.id)">预览</el-button>
           <el-button type="primary" link @click="handleEdit(scope.row.id)">编辑</el-button>
           <el-button type="warning" link @click="handleSync(scope.row)">同步</el-button>
           <el-button type="danger" link @click="handleDeleteBatch(scope.row.id)">删除</el-button>
@@ -46,6 +45,7 @@
     <!-- 弹窗 -->
     <Import ref="importRef" @refresh-page="getPage" />
     <Edit ref="editRef" @refresh-page="getPage" />
+    <Preview ref="previewRef" />
     <Generator ref="generatorRef" @refresh-page="getPage" />
   </el-card>
 </template>
@@ -53,6 +53,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import Edit from '@/views/generator/edit.vue'
+import Preview from '@/views/generator/preview.vue'
 import Import from '@/views/generator/import.vue'
 import Generator from '@/views/generator/generator.vue'
 import { page, deleteByIds, syncTable } from '@/api/table'
@@ -80,6 +81,7 @@ const state = reactive({
 
 const editRef = ref()
 const importRef = ref()
+const previewRef = ref()
 const generatorRef = ref()
 
 onMounted(() => {
@@ -121,6 +123,10 @@ const handleCurrentChange = (current: number) => {
 
 const handleGenerator = (id: string) => {
   generatorRef.value.init(id)
+}
+
+const handlePreview = (id: string) => {
+  previewRef.value.init(id)
 }
 
 const handleEdit = (id?: string) => {

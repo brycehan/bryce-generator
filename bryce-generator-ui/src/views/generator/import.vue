@@ -11,7 +11,7 @@
       :rules="rules"
       @keyup.enter="handleSubmit()"
     >
-      <el-form-item prop="datasourceId" label="数据源">
+      <el-form-item label="数据源" prop="datasourceId">
         <el-select v-model="dataForm.datasourceId" clearable placeholder="请选择数据源" @change="getTableList" style="width: 100%">
           <el-option value="0" label="默认数据源" />
           <el-option v-for="datasource in dataForm.datasourceList" :key="datasource.id" :value="datasource.id" :label="datasource.connName" />
@@ -25,8 +25,8 @@
             @selection-change="handleSelectionChange"
         >
           <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-          <el-table-column prop="tableName" label="表名" header-align="center" align="center"></el-table-column>
-          <el-table-column prop="tableComment" label="表说明" header-align="center" align="center"></el-table-column>
+          <el-table-column label="表名" prop="tableName" header-align="center" align="center"></el-table-column>
+          <el-table-column label="表说明" prop="tableComment" header-align="center" align="center"></el-table-column>
         </el-table>
     </el-form>
     <template #footer>

@@ -11,10 +11,10 @@
       label-width="120px"
       @keyup.enter="handleSubmit()"
     >
-      <el-form-item prop="connName" label="连接名">
+      <el-form-item label="连接名" prop="connName">
         <el-input v-model="dataForm.connName" placeholder="连接名" />
       </el-form-item>
-      <el-form-item prop="dbType" label="数据库类型">
+      <el-form-item label="数据库类型" prop="dbType">
         <el-select v-model="dataForm.dbType" clearable placeholder="数据库类型" style="width: 100%">
           <el-option value="MySQL" label="MySQL" />
           <el-option value="PostgreSQL" label="PostgreSQL" />
@@ -24,13 +24,13 @@
           <el-option value="Clickhouse" label="Clickhouse" />
         </el-select>
       </el-form-item>
-      <el-form-item prop="connUrl" label="数据库URL">
+      <el-form-item label="数据库URL" prop="connUrl">
         <el-input v-model="dataForm.connUrl" placeholder="数据库URL" />
       </el-form-item>
-      <el-form-item prop="username" label="用户名">
+      <el-form-item label="用户名" prop="username">
         <el-input v-model="dataForm.username" placeholder="用户名" />
       </el-form-item>
-      <el-form-item prop="password" label="密码">
+      <el-form-item label="密码" prop="password">
         <el-input v-model="dataForm.password" type="password" placeholder="密码" />
       </el-form-item>
     </el-form>

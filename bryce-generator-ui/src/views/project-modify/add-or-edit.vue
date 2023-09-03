@@ -11,17 +11,17 @@
       label-width="100px"
       @keyup.enter="handleSubmit()"
     >
-      <el-form-item prop="projectName" label="项目名">
+      <el-form-item label="项目名" prop="projectName">
         <el-input v-model="dataForm.projectName" placeholder="项目名" />
       </el-form-item>
 
-      <el-form-item prop="projectCode" label="项目标识">
+      <el-form-item label="项目标识" prop="projectCode">
         <el-input v-model="dataForm.projectCode" placeholder="项目标识" />
       </el-form-item>
-      <el-form-item prop="projectPackage" label="项目包名">
+      <el-form-item label="项目包名" prop="projectPackage">
         <el-input v-model="dataForm.projectPackage" placeholder="项目包名" />
       </el-form-item>
-      <el-form-item prop="projectPath" label="项目路径">
+      <el-form-item label="项目路径" prop="projectPath">
         <el-input v-model="dataForm.projectPath" placeholder="项目路径" />
       </el-form-item>
     </el-form>

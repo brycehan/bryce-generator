@@ -12,6 +12,7 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * 字段类型管理服务类
@@ -65,7 +66,7 @@ public interface FieldTypeService extends IService<FieldType> {
      * @param tableId 表ID
      * @return 包名列表
      */
-    List<String> getPackageNameByTableId(Long tableId);
+    Set<String> getPackageNameByTableId(Long tableId);
 
     /**
      * 查询属性类型列表

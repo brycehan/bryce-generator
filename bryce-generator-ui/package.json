@@ -16,6 +16,7 @@
     "@vueuse/core": "^10.3.0",
     "axios": "^1.4.0",
     "element-plus": "^2.3.9",
+    "highlight.js": "^11.8.0",
     "qs": "^6.11.2",
     "sortablejs": "^1.15.0",
     "vue": "^3.3.4",

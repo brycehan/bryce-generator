@@ -23,7 +23,7 @@ import Aside from '@/components/layout/aside/index.vue'
 import Main from '@/components/layout/main/index.vue'
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .layout-container {
   width: 100%;
   height: 100%;
@@ -39,15 +39,11 @@ import Main from '@/components/layout/main/index.vue'
   }
 
   .layout-main {
-    --el-main-padding: 0px !important;
+    padding: 0 !important;
     background-color: var(--theme-main-bg-color);
     overflow: hidden;
     width: 100%;
-
-    .main-container {
-      height: calc(100vh - 30px - var(--theme-header-height));
-      padding: 15px;
-    }
+    height: calc(100vh - var(--theme-header-height));
   }
 }
 </style>

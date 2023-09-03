@@ -3,6 +3,9 @@ server:
   servlet:
     context-path: /gen
 
+bryce:
+  gen:
+    table-prefix: brc_
 spring:
   profiles:
     active: mysql

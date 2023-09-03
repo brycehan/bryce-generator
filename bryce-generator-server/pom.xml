@@ -24,7 +24,6 @@
             <groupId>com.brycehan</groupId>
             <artifactId>bryce-generator-boot-starter</artifactId>
         </dependency>
-
         <!-- Tools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
         <el-input v-model="state.queryForm.connName" placeholder="连接名" />
@@ -27,10 +27,10 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-      <el-table-column prop="connName" label="连接名" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="dbType" label="数据库类型" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="connUrl" label="数据库URL" show-overflow-tooltip header-align="center" align="center"></el-table-column>
-      <el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
+      <el-table-column label="连接名" prop="connName" header-align="center" align="center"></el-table-column>
+      <el-table-column label="数据库类型" prop="dbType" header-align="center" align="center"></el-table-column>
+      <el-table-column label="数据库URL" prop="connUrl" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+      <el-table-column label="用户名" prop="username" header-align="center" align="center"></el-table-column>
       <el-table-column label="密码" header-align="center" align="center">
         <template #default="scope">
           <span>{{ formatPassword(scope.row.password) }}</span>
@@ -62,10 +62,10 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import {onMounted, reactive, ref} from 'vue'
 import AddOrEdit from '@/views/datasource/add-or-edit.vue'
-import { page, testById, deleteByIds } from '@/api/datasource'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import {deleteByIds, page, testById} from '@/api/datasource'
+import {ElMessage, ElMessageBox} from 'element-plus'
 
 const state = reactive({
   queryForm: {

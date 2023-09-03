@@ -11,16 +11,16 @@
       label-width="120px"
       @keyup.enter="handleSubmit()"
     >
-      <el-form-item prop="code" label="基类编码">
+      <el-form-item label="基类编码" prop="code">
         <el-input v-model="dataForm.code" placeholder="基类编码" />
       </el-form-item>
-      <el-form-item prop="packageName" label="基类包名">
+      <el-form-item label="基类包名" prop="packageName">
         <el-input v-model="dataForm.packageName" placeholder="基类包名" />
       </el-form-item>
-      <el-form-item prop="fields" label="基类字段">
+      <el-form-item label="基类字段" prop="fields">
         <el-input v-model="dataForm.fields" placeholder="基类字段（多个字段，用英文逗号分隔）" />
       </el-form-item>
-      <el-form-item prop="remark" label="备注">
+      <el-form-item label="备注" prop="remark">
         <el-input v-model="dataForm.remark" placeholder="备注" />
       </el-form-item>
     </el-form>

@@ -74,4 +74,11 @@ public interface DbQuery {
      */
     String fieldKey();
 
+    /**
+     * 字符最大长度
+     *
+     * @return 该字段可存储的字符最大长度
+     */
+    String fieldCharacterMaximumLength();
+
 }

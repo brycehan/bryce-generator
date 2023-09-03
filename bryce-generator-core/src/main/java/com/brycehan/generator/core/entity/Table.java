@@ -122,7 +122,8 @@ public class Table implements Serializable {
     /**
      * 基类ID
      */
-    private Long baseclassId;
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private Long baseClassId;
 
     /**
      * 创建时间

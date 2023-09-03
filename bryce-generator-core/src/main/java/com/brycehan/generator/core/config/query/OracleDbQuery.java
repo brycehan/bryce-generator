@@ -76,4 +76,9 @@ public class OracleDbQuery implements DbQuery {
         return "key";
     }
 
+    @Override
+    public String fieldCharacterMaximumLength() {
+        return null;
+    }
+
 }

@@ -13,52 +13,52 @@
     >
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="projectName" label="项目名">
+          <el-form-item label="项目名" prop="projectName">
             <el-input v-model="dataForm.projectName" disabled placeholder="项目名" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="projectPath" label="项目路径">
+          <el-form-item label="项目路径" prop="projectPath">
             <el-input v-model="dataForm.projectPath" disabled placeholder="项目路径" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="projectCode" label="项目标识">
+          <el-form-item label="项目标识" prop="projectCode">
             <el-input v-model="dataForm.projectCode" disabled placeholder="项目标识" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="projectPackage" label="项目包名">
+          <el-form-item label="项目包名" prop="projectPackage">
             <el-input v-model="dataForm.projectPackage" disabled placeholder="项目包名" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-divider>变更后的信息</el-divider>
-      <el-form-item prop="modifyProjectName" label="项目名">
+      <el-form-item label="项目名" prop="modifyProjectName">
         <el-input v-model="dataForm.modifyProjectName" placeholder="项目名" />
       </el-form-item>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="modifyProjectCode" label="项目标识">
+          <el-form-item label="项目标识" prop="modifyProjectCode">
             <el-input v-model="dataForm.modifyProjectCode" placeholder="项目标识" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="modifyProjectPackage" label="项目包名">
+          <el-form-item label="项目包名" prop="modifyProjectPackage">
             <el-input v-model="dataForm.modifyProjectPackage" placeholder="项目包名" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="exclusions" label="排除文件">
+          <el-form-item label="排除文件" prop="exclusions">
             <el-input v-model="dataForm.exclusions" placeholder="排除文件" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="modifySuffix" label="变更文件">
+          <el-form-item label="变更文件" prop="modifySuffix">
             <el-input v-model="dataForm.modifySuffix" placeholder="变更文件" />
           </el-form-item>
         </el-col>

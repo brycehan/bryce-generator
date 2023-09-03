@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
         <el-input v-model="state.queryForm.columnType" placeholder="字段类型" />
@@ -21,9 +21,9 @@
         @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-      <el-table-column prop="columnType" label="字段类型" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="attrType" label="属性类型" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="packageName" label="属性包名" header-align="center" align="center"></el-table-column>
+      <el-table-column label="字段类型" prop="columnType" header-align="center" align="center"></el-table-column>
+      <el-table-column label="属性类型" prop="attrType" header-align="center" align="center"></el-table-column>
+      <el-table-column label="属性包名" prop="packageName" header-align="center" align="center"></el-table-column>
       <el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
         <template #default="scope">
           <el-button type="primary" link @click="handleAddOrEdit(scope.row.id)">编辑</el-button>

@@ -78,4 +78,9 @@ public class PostgreSQLDbQuery implements DbQuery {
         return "column_key";
     }
 
+    @Override
+    public String fieldCharacterMaximumLength() {
+        return null;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.brycehan.generator.server;
+package com.brycehan.generator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

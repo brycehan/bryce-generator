@@ -19,7 +19,7 @@
         <result column="function_name" property="functionName"/>
         <result column="form_layout" property="formLayout"/>
         <result column="datasource_id" property="datasourceId"/>
-        <result column="baseclass_id" property="baseclassId"/>
+        <result column="base_class_id" property="baseClassId"/>
         <result column="remark" property="remark"/>
         <result column="create_time" property="createTime"/>
     </resultMap>
@@ -27,7 +27,7 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id
-        , table_name, class_name, table_comment, author, email, package_name, version, generator_type, backend_path, frontend_path, module_name, function_name, form_layout, datasource_id, baseclass_id, remark, create_time
+        , table_name, class_name, table_comment, author, email, package_name, version, generator_type, backend_path, frontend_path, module_name, function_name, form_layout, datasource_id, base_class_id, remark, create_time
     </sql>
 
 </mapper>

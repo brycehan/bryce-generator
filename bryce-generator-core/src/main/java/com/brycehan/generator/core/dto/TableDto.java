@@ -112,7 +112,7 @@ public class TableDto implements Serializable {
     /**
      * 基类ID
      */
-    private Long baseclassId;
+    private Long baseClassId;
 
     /**
      * 创建时间

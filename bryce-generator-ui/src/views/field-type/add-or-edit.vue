@@ -11,13 +11,13 @@
       label-width="120px"
       @keyup.enter="handleSubmit()"
     >
-      <el-form-item prop="columnType" label="字段类型">
+      <el-form-item label="字段类型" prop="columnType">
         <el-input v-model="dataForm.columnType" placeholder="字段类型" />
       </el-form-item>
-      <el-form-item prop="attrType" label="属性类型">
+      <el-form-item label="属性类型" prop="attrType">
         <el-input v-model="dataForm.attrType" placeholder="属性类型" />
       </el-form-item>
-      <el-form-item prop="packageName" label="属性包名">
+      <el-form-item label="属性包名" prop="packageName">
         <el-input v-model="dataForm.packageName" placeholder="属性包名" />
       </el-form-item>
     </el-form>

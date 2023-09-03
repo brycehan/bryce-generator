@@ -44,7 +44,7 @@ comment on column brc_gen_field_type.create_time is '创建时间';
 
 -- 初始化-字段类型表数据
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (1, 'bit', 'Boolean', null, null, now());
-insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (2, 'tinyint', 'Integer', null, null, now());
+insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (2, 'tinyint', 'Boolean', null, null, now());
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (3, 'smallint', 'Integer', null, null, now());
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (4, 'mediumint', 'Integer', null, null, now());
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (5, 'int', 'Integer', null, null, now());
@@ -116,7 +116,7 @@ create table brc_gen_table
     function_name  varchar(100),
     form_layout    int,
     datasource_id  bigint       not null,
-    baseclass_id   bigint,
+    base_class_id   bigint,
     remark         varchar(300),
     create_time    datetime,
     primary key (id)
@@ -140,7 +140,7 @@ comment on column brc_gen_table.module_name is '模块名';
 comment on column brc_gen_table.function_name is '功能名';
 comment on column brc_gen_table.form_layout is '表单布局（1：一列，2：两列）';
 comment on column brc_gen_table.datasource_id is '数据源ID';
-comment on column brc_gen_table.baseclass_id is '基类ID';
+comment on column brc_gen_table.base_class_id is '基类ID';
 comment on column brc_gen_table.remark is '备注';
 comment on column brc_gen_table.create_time is '创建时间';
 
@@ -158,6 +158,7 @@ create table brc_gen_table_field
     sort            int,
     auto_fill       varchar(20),
     primary_key     bit,
+    character_maximum_length bigint,
     base_field      bit,
     form_item       bit,
     form_item_type  varchar(200),
@@ -185,6 +186,7 @@ comment on column brc_gen_table_field.package_name is '属性包名';
 comment on column brc_gen_table_field.sort is '排序';
 comment on column brc_gen_table_field.auto_fill is '自动填充（DEFAULT, INSERT, UPDATE, INSERT_UPDATE）';
 comment on column brc_gen_table_field.primary_key is '主键（0：否，1：是）';
+comment on column brc_gen_table_field.character_maximum_length is '字符最大长度';
 comment on column brc_gen_table_field.base_field is '基类字段（0：否，1：是）';
 comment on column brc_gen_table_field.form_item is '表单项（0：否，1：是）';
 comment on column brc_gen_table_field.form_item_type is '表单项类型';

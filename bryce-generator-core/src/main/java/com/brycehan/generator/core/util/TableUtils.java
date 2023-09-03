@@ -1,5 +1,6 @@
 package com.brycehan.generator.core.util;
 
+import cn.hutool.core.text.NamingCase;
 import cn.hutool.core.util.StrUtil;
 import com.brycehan.generator.core.config.DbType;
 import com.brycehan.generator.core.config.GenDatasource;
@@ -8,6 +9,7 @@ import com.brycehan.generator.core.entity.Table;
 import com.brycehan.generator.core.entity.TableField;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.sql.DatabaseMetaData;
@@ -114,6 +116,7 @@ public class TableUtils {
                 field.setFieldComment(resultSet.getString(query.fieldComment()));
                 String key = resultSet.getString(query.fieldKey());
                 field.setPrimaryKey(StringUtils.isNotBlank(key) && "PRI".equalsIgnoreCase(key));
+                field.setCharacterMaximumLength(resultSet.getLong(query.fieldCharacterMaximumLength()));
                 tableFieldList.add(field);
             }
         } catch (SQLException e) {
@@ -125,13 +128,51 @@ public class TableUtils {
     }
 
     /**
+     * 获取类名
+     *
+     * @param tableName 表名
+     * @return 类名
+     */
+    public static String getClassName(String tableName, String tablePrefix) {
+        String className = NamingCase.toPascalCase(tableName);
+        // 去除前缀
+        String[] prefixArray = tablePrefix.split(",");
+        if(ArrayUtils.isNotEmpty(prefixArray)){
+            for (String  prefix : prefixArray) {
+                if(tableName.startsWith(prefix)) {
+                    className = NamingCase.toPascalCase(StrUtil.subAfter(tableName, prefix, false));
+                    break;
+                }
+            }
+        }
+
+        return className;
+    }
+
+    /**
      * 获取模块名
      *
-     * @param packageName 包名
+     * @param tableName 表名
      * @return 模块名
      */
-    public static String getModuleName(String tableName) {
-        return StrUtil.subBetween(tableName, "brc_", "_");
+    public static String getModuleName(String tableName, String tablePrefix) {
+
+        String moduleName = StrUtil.subBefore(tableName, "_", false);
+        // 获取模块名
+        String[] prefixArray = tablePrefix.split(",");
+        if(ArrayUtils.isNotEmpty(prefixArray)){
+            for (String  prefix : prefixArray) {
+                if(tableName.startsWith(prefix)) {
+                    moduleName = StrUtil.subBetween(tableName, prefix, "_");
+                    break;
+                }
+            }
+        }
+
+        if("sys".equals(moduleName) || StringUtils.isEmpty(moduleName)){
+            moduleName = "system";
+        }
+        return moduleName;
     }
 
     /**
@@ -140,12 +181,36 @@ public class TableUtils {
      * @param tableName 表名
      * @return 功能名
      */
-    public static String getFunctionName(String tableName) {
-        String functionName = StrUtil.subAfter(tableName, "_", true);
-        if (StringUtils.isBlank(functionName)) {
-            functionName = tableName;
+    public static String getFunctionName(String tableName, String tablePrefix) {
+        String functionName = NamingCase.toPascalCase(tableName);
+        // 去除前缀
+        String[] prefixArray = tablePrefix.split(",");
+        if(ArrayUtils.isNotEmpty(prefixArray)){
+            for (String  prefix : prefixArray) {
+                if(tableName.startsWith(prefix)) {
+                    functionName = StrUtil.subAfter(tableName, prefix, false);
+                    break;
+                }
+            }
         }
-        return functionName;
+        // 去除模块前缀
+        if(functionName.contains("_") && functionName.length() > 1){
+            functionName = StrUtil.subAfter(functionName, "_", false);
+        }
+        return StrUtil.toCamelCase(functionName);
+    }
+
+    /**
+     * 获取表说明
+     *
+     * @param rawTableComment 表说明
+     * @return 功能名
+     */
+    public static String getTableComment(String rawTableComment) {
+        if(rawTableComment.endsWith("表")){
+            return rawTableComment.substring(0, rawTableComment.length() - 1);
+        }
+        return rawTableComment;
     }
 
 }

@@ -8,22 +8,24 @@ import com.brycehan.generator.core.common.PageResult;
 import com.brycehan.generator.core.common.dto.DeleteDto;
 import com.brycehan.generator.core.common.service.impl.BaseServiceImpl;
 import com.brycehan.generator.core.config.GenDatasource;
+import com.brycehan.generator.core.config.property.GenProperties;
 import com.brycehan.generator.core.config.template.GeneratorConfig;
 import com.brycehan.generator.core.config.template.GeneratorContent;
 import com.brycehan.generator.core.convert.TableConvert;
 import com.brycehan.generator.core.dto.TableDto;
 import com.brycehan.generator.core.dto.TablePageDto;
+import com.brycehan.generator.core.entity.BaseClass;
 import com.brycehan.generator.core.entity.Table;
 import com.brycehan.generator.core.entity.TableField;
 import com.brycehan.generator.core.enums.FormLayoutEnum;
 import com.brycehan.generator.core.enums.GeneratorTypeEnum;
 import com.brycehan.generator.core.mapper.TableMapper;
+import com.brycehan.generator.core.service.BaseClassService;
 import com.brycehan.generator.core.service.DatasourceService;
 import com.brycehan.generator.core.service.TableFieldService;
 import com.brycehan.generator.core.service.TableService;
 import com.brycehan.generator.core.util.TableUtils;
 import com.brycehan.generator.core.vo.TableVo;
-import com.google.common.base.CaseFormat;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +38,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -51,24 +54,26 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implements TableService {
 
-    private final TableMapper tableMapper;
-
     private final DatasourceService datasourceService;
 
     private final TableFieldService tableFieldService;
 
+    private final BaseClassService baseClassService;
+
     private final GeneratorConfig generatorConfig;
+
+    private final GenProperties genProperties;
 
     @Override
     public void save(TableDto tableDto) {
         Table table = TableConvert.INSTANCE.convert(tableDto);
-        this.tableMapper.insert(table);
+        this.baseMapper.insert(table);
     }
 
     @Override
     public void update(TableDto tableDto) {
         Table table = TableConvert.INSTANCE.convert(tableDto);
-        this.tableMapper.updateById(table);
+        this.baseMapper.updateById(table);
     }
 
     @Override
@@ -89,7 +94,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
     @Override
     public PageResult<TableVo> page(@NotNull TablePageDto tablePageDto) {
 
-        IPage<Table> page = this.tableMapper.selectPage(getPage(tablePageDto), getWrapper(tablePageDto));
+        IPage<Table> page = this.baseMapper.selectPage(getPage(tablePageDto), getWrapper(tablePageDto));
 
         return new PageResult<>(page.getTotal(), TableConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -131,9 +136,16 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
         table.setAuthor(generatorContent.getDeveloper().getAuthor());
         table.setFormLayout(FormLayoutEnum.ONE.value());
         table.setGeneratorType(GeneratorTypeEnum.ZIP_DOWNLOAD.value());
-        table.setClassName(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName));
-        table.setModuleName(TableUtils.getModuleName(table.getTableName()));
-        table.setFunctionName(TableUtils.getFunctionName(tableName));
+        table.setClassName(TableUtils.getClassName(tableName, genProperties.getTablePrefix()));
+        table.setModuleName(TableUtils.getModuleName(tableName, genProperties.getTablePrefix()));
+        table.setFunctionName(TableUtils.getFunctionName(tableName, genProperties.getTablePrefix()));
+        table.setTableComment(TableUtils.getTableComment(table.getTableComment()));
+
+        // 默认有基类
+        Optional<BaseClass> optionalBaseClass = this.baseClassService.list().stream().findFirst();
+        if(optionalBaseClass.isPresent()) {
+            table.setBaseClassId(optionalBaseClass.get().getId());
+        }
 
         table.setCreateTime(LocalDateTime.now());
         this.baseMapper.insert(table);
@@ -166,7 +178,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void sync(Long id) {
-        Table table = this.tableMapper.selectById(id);
+        Table table = this.baseMapper.selectById(id);
 
         // 初始化配置信息
         GenDatasource datasource = this.datasourceService.get(table.getDatasourceId());
@@ -197,7 +209,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
 
             // 修改字段
             TableField updateField = tableFieldMap.get(tableField.getFieldName());
-            updateField.setPrimaryKey(tableField.getPrimaryKey());
+            updateField.setPrimaryKey(tableField.isPrimaryKey());
             updateField.setFieldComment(tableField.getFieldComment());
             updateField.setFieldType(tableField.getFieldType());
             updateField.setAttrType(tableField.getAttrType());

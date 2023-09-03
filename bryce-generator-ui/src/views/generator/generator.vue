@@ -14,24 +14,24 @@
     >
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="tableName" label="表名">
+          <el-form-item label="表名" prop="tableName">
             <el-input v-model="dataForm.tableName" disabled placeholder="表名" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="tableComment" label="说明">
+          <el-form-item label="说明" prop="tableComment">
             <el-input v-model="dataForm.tableComment" placeholder="说明" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="className" label="类名">
+          <el-form-item label="类名" prop="className">
             <el-input v-model="dataForm.className" placeholder="类名" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="baseClassId" label="继承">
+          <el-form-item label="继承" prop="baseClassId">
             <el-select v-model="dataForm.baseClassId" placeholder="继承" style="width: 100%" clearable>
               <el-option v-for="item in baseClassList" :key="item.id" :label="item.code" :value="item.id"/>
             </el-select>
@@ -40,43 +40,43 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="moduleName" label="模块名">
+          <el-form-item label="模块名" prop="moduleName">
             <el-input v-model="dataForm.moduleName" placeholder="模块名" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="functionName" label="功能名">
+          <el-form-item label="功能名" prop="functionName">
             <el-input v-model="dataForm.functionName" placeholder="功能名" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="packageName" label="项目包名">
+          <el-form-item label="项目包名" prop="packageName">
             <el-input v-model="dataForm.packageName" placeholder="项目包名" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="version" label="版本号">
+          <el-form-item label="版本号" prop="version">
             <el-input v-model="dataForm.version" placeholder="版本号" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="author" label="作者">
+          <el-form-item label="作者" prop="author">
             <el-input v-model="dataForm.author" placeholder="作者" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="email" label="作者邮箱">
+          <el-form-item label="作者邮箱" prop="email">
             <el-input v-model="dataForm.email" placeholder="作者邮箱" />
           </el-form-item>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item prop="generatorType" label="生成方式">
+          <el-form-item label="生成方式" prop="generatorType">
             <el-radio-group v-model="dataForm.generatorType" >
               <el-radio :label="0">zip压缩包</el-radio>
               <el-radio :label="1">自定义路径</el-radio>
@@ -84,7 +84,7 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item prop="formLayout" label="表单布局">
+          <el-form-item label="表单布局" prop="formLayout">
             <el-radio-group v-model="dataForm.formLayout" >
               <el-radio :label="1">一列</el-radio>
               <el-radio :label="2">两列</el-radio>
@@ -92,10 +92,10 @@
           </el-form-item>
         </el-col>
       </el-row>
-      <el-form-item v-if="dataForm.generatorType === 1" prop="backendPath" label="后端生成路径">
+      <el-form-item v-if="dataForm.generatorType === 1" label="后端生成路径" prop="backendPath">
         <el-input v-model="dataForm.backendPath" placeholder="后端生成路径" />
       </el-form-item>
-      <el-form-item v-if="dataForm.generatorType === 1" prop="frontendPath" label="前端生成路径">
+      <el-form-item v-if="dataForm.generatorType === 1" label="前端生成路径" prop="frontendPath">
         <el-input v-model="dataForm.frontendPath" placeholder="前端生成路径" />
       </el-form-item>
     </el-form>

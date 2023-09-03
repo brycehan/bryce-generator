@@ -73,4 +73,9 @@ public class MySQLDbQuery implements DbQuery {
         return "column_key";
     }
 
+    @Override
+    public String fieldCharacterMaximumLength() {
+        return "character_maximum_length";
+    }
+
 }

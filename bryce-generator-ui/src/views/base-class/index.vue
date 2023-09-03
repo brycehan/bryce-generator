@@ -1,5 +1,5 @@
 <template>
-  <el-card>
+  <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
         <el-input v-model="state.queryForm.code" placeholder="基类编码" />
@@ -18,10 +18,10 @@
         @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
-      <el-table-column prop="code" label="基类编码" header-align="center" align="center"></el-table-column>
-      <el-table-column prop="packageName" label="基类包名" show-overflow-tooltip header-align="center" align="center"></el-table-column>
-      <el-table-column prop="fields" label="基类字段" show-overflow-tooltip header-align="center" align="center"></el-table-column>
-      <el-table-column prop="remark" label="备注" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+      <el-table-column label="基类编码" prop="code" header-align="center" align="center"></el-table-column>
+      <el-table-column label="基类包名" prop="packageName" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+      <el-table-column label="基类字段" prop="fields" show-overflow-tooltip header-align="center" align="center"></el-table-column>
+      <el-table-column label="备注" prop="remark" show-overflow-tooltip header-align="center" align="center"></el-table-column>
       <el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
         <template #default="scope">
           <el-button type="primary" link @click="handleAddOrEdit(scope.row.id)">编辑</el-button>

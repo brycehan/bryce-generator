@@ -1,4 +1,4 @@
-package com.brycehan.generator.server.handler;
+package com.brycehan.generator.handler;
 
 
 import com.brycehan.generator.core.common.ResponseResult;

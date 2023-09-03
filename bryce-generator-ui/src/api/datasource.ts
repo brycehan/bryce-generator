@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export const addOrUpdate = (data: any) => {
   if (data.id) {
-    return request.patch('/gen/datasource', data)
+    return request.put('/gen/datasource', data)
   } else {
     return request.post('/gen/datasource', data)
   }

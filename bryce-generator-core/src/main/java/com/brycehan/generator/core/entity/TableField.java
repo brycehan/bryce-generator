@@ -92,17 +92,22 @@ public class TableField implements Serializable {
     /**
      * 主键（0：否，1：是）
      */
-    private Boolean primaryKey;
+    private boolean primaryKey;
+
+    /**
+     * 字符最大长度
+     */
+    private Long characterMaximumLength;
 
     /**
      * 基类字段（0：否，1：是）
      */
-    private Boolean baseField;
+    private boolean baseField;
 
     /**
      * 表单项（0：否，1：是）
      */
-    private Boolean formItem;
+    private boolean formItem;
 
     /**
      * 表单项类型
@@ -119,7 +124,7 @@ public class TableField implements Serializable {
     /**
      * 表单必填（0：否，1：是）
      */
-    private Boolean formRequired;
+    private boolean formRequired;
 
     /**
      * 表单校验器
@@ -130,17 +135,17 @@ public class TableField implements Serializable {
     /**
      * 列表项（0：否，1：是）
      */
-    private Boolean gridItem;
+    private boolean gridItem;
 
     /**
      * 列表排序（0：否，1：是）
      */
-    private Boolean gridSort;
+    private boolean gridSort;
 
     /**
      * 查询项（0：否，1：是）
      */
-    private Boolean queryItem;
+    private boolean queryItem;
 
     /**
      * 查询方式

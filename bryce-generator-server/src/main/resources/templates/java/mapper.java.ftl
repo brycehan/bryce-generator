@@ -1,11 +1,8 @@
 package ${packageName}.${moduleName}.mapper;
 
-import ${packageName}.common.base.mapper.BryceBaseMapper;
-import ${packageName}.${moduleName}.dto.${entityPageDtoName};
-import ${packageName}.${moduleName}.entity.${entityName};
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.util.List;
+import ${packageName}.${moduleName}.entity.${entityName};
 
 /**
 * ${tableComment}Mapper接口
@@ -14,6 +11,6 @@ import java.util.List;
 * @since ${date}
 */
 @Mapper
-public interface SysPostMapper extends BryceBaseMapper<${entityName}> {
+public interface ${mapperName} extends BaseMapper<${entityName}> {
 
 }

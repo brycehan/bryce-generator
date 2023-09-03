@@ -31,7 +31,7 @@ create table brc_gen_field_type
 
 -- 初始化-字段类型表数据
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (1, 'bit', 'Boolean', null, null, now());
-insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (2, 'tinyint', 'Integer', null, null, now());
+insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (2, 'tinyint', 'Boolean', null, null, now());
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (3, 'smallint', 'Integer', null, null, now());
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (4, 'mediumint', 'Integer', null, null, now());
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (5, 'int', 'Integer', null, null, now());
@@ -76,7 +76,7 @@ create table brc_gen_base_class
 ) engine InnoDB default charset utf8mb4 comment '基类管理';
 
 -- 初始化-基类表数据
-insert into brc_gen_base_class (id,code,package_name,fields,remark,create_time) values (1,'BaseEntity','com.brycehan.boot.common.base.entity','id,create_user_id,create_time,update_user_id,update_time','使用该基类，则需要表里有这些字段',now());
+INSERT INTO brc_gen_base_class (id, code, package_name, fields, remark, create_time) VALUES (1, 'BaseEntity', 'com.brycehan.boot.common.base.entity', 'id,version,deleted,created_user_id,created_time,updated_user_id,updated_time', '使用该基类，则需要表里有这些字段', now());
 
 -- 4、代码生成表
 drop table if exists brc_gen_table;
@@ -97,7 +97,7 @@ create table brc_gen_table
     function_name  varchar(100) comment '功能名',
     form_layout    tinyint comment '表单布局（1：一列，2：两列）',
     datasource_id  bigint       not null comment '数据源ID',
-    baseclass_id   bigint       comment '基类ID',
+    base_class_id   bigint       comment '基类ID',
     remark         varchar(300) default null comment '备注',
     create_time    datetime     default null comment '创建时间',
     primary key (id)
@@ -112,12 +112,13 @@ create table brc_gen_table_field
     field_name       varchar(200) not null comment '字段名称',
     field_type       varchar(100) not null comment '字段类型',
     field_comment    varchar(200) comment '字段说明',
-    attr_name   varchar(200) not null comment '属性名',
-    attr_type   varchar(100) not null comment '属性类型',
+    attr_name       varchar(200) not null comment '属性名',
+    attr_type       varchar(100) not null comment '属性类型',
     package_name     varchar(200) comment '属性包名',
-    sort      integer  default '0' comment '排序',
+    sort            int  default '0' comment '排序',
     auto_fill        varchar(20) comment '自动填充（DEFAULT, INSERT, UPDATE, INSERT_UPDATE）',
     primary_key      tinyint comment '主键（0：否，1：是）',
+    character_maximum_length bigint comment '字符最大长度',
     base_field       tinyint comment '基类字段（0：否，1：是）',
     form_item        tinyint comment '表单项（0：否，1：是）',
     form_item_type   varchar(200) comment '表单项类型',
