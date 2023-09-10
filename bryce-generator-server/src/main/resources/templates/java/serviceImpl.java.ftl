@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packageName}.common.base.entity.PageResult;
-import ${packageName}.common.base.http.HttpResponseStatusEnum;
-import ${packageName}.common.exception.BusinessException;
 import ${packageName}.framework.mybatis.service.impl.BaseServiceImpl;
 import ${packageName}.common.util.ExcelUtils;
 import ${packageName}.${moduleName}.convert.${convertName};
@@ -14,10 +12,10 @@ import ${packageName}.${moduleName}.entity.${entityName};
 import ${packageName}.${moduleName}.vo.${entityName}Vo;
 import ${packageName}.${moduleName}.service.${serviceName};
 import ${packageName}.${moduleName}.mapper.${mapperName};
-import org.apache.commons.collections4.CollectionUtils;
+<#if queryList?filter(f -> f.attrType == "String")?size gt 0>
 import org.apache.commons.lang3.StringUtils;
+</#if>
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -49,8 +47,8 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
      */
     private Wrapper<${entityName}> getWrapper(${entityPageDtoName} ${entityParam}PageDto){
         LambdaQueryWrapper<${entityName}> wrapper = new LambdaQueryWrapper<>();
-        <#list queryList as field>
-        	<#if field.queryFormType == 'date' || field.queryFormType == 'datetime'>
+        <#list queryListCataloged as field>
+          <#if field.queryFormType == 'date' || field.queryFormType == 'datetime'>
         wrapper.between(ArrayUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()), ${entityName}::get${field.attrName?cap_first}, ArrayUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()) ? ${entityParam}PageDto.get${field.attrName?cap_first}()[0] : null, ArrayUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()) ? ${entityParam}PageDto.get${field.attrName?cap_first}()[1] : null);
           <#elseif field.queryType == '='>
         wrapper.eq(Objects.nonNull(${entityParam}PageDto.get${field.attrName?cap_first}()), ${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}());
@@ -70,7 +68,17 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
         wrapper.likeLeft(StringUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()), ${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}());
           <#elseif field.queryType == 'right like'>
         wrapper.likeRight(StringUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()), ${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}());
-        	</#if>
+          <#elseif field.queryType == 'between'>
+
+        if(${entityParam}PageDto.get${field.attrName?cap_first}Start() != null && ${entityParam}PageDto.get${field.attrName?cap_first}End() != null) {
+            wrapper.between(SysDictType::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}Start(), ${entityParam}PageDto.get${field.attrName?cap_first}End());
+        } else if(${entityParam}PageDto.get${field.attrName?cap_first}Start() != null) {
+            wrapper.ge(SysDictType::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}Start());
+        }else if(${entityParam}PageDto.get${field.attrName?cap_first}End() != null) {
+            wrapper.ge(SysDictType::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}End());
+        }
+
+          </#if>
         </#list>
         return wrapper;
     }

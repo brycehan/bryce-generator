@@ -2,10 +2,9 @@ package com.brycehan.generator.core.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.common.service.impl.BaseServiceImpl;
 import com.brycehan.generator.core.convert.FieldTypeConvert;
 import com.brycehan.generator.core.dto.FieldTypeDto;
@@ -21,10 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -53,11 +49,11 @@ public class FieldTypeServiceImpl extends BaseServiceImpl<FieldTypeMapper, Field
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(DeleteDto deleteDto) {
+    public void delete(IdsDto idsDto) {
         // 过滤空数据
-        List<String> ids = deleteDto.getIds()
+        List<Long> ids = idsDto.getIds()
                 .stream()
-                .filter(StringUtils::isNotBlank)
+                .filter(Objects::nonNull)
                 .toList();
         if (CollectionUtils.isEmpty(ids)) {
             throw new RuntimeException("参数无效");
@@ -99,8 +95,8 @@ public class FieldTypeServiceImpl extends BaseServiceImpl<FieldTypeMapper, Field
     }
 
     @Override
-    public Set<String> getPackageNameByTableId(Long tableId) {
-        return this.fieldTypeMapper.getPackageNameByTableId(tableId);
+    public Set<String> getPackageNameByTableId(Long tableId, Long baseClassId) {
+        return this.fieldTypeMapper.getPackageNameByTableId(tableId, baseClassId);
     }
 
     @Override

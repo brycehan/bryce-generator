@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2022/10/31
  */
 @Data
-public class DeleteDto implements Serializable {
+public class IdsDto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -25,6 +25,6 @@ public class DeleteDto implements Serializable {
      */
     @Size(min = 1, max = 10000)
     @NotNull
-    private List<String> ids;
+    private List<Long> ids;
 
 }

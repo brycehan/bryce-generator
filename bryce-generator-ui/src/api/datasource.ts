@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export const addOrUpdate = (data: any) => {
+export const saveOrUpdate = (data: any) => {
   if (data.id) {
     return request.put('/gen/datasource', data)
   } else {

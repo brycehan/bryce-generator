@@ -1,8 +1,33 @@
 <template>
   <el-card shadow="hover">
-    <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
-<#list queryList as field>
-      <el-form-item>
+    <el-form ref="queryFormRef" :model="state.queryForm" :inline="true" label-width="68px" @keyup.enter="getPage()" @submit.prevent>
+<#list queryList?filter(f -> f.attrName != "tenantId") as field>
+  <#if field.queryType == "between">
+    <#if field.queryFormType == 'date'>
+      <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
+        <el-date-picker
+            v-model="state.queryForm.${field.attrName}Range"
+            type="daterange"
+            unlink-panels
+            range-separator="-"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            value-format="YYYY-MM-DD"/>
+      </el-form-item>
+    <#elseif field.queryFormType == 'datetime'>
+      <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
+        <el-date-picker
+            v-model="state.queryForm.${field.attrName}Range"
+            type="datetimerange"
+            unlink-panels
+            range-separator="-"
+            start-placeholder="开始时间"
+            end-placeholder="结束时间"
+            value-format="YYYY-MM-DD HH:mm"/>
+      </el-form-item>
+    </#if>
+  <#else>
+      <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
       <#if field.queryFormType == 'text' || field.queryFormType == 'textarea' || field.queryFormType == 'editor'>
         <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" />
       <#elseif field.queryFormType == 'select'>
@@ -35,13 +60,17 @@
         <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" />
       </#if>
       </el-form-item>
+  </#if>
 </#list>
       <el-form-item>
-        <el-button @click="getPage()">查询</el-button>
-        <el-button type="primary" @click="handleAddOrEdit()">新增</el-button>
-        <el-button type="danger" @click="handleDeleteBatch()">删除</el-button>
+        <el-button type="primary" icon="Search" @click="getPage()">搜索</el-button>
+        <el-button icon="RefreshLeft" @click="handleResetQuery()">重置</el-button>
       </el-form-item>
     </el-form>
+    <el-row class="mb-2">
+      <el-button type="primary" icon="Plus" @click="handleAddOrEdit()">新增</el-button>
+      <el-button type="danger" icon="Delete" @click="handleDeleteBatch()">删除</el-button>
+    </el-row>
     <el-table
       v-loading="state.loading"
       :data="state.data"
@@ -52,9 +81,9 @@
       <el-table-column type="selection" header-align="center" align="center" width="50" />
     <#list gridList as field>
       <#if field.formDict??>
-      <dict-table-column label="${field.fieldComment!}" prop="${field.attrName}" dict-type="${field.formDict}" />
+      <dict-table-column label="${field.fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>dict-type="${field.formDict}" />
       <#else>
-      <el-table-column label="${field.fieldComment!}" prop="${field.attrName}" header-align="center" align="center" />
+      <el-table-column label="${field.fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>header-align="center" align="center" />
       </#if>
     </#list>
       <el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
@@ -65,11 +94,11 @@
       </el-table-column>
     </el-table>
     <el-pagination
-      :current-page="state.page.current"
-      :page-size="state.page.pageSize"
-      :page-sizes="[10, 20, 50, 100, 200]"
-      :total="state.page.total"
-      layout="total,sizes,prev,pager,next,jumper"
+      :current-page="state.current"
+      :page-size="state.size"
+      :total="state.total"
+      :page-sizes="state.pageSizes"
+      :layout="state.layout"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
@@ -83,98 +112,63 @@
 import { onMounted, reactive, ref } from 'vue'
 import AddOrEdit from './add-or-edit.vue'
 import { page, deleteByIds } from '@/api/${moduleName}/${functionName}'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import type { StateOptions } from "@/utils/state";
+import { crud } from "@/utils/state";
 
-const state = reactive({
-    queryForm: {
-        <#list queryList as field>
-          ${field.attrName}: ''<#sep>,</#sep>
-        </#list>
-    },
-    page: {
-        /** 起始页数，从1开始计算 */
-        current: 1,
-        /** 每页条数 */
-        pageSize: 10,
-        /** 总条数 */
-        total: 0,
-        /** 排序项 */
-        orderItems: [{column: 'createTime', asc: false}],
-    },
-    data: [],
-    dataSelections: [] as any[],
-    loading: false,
+const state: StateOptions = reactive({
+  api: {
+    page,
+    deleteByIds
+  },
+  queryForm: {
+      <#list queryList?filter(f -> f.attrName != "tenantId") as field>
+        <#if field.queryType == "between">
+        ${field.attrName}Start: '',
+        ${field.attrName}End: ''<#sep>,</#sep>
+        <#else>
+        ${field.attrName}: ''<#sep>,</#sep>
+        </#if>
+      </#list>
+  },
+<#if queryList?filter(f -> f.queryType == "between")?size gt 0>
+  range: {
+  <#list queryList?filter(f -> f.queryType == "between") as field>
+    ${field.attrName}Range: ''<#sep >,</#sep>
+  </#list>
+  },
+</#if>
 })
 
+const queryFormRef = ref()
 const addOrEditRef = ref()
 
 onMounted(() => {
-    getPage()
+  getPage()
 })
 
-const getPage = (current: number = 1, size?: number) => {
-    state.page.current = current
+const {
+  getPage,
+  handleSizeChange,
+  handleCurrentChange,
+  handleDeleteBatch,
+  handleSelectionChange,
+} = crud(state)
 
-    if(size !== undefined){
-        state.page.pageSize = size
-    }
-    state.loading = true
+/** 重置按钮操作 */
+const handleResetQuery = () => {
+  for (const key in state.range) {
+    state.range[key] = []
+  }
 
-    const body = {
-        current: state.page.current,
-        pageSize: state.page.pageSize,
-        orderItems: state.page.orderItems,
-        ...state.queryForm
-    }
+  if(queryFormRef.value) {
+    queryFormRef.value.resetFields()
+  }
 
-    page(body).then((response: any) => {
-        const { list, total } = response.data
-        state.data = list
-        state.page.total = total
-    })
-    state.loading = false
+  getPage()
 }
 
-/** 调整当前显示条数 */
-const handleSizeChange = (size: number) => {
-    getPage(1, size)
-}
-
-/** 跳转到指定页 */
-const handleCurrentChange = (current: number) => {
-    getPage(current)
-}
-
-const handleAddOrEdit = (id?: string) => {
-    addOrEditRef.value.init(id)
-}
-
-const handleDeleteBatch = (id?: string) => {
-    let data: any[] = []
-    if (id) {
-        data = [id]
-    } else {
-        data = state.dataSelections ? state.dataSelections : []
-        if (data.length === 0) {
-            ElMessage.warning('请选择删除的记录')
-            return
-        }
-    }
-    ElMessageBox.confirm('确定进行删除操作？', '提示', {
-        type: 'warning'
-    })
-        .then(() => {
-            deleteByIds(data).then(() => {
-                ElMessage.success('删除成功')
-                getPage()
-            })
-        })
-        .catch((error) => {
-            console.error(error)
-        })
-}
-
-const handleSelectionChange = (selections: any[]) => {
-    state.dataSelections = selections.map((item: any) => item.id)
+/** 新增/修改 弹窗 */
+const handleAddOrEdit = (id?: bigint) => {
+  addOrEditRef.value.init(id)
 }
 </script>

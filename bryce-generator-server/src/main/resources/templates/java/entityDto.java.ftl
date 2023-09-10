@@ -1,6 +1,5 @@
 package ${packageName}.${moduleName}.dto;
 
-import com.baomidou.mybatisplus.annotation.*;
 <#if fieldList?filter(field -> field.characterMaximumLength gt 0)?size  gt 0>
 import com.brycehan.boot.common.validator.AddGroup;
 import com.brycehan.boot.common.validator.UpdateGroup;
@@ -22,12 +21,19 @@ import java.io.Serial;
  */
 @Schema(description = "${tableComment}Dto")
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class ${entityName}Dto implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
+<#if baseClass??>
+    /**
+    * ID
+    */
+    @Schema(description = "ID")
+    private Long id;
+
+</#if>
 <#list fieldList as field>
 <#if !field.baseField>
 	<#if field.fieldComment!?length gt 0>

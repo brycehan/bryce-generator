@@ -3,7 +3,7 @@ package com.brycehan.generator.core.controller;
 import cn.hutool.core.io.IoUtil;
 import com.brycehan.generator.core.common.PageResult;
 import com.brycehan.generator.core.common.ResponseResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.convert.ProjectModifyConvert;
 import com.brycehan.generator.core.dto.ProjectModifyDto;
 import com.brycehan.generator.core.dto.ProjectModifyPageDto;
@@ -61,13 +61,13 @@ public class ProjectModifyController {
     /**
      * 删除项目名变更
      *
-     * @param deleteDto 项目名变更删除Dto
+     * @param idsDto 项目名变更删除Dto
      * @return 响应结果
      */
     @DeleteMapping
-    public ResponseResult<Void> delete(@Validated @RequestBody DeleteDto deleteDto) {
+    public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.projectModifyService.delete(deleteDto);
+        this.projectModifyService.delete(idsDto);
         return ResponseResult.ok();
     }
 

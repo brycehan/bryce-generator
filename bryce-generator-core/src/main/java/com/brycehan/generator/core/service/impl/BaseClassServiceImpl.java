@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.common.service.impl.BaseServiceImpl;
 import com.brycehan.generator.core.convert.BaseClassConvert;
 import com.brycehan.generator.core.dto.BaseClassDto;
@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 基类管理服务实现类
@@ -48,11 +49,11 @@ public class BaseClassServiceImpl extends BaseServiceImpl<BaseClassMapper, BaseC
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(DeleteDto deleteDto) {
+    public void delete(IdsDto idsDto) {
         // 过滤空数据
-        List<String> ids = deleteDto.getIds()
+        List<Long> ids = idsDto.getIds()
                 .stream()
-                .filter(StringUtils::isNotBlank)
+                .filter(Objects::nonNull)
                 .toList();
         if (CollectionUtils.isEmpty(ids)) {
             throw new RuntimeException("参数无效");

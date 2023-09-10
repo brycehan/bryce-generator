@@ -2,7 +2,7 @@ package com.brycehan.generator.core.controller;
 
 import com.brycehan.generator.core.common.PageResult;
 import com.brycehan.generator.core.common.ResponseResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.convert.BaseClassConvert;
 import com.brycehan.generator.core.dto.BaseClassDto;
 import com.brycehan.generator.core.dto.BaseClassPageDto;
@@ -58,13 +58,13 @@ public class BaseClassController {
     /**
      * 删除基类
      *
-     * @param deleteDto 基类删除Dto
+     * @param idsDto 基类删除Dto
      * @return 响应结果
      */
     @DeleteMapping
-    public ResponseResult<Void> delete(@Validated @RequestBody DeleteDto deleteDto) {
+    public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.baseClassService.delete(deleteDto);
+        this.baseClassService.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -88,6 +88,8 @@ public class BaseClassController {
     @GetMapping(path = "/list")
     public ResponseResult<List<BaseClassVo>> list() {
         List<BaseClass> list = this.baseClassService.list();
+//        LambdaQueryWrapper<BaseClass> queryWrapper = new LambdaQueryWrapper<>();
+//        queryWrapper.between()
         return ResponseResult.ok(BaseClassConvert.INSTANCE.convert(list));
     }
 

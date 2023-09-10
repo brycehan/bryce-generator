@@ -2,7 +2,7 @@ package com.brycehan.generator.core.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.config.GenDatasource;
 import com.brycehan.generator.core.dto.DatasourceDto;
 import com.brycehan.generator.core.dto.DatasourcePageDto;
@@ -38,9 +38,9 @@ public interface DatasourceService extends IService<Datasource> {
     /**
      * 删除数据源
      *
-     * @param deleteDto 数据源删除Dto
+     * @param idsDto 数据源删除Dto
      */
-    void delete(DeleteDto deleteDto);
+    void delete(IdsDto idsDto);
 
     /**
      * 获取数据源配置

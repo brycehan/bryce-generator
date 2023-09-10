@@ -12,9 +12,9 @@
       @keyup.enter="handleSubmit()"
     >
       <el-form-item label="数据源" prop="datasourceId">
-        <el-select v-model="dataForm.datasourceId" clearable placeholder="请选择数据源" @change="getTableList" style="width: 100%">
-          <el-option value="0" label="默认数据源" />
-          <el-option v-for="datasource in dataForm.datasourceList" :key="datasource.id" :value="datasource.id" :label="datasource.connName" />
+        <el-select v-model="dataForm.datasourceId" placeholder="请选择数据源" clearable @change="getTableList" style="width: 100%">
+          <el-option label="默认数据源" :value="0" />
+          <el-option v-for="datasource in dataForm.datasourceList" :key="datasource.id" :label="datasource.connName" :value="datasource.id" />
         </el-select>
       </el-form-item>
         <el-table

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.common.service.impl.BaseServiceImpl;
 import com.brycehan.generator.core.config.GenDatasource;
 import com.brycehan.generator.core.config.property.GenProperties;
@@ -29,6 +29,7 @@ import com.brycehan.generator.core.vo.TableVo;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +39,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -78,17 +80,19 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(DeleteDto deleteDto) {
+    public void delete(IdsDto idsDto) {
         // 过滤空数据
-        List<String> ids = deleteDto.getIds()
+        List<Long> ids = idsDto.getIds()
                 .stream()
-                .filter(StringUtils::isNotBlank)
+                .filter(Objects::nonNull)
                 .toList();
         if (CollectionUtils.isEmpty(ids)) {
             throw new RuntimeException("参数无效");
         }
         // 删除
         removeByIds(ids);
+        // 删除对应字段数据
+        this.tableFieldService.remove(new LambdaQueryWrapper<TableField>().in(TableField::getTableId, ids));
     }
 
     @Override
@@ -152,8 +156,23 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
 
         // 获取数据库表字段数据
         List<TableField> tableFieldList = TableUtils.getTableFieldList(datasource, table.getId(), table.getTableName());
+
         // 初始化列数据
         this.tableFieldService.initFieldList(tableFieldList);
+
+        // 初始化基类字段
+        if(optionalBaseClass.isPresent()) {
+            // 基类字段
+            String[] fields = optionalBaseClass.get().getFields().split(",");
+
+            // 标注为基类字段
+            for (TableField field : tableFieldList) {
+                if (ArrayUtils.contains(fields, field.getFieldName())) {
+                    field.setBaseField(true);
+                }
+            }
+        }
+
         // 保存列数据
         this.tableFieldService.saveBatch(tableFieldList);
 

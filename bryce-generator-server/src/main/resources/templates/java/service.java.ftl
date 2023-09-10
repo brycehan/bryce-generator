@@ -2,12 +2,12 @@ package ${packageName}.${moduleName}.service;
 
 import ${packageName}.framework.mybatis.service.BaseService;
 import ${packageName}.common.base.entity.PageResult;
-import ${packageName}.${moduleName}.dto.DeleteDto;
+import ${packageName}.common.base.id.IdGenerator;
+import ${packageName}.${moduleName}.convert.${entityName}Convert;
 import ${packageName}.${moduleName}.dto.${entityName}Dto;
 import ${packageName}.${moduleName}.dto.${entityPageDtoName};
 import ${packageName}.${moduleName}.entity.${entityName};
 import ${packageName}.${moduleName}.vo.${entityName}Vo;
-import java.util.List;
 
 /**
  * ${tableComment}服务

@@ -2,7 +2,7 @@ package com.brycehan.generator.core.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.dto.ProjectModifyDto;
 import com.brycehan.generator.core.dto.ProjectModifyPageDto;
 import com.brycehan.generator.core.entity.ProjectModify;
@@ -39,9 +39,9 @@ public interface ProjectModifyService extends IService<ProjectModify> {
     /**
      * 删除项目名变更
      *
-     * @param deleteDto 项目名变更删除Dto
+     * @param idsDto 项目名变更删除Dto
      */
-    void delete(DeleteDto deleteDto);
+    void delete(IdsDto idsDto);
 
     /**
      * 项目名变更分页查询信息

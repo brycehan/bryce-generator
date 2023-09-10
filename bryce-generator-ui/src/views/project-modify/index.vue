@@ -6,7 +6,7 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getPage()">查询</el-button>
-        <el-button type="primary" @click="handleAddOrUpdate()">新增</el-button>
+        <el-button type="primary" @click="handleAddOrEdit()">新增</el-button>
         <el-button type="danger" @click="handleDeleteBatch()">删除</el-button>
       </el-form-item>
     </el-form>
@@ -27,7 +27,7 @@
           <el-button type="success" link @click="handleDownload(scope.row.id)"
             >源码下载</el-button
           >
-          <el-button type="primary" link @click="handleAddOrUpdate(scope.row.id)">编辑</el-button>
+          <el-button type="primary" link @click="handleAddOrEdit(scope.row.id)">编辑</el-button>
           <el-button type="danger" link @click="handleDeleteBatch(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -43,7 +43,7 @@
     />
 
     <!-- 弹窗，新增/修改 -->
-    <AddOrUpdate ref="addOrUpdateRef" @refresh-page="getPage" />
+    <AddOrEdit ref="addOrEditRef" @refresh-page="getPage" />
     <!-- 源码下载 -->
     <Download ref="downloadRef"/>
   </el-card>
@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
-import AddOrUpdate from '@/views/project-modify/add-or-edit.vue'
+import AddOrEdit from '@/views/project-modify/add-or-edit.vue'
 import { page, deleteByIds } from '@/api/projectModify'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import Download from "@/views/project-modify/download.vue";
@@ -75,7 +75,7 @@ const state = reactive({
   loading: false,
 })
 
-const addOrUpdateRef = ref()
+const addOrEditRef = ref()
 const downloadRef = ref()
 
 onMounted(() => {
@@ -119,8 +119,8 @@ const handleDownload = (id: string) => {
   downloadRef.value.init(id)
 }
 
-const handleAddOrUpdate = (id?: string) => {
-  addOrUpdateRef.value.init(id)
+const handleAddOrEdit = (id?: string) => {
+  addOrEditRef.value.init(id)
 }
 
 const handleDeleteBatch = (id?: string) => {

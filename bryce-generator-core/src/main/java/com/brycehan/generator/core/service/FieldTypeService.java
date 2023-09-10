@@ -2,7 +2,7 @@ package com.brycehan.generator.core.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.dto.FieldTypeDto;
 import com.brycehan.generator.core.dto.FieldTypePageDto;
 import com.brycehan.generator.core.entity.FieldType;
@@ -41,9 +41,9 @@ public interface FieldTypeService extends IService<FieldType> {
     /**
      * 删除字段类型
      *
-     * @param deleteDto 字段类型删除Dto
+     * @param idsDto 字段类型删除Dto
      */
-    void delete(DeleteDto deleteDto);
+    void delete(IdsDto idsDto);
 
     /**
      * 字段类型分页查询信息
@@ -66,7 +66,7 @@ public interface FieldTypeService extends IService<FieldType> {
      * @param tableId 表ID
      * @return 包名列表
      */
-    Set<String> getPackageNameByTableId(Long tableId);
+    Set<String> getPackageNameByTableId(Long tableId, Long baseClassId);
 
     /**
      * 查询属性类型列表

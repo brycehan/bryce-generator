@@ -2,7 +2,7 @@ package com.brycehan.generator.core.controller;
 
 import com.brycehan.generator.core.common.PageResult;
 import com.brycehan.generator.core.common.ResponseResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.convert.TableFieldConvert;
 import com.brycehan.generator.core.dto.TableFieldDto;
 import com.brycehan.generator.core.dto.TableFieldPageDto;
@@ -58,13 +58,13 @@ public class TableFieldController {
     /**
      * 删除表字段
      *
-     * @param deleteDto 表字段删除Dto
+     * @param idsDto 表字段删除Dto
      * @return 响应结果
      */
     @DeleteMapping
-    public ResponseResult<Void> delete(@Validated @RequestBody DeleteDto deleteDto) {
+    public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.tableFieldService.delete(deleteDto);
+        this.tableFieldService.delete(idsDto);
         return ResponseResult.ok();
     }
 

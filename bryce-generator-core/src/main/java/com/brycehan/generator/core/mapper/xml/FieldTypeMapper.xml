@@ -22,6 +22,9 @@
         select bgft.package_name
         from brc_gen_field_type bgft
         inner join brc_gen_table_field bgtf on bgft.attr_type = bgtf.attr_type
-        where bgtf.table_id = #{value}
+        where bgtf.table_id = #{tableId}
+        <if test="baseClassId != null">
+            and bgtf.base_field = false
+        </if>
     </select>
 </mapper>

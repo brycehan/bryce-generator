@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.common.service.impl.BaseServiceImpl;
 import com.brycehan.generator.core.convert.TableFieldConvert;
 import com.brycehan.generator.core.dto.TableFieldDto;
@@ -19,7 +19,6 @@ import com.brycehan.generator.core.service.TableFieldService;
 import com.brycehan.generator.core.vo.TableFieldVo;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -49,9 +48,18 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
     /** 自动填充更新属性列表 */
     private final List<String> autoFillUpdateAttrNameList = List.of("updatedUserId", "updatedTime");
 
-    /** 默认查询条件字段属性列表 */
-    private final List<String> defaultQueryAttrNameLikeList = List.of("name", "username");
-    private final List<String> defaultQueryAttrNameEqualList = List.of("type", "status", "orgId", "tenantId");
+    /** 默认表单属性名忽略显示列表 */
+    private final List<String> defaultFormAttrNameIgnoreList = List.of("id", "tenantId", "version", "deleted", "createdUserId", "createdTime", "updatedUserId", "updatedTime");
+
+    /** 默认查询条件like属性列表 */
+    private final List<String> defaultQueryLikeAttrNameList = List.of("name", "username");
+    /** 默认查询条件equal属性列表 */
+    private final List<String> defaultQueryEqualAttrNameList = List.of("type", "status", "orgId", "tenantId");
+    /** 默认查询条件select属性列表 */
+    private final List<String> defaultQuerySelectAttrNameList = List.of("type", "status");
+
+    /** 默认列表属性名忽略显示列表 */
+    private final List<String> defaultGridAttrNameIgnoreList = List.of("id", "tenantId", "version", "deleted", "createdUserId", "updatedUserId", "updatedTime");
 
     @Override
     public void save(TableFieldDto tableFieldDto) {
@@ -67,11 +75,11 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(DeleteDto deleteDto) {
+    public void delete(IdsDto idsDto) {
         // 过滤空数据
-        List<String> ids = deleteDto.getIds()
+        List<Long> ids = idsDto.getIds()
                 .stream()
-                .filter(StringUtils::isNotBlank)
+                .filter(Objects::nonNull)
                 .toList();
         if (CollectionUtils.isEmpty(ids)) {
             throw new RuntimeException("参数无效");
@@ -121,22 +129,31 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
                 field.setAutoFill(AutoFillEnum.DEFAULT.name());
             }
 
-            field.setFormItem(true);
-            field.setGridItem(true);
+            field.setFormItemType("text");
+            field.setFormRequired(false);
+            // 表单默认忽略的属性处理
+            field.setFormItem(!this.defaultFormAttrNameIgnoreList.contains(field.getAttrName()));
 
             // 查询显示默认处理
-            if(this.defaultQueryAttrNameEqualList.contains(field.getAttrName())){
+            field.setQueryFormType("text");
+            if(this.defaultQuerySelectAttrNameList.contains(field.getAttrName())) {
+                field.setQueryType("select");
+            }
+            if(this.defaultQueryEqualAttrNameList.contains(field.getAttrName())){
                 field.setQueryItem(true);
                 field.setQueryType("=");
             }
-            if(this.defaultQueryAttrNameLikeList.contains(field.getAttrName())) {
+            if(this.defaultQueryLikeAttrNameList.contains(field.getAttrName())) {
                 field.setQueryItem(true);
                 field.setQueryType("like");
             }
 
-            field.setQueryFormType("text");
-            field.setFormItemType("text");
-            field.setFormRequired(false);
+            // 列表显示默认忽略的属性处理
+            field.setGridItem(!this.defaultGridAttrNameIgnoreList.contains(field.getAttrName()));
+            // 列表默认排序处理
+            if("sort".equals(field.getAttrName())) {
+                field.setGridSort(true);
+            }
 
             field.setSort(i);
         }

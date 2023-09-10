@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.common.service.impl.BaseServiceImpl;
 import com.brycehan.generator.core.config.GenDatasource;
 import com.brycehan.generator.core.convert.DatasourceConvert;
@@ -24,6 +24,7 @@ import org.springframework.util.CollectionUtils;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -55,11 +56,11 @@ public class DatasourceServiceImpl extends BaseServiceImpl<DatasourceMapper, Dat
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(DeleteDto deleteDto) {
+    public void delete(IdsDto idsDto) {
         // 过滤空数据
-        List<String> ids = deleteDto.getIds()
+        List<Long> ids = idsDto.getIds()
                 .stream()
-                .filter(StringUtils::isNotBlank)
+                .filter(Objects::nonNull)
                 .toList();
         if (CollectionUtils.isEmpty(ids)) {
             throw new RuntimeException("参数无效");

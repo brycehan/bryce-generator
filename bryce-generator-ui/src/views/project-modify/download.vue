@@ -73,7 +73,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { getById, addOrUpdate, sourceDownload } from '@/api/projectModify'
+import { getById, saveOrUpdate, sourceDownload } from '@/api/projectModify'
 
 const visible = ref(false)
 const dataFormRef = ref()
@@ -125,7 +125,7 @@ const handleSubmit = () => {
     }
 
     // 先保存
-    await addOrUpdate(dataForm)
+    await saveOrUpdate(dataForm)
 
     // 源码下载
     sourceDownload(dataForm.id)

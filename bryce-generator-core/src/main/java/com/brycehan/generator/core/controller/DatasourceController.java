@@ -2,7 +2,7 @@ package com.brycehan.generator.core.controller;
 
 import com.brycehan.generator.core.common.PageResult;
 import com.brycehan.generator.core.common.ResponseResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.config.GenDatasource;
 import com.brycehan.generator.core.convert.DatasourceConvert;
 import com.brycehan.generator.core.convert.TableConvert;
@@ -66,13 +66,13 @@ public class DatasourceController {
     /**
      * 删除数据源
      *
-     * @param deleteDto 数据源删除Dto
+     * @param idsDto 数据源删除Dto
      * @return 响应结果
      */
     @DeleteMapping
-    public ResponseResult<Void> delete(@Validated @RequestBody DeleteDto deleteDto) {
+    public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.datasourceService.delete(deleteDto);
+        this.datasourceService.delete(idsDto);
         return ResponseResult.ok();
     }
 

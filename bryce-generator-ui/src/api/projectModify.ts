@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import download from "@/utils/download"
 
-export const addOrUpdate = (data: any) => {
+export const saveOrUpdate = (data: any) => {
   if (data.id) {
     return request.put('/gen/projectModify', data)
   } else {

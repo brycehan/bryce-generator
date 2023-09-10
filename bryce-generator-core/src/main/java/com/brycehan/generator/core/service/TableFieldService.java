@@ -2,7 +2,7 @@ package com.brycehan.generator.core.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.brycehan.generator.core.common.PageResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.dto.TableFieldDto;
 import com.brycehan.generator.core.dto.TableFieldPageDto;
 import com.brycehan.generator.core.entity.TableField;
@@ -38,9 +38,9 @@ public interface TableFieldService extends IService<TableField> {
     /**
      * 删除表字段
      *
-     * @param deleteDto 表字段删除Dto
+     * @param idsDto 表字段删除Dto
      */
-    void delete(DeleteDto deleteDto);
+    void delete(IdsDto idsDto);
 
     /**
      * 表字段分页查询信息

@@ -2,7 +2,7 @@ package com.brycehan.generator.core.controller;
 
 import com.brycehan.generator.core.common.PageResult;
 import com.brycehan.generator.core.common.ResponseResult;
-import com.brycehan.generator.core.common.dto.DeleteDto;
+import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.convert.FieldTypeConvert;
 import com.brycehan.generator.core.dto.FieldTypeDto;
 import com.brycehan.generator.core.dto.FieldTypePageDto;
@@ -58,13 +58,13 @@ public class FieldTypeController {
     /**
      * 删除字段类型
      *
-     * @param deleteDto 字段类型删除Dto
+     * @param idsDto 字段类型删除Dto
      * @return 响应结果
      */
     @DeleteMapping
-    public ResponseResult<Void> delete(@Validated @RequestBody DeleteDto deleteDto) {
+    public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.fieldTypeService.delete(deleteDto);
+        this.fieldTypeService.delete(idsDto);
         return ResponseResult.ok();
     }
 

@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { getById, addOrUpdate } from '@/api/fieldType'
+import { getById, saveOrUpdate } from '@/api/fieldType'
 import { ElMessage } from 'element-plus'
 
 const emit = defineEmits(['refreshPage'])
@@ -79,7 +79,7 @@ const handleSubmit = () => {
       return false
     }
 
-    addOrUpdate(dataForm).then(() => {
+    saveOrUpdate(dataForm).then(() => {
       ElMessage.success({
         message: '操作成功',
         duration: 500,

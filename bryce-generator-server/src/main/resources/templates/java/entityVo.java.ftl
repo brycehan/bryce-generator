@@ -2,7 +2,6 @@ package ${packageName}.${moduleName}.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 <#list importList as item>
 import ${item!};
 </#list>
@@ -18,16 +17,12 @@ import java.io.Serial;
  */
 @Schema(description = "${tableComment}Vo")
 @Data
-<#if baseClass??>
-@EqualsAndHashCode(callSuper=false)
-</#if>
 public class ${entityName}Vo implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-<#list fieldList as field>
-<#if !field.baseField>
+<#list fieldList?filter(f -> f.primaryKey || f.gridItem || f.formItem || f.queryItem) as field>
 	<#if field.fieldComment!?length gt 0>
     /**
      * ${field.fieldComment}
@@ -36,6 +31,5 @@ public class ${entityName}Vo implements Serializable {
     @Schema(description = "${field.fieldComment}")
     private ${field.attrType} ${field.attrName};
 
-</#if>
 </#list>
 }

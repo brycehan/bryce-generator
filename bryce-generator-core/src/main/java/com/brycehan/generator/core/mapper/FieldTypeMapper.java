@@ -21,6 +21,6 @@ public interface FieldTypeMapper extends BaseMapper<FieldType> {
      * @param tableId 表ID
      * @return 包名列表
      */
-    Set<String> getPackageNameByTableId(Long tableId);
+    Set<String> getPackageNameByTableId(Long tableId, Long baseClassId);
 
 }

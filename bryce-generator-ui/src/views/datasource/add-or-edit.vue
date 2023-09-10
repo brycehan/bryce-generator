@@ -15,7 +15,7 @@
         <el-input v-model="dataForm.connName" placeholder="连接名" />
       </el-form-item>
       <el-form-item label="数据库类型" prop="dbType">
-        <el-select v-model="dataForm.dbType" clearable placeholder="数据库类型" style="width: 100%">
+        <el-select v-model="dataForm.dbType" placeholder="数据库类型" clearable style="width: 100%">
           <el-option value="MySQL" label="MySQL" />
           <el-option value="PostgreSQL" label="PostgreSQL" />
           <el-option value="Oracle" label="Oracle" />
@@ -43,7 +43,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { getById, addOrUpdate } from '@/api/datasource'
+import { getById, saveOrUpdate } from '@/api/datasource'
 import { ElMessage } from 'element-plus'
 
 const emit = defineEmits(['refreshPage'])
@@ -96,7 +96,7 @@ const handleSubmit = () => {
       return false
     }
 
-    addOrUpdate(dataForm).then(() => {
+    saveOrUpdate(dataForm).then(() => {
       ElMessage.success({
         message: '操作成功',
         duration: 500,

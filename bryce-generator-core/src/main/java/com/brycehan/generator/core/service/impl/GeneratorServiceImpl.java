@@ -11,6 +11,7 @@ import com.brycehan.generator.core.entity.BaseClass;
 import com.brycehan.generator.core.entity.Table;
 import com.brycehan.generator.core.entity.TableField;
 import com.brycehan.generator.core.service.*;
+import com.brycehan.generator.core.util.JsonUtils;
 import com.brycehan.generator.core.util.TemplateUtils;
 import com.google.common.base.CaseFormat;
 import com.google.common.collect.Maps;
@@ -151,6 +152,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         dataModel.put("date", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         dataModel.put("datetime", LocalDateTime.now().format(formatter));
+        dataModel.put("JsonUtils", new JsonUtils());
 
         // 设置字段分类
         setFieldTypeList(dataModel, table);
@@ -158,8 +160,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         // 设置基类信息
         setBaseClass(dataModel, table);
 
-        // 导入包的列表
-        Set<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId());
+        // entity导入包的列表
+        Set<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId());
         dataModel.put("importList", Sets.filter(importList, StringUtils::isNotBlank));
 
         // 表信息
@@ -177,7 +179,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         dataModel.put("entityDtoName", table.getClassName().concat("Dto"));
         dataModel.put("entityPageDtoName", table.getClassName().concat("PageDto"));
         dataModel.put("entityVoName", table.getClassName().concat("Vo"));
-        String entityParam = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, table.getClassName());
+        String entityParam = StrUtil.lowerFirst(table.getClassName());
+
         dataModel.put("entityParam", entityParam);
         dataModel.put("serviceParam", entityParam.concat("Service"));
         dataModel.put("mapperParam", entityParam.concat("Mapper"));
@@ -221,7 +224,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         dataModel.put("primaryKeys", primaryKeys);
         dataModel.put("formList", formList);
         dataModel.put("gridList", gridList);
-        dataModel.put("queryList", queryList.stream()
+        dataModel.put("queryList", queryList);
+        dataModel.put("queryListCataloged", queryList.stream()
                 .sorted(Comparator.comparing(TableField::getQueryType))
                 .toList());
     }

@@ -2,12 +2,12 @@ package ${packageName}.${moduleName}.controller;
 
 import ${packageName}.common.base.entity.PageResult;
 import ${packageName}.common.base.http.ResponseResult;
+import ${packageName}.common.base.dto.IdsDto;
 import ${packageName}.common.validator.AddGroup;
 import ${packageName}.common.validator.UpdateGroup;
 import ${packageName}.framework.operationlog.annotation.OperateLog;
 import ${packageName}.framework.operationlog.annotation.OperateType;
 import ${packageName}.${moduleName}.convert.${convertName};
-import ${packageName}.${moduleName}.dto.DeleteDto;
 import ${packageName}.${moduleName}.dto.${entityName}Dto;
 import ${packageName}.${moduleName}.dto.${entityPageDtoName};
 import ${packageName}.${moduleName}.entity.${entityName};
@@ -68,15 +68,15 @@ public class ${controllerName} {
     /**
      * 删除${tableComment}
      *
-     * @param deleteDto ${tableComment}删除Dto
+     * @param idsDto ID列表Dto
      * @return 响应结果
      */
     @Operation(summary = "删除${tableComment}")
     @OperateLog(type = OperateType.DELETE)
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:delete')")
     @DeleteMapping
-    public ResponseResult<Void> delete(@Validated @RequestBody DeleteDto deleteDto) {
-        this.${serviceParam}.delete(deleteDto);
+    public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
+        this.${serviceParam}.delete(idsDto);
         return ResponseResult.ok();
     }
 
