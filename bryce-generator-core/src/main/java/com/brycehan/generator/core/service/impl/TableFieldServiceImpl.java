@@ -49,7 +49,11 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
     private final List<String> autoFillUpdateAttrNameList = List.of("updatedUserId", "updatedTime");
 
     /** 默认表单属性名忽略显示列表 */
-    private final List<String> defaultFormAttrNameIgnoreList = List.of("id", "tenantId", "version", "deleted", "createdUserId", "createdTime", "updatedUserId", "updatedTime");
+    private final List<String> defaultFormAttrNameIgnoreList = List.of("id", "tenantId", "version", "deleted",
+            "createdUserId", "createdTime", "updatedUserId", "updatedTime");
+
+    /** 默认表单属性名必填列表 */
+    private final List<String> defaultFormAttrNameRequiredList = List.of("name", "sort");
 
     /** 默认查询条件like属性列表 */
     private final List<String> defaultQueryLikeAttrNameList = List.of("name", "username");
@@ -59,7 +63,8 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
     private final List<String> defaultQuerySelectAttrNameList = List.of("type", "status");
 
     /** 默认列表属性名忽略显示列表 */
-    private final List<String> defaultGridAttrNameIgnoreList = List.of("id", "tenantId", "version", "deleted", "createdUserId", "updatedUserId", "updatedTime");
+    private final List<String> defaultGridAttrNameIgnoreList = List.of("id", "tenantId", "version", "deleted",
+            "createdUserId", "updatedUserId", "updatedTime");
 
     @Override
     public void save(TableFieldDto tableFieldDto) {
@@ -130,9 +135,10 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
             }
 
             field.setFormItemType("text");
-            field.setFormRequired(false);
             // 表单默认忽略的属性处理
             field.setFormItem(!this.defaultFormAttrNameIgnoreList.contains(field.getAttrName()));
+            // 表单默认必填的属性处理
+            field.setFormRequired(this.defaultFormAttrNameRequiredList.contains(field.getAttrName()));
 
             // 查询显示默认处理
             field.setQueryFormType("text");

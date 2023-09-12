@@ -6,7 +6,7 @@
     <#if field.queryFormType == 'date'>
       <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
         <el-date-picker
-            v-model="state.queryForm.${field.attrName}Range"
+            v-model="state.range.${field.attrName}"
             type="daterange"
             unlink-panels
             range-separator="-"
@@ -17,7 +17,7 @@
     <#elseif field.queryFormType == 'datetime'>
       <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
         <el-date-picker
-            v-model="state.queryForm.${field.attrName}Range"
+            v-model="state.range.${field.attrName}"
             type="datetimerange"
             unlink-panels
             range-separator="-"
@@ -32,7 +32,7 @@
         <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" />
       <#elseif field.queryFormType == 'select'>
         <#if field.formDict??>
-        <dict-select v-model="state.queryForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" clearable/>
+        <dict-select v-model="state.queryForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" clearable />
         <#else>
         <el-select v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}">
           <el-option label="选择" value="0"/>
@@ -121,19 +121,14 @@ const state: StateOptions = reactive({
     deleteByIds
   },
   queryForm: {
-      <#list queryList?filter(f -> f.attrName != "tenantId") as field>
-        <#if field.queryType == "between">
-        ${field.attrName}Start: '',
-        ${field.attrName}End: ''<#sep>,</#sep>
-        <#else>
-        ${field.attrName}: ''<#sep>,</#sep>
-        </#if>
-      </#list>
+    <#list queryList?filter(f -> f.attrName != "tenantId") as field>
+    ${field.attrName}: ''<#sep>,</#sep>
+    </#list>
   },
 <#if queryList?filter(f -> f.queryType == "between")?size gt 0>
   range: {
   <#list queryList?filter(f -> f.queryType == "between") as field>
-    ${field.attrName}Range: ''<#sep >,</#sep>
+    ${field.attrName}: ''<#sep >,</#sep>
   </#list>
   },
 </#if>

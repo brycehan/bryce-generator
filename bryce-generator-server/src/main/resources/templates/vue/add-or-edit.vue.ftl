@@ -19,7 +19,7 @@
         <el-col :span="12">
         <#if field.formItemType == 'text'>
           <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-            <el-input v-model="state.dataForm.${field.attrName}" placeholder="${field.fieldComment!}" />
+            <el-input v-model="state.dataForm.${field.attrName}" placeholder="请输入${field.fieldComment!}" clearable />
           </el-form-item>
         <#elseif field.formItemType == 'textarea'>
           <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
@@ -32,11 +32,11 @@
         <#elseif field.formItemType == 'select'>
           <#if field.formDict??>
             <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-              <dict-select v-model="state.dataForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" />
+              <dict-select v-model="state.dataForm.${field.attrName}" dict-type="${field.formDict}" placeholder="请选择${field.fieldComment!}" clearable />
             </el-form-item>
           <#else>
             <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-              <el-select v-model="state.dataForm.${field.attrName}" placeholder="请选择">
+              <el-select v-model="state.dataForm.${field.attrName}" placeholder="请选择" clearable>
                 <el-option label="请选择" value="0" />
               </el-select>
             </el-form-item>

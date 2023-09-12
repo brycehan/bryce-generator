@@ -19,8 +19,8 @@ import java.io.Serial;
  * @author ${author}
  * @since ${date}
  */
-@Schema(description = "${tableComment}Dto")
 @Data
+@Schema(description = "${tableComment}Dto")
 public class ${entityName}Dto implements Serializable {
 
     @Serial

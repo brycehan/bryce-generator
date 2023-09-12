@@ -19,8 +19,8 @@ import java.io.Serial;
  * @author ${author}
  * @since ${date}
  */
-@Schema(description = "${tableComment}PageDto")
 @Data
+@Schema(description = "${tableComment}PageDto")
 @EqualsAndHashCode(callSuper = false)
 public class ${entityName}PageDto extends BasePageDto {
 

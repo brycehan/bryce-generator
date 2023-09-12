@@ -80,7 +80,6 @@ public class ${controllerName} {
         return ResponseResult.ok();
     }
 
-
     /**
      * 查询${tableComment}详情
      *
@@ -108,7 +107,6 @@ public class ${controllerName} {
         PageResult<${entityName}Vo> page = this.${serviceParam}.page(${entityParam}PageDto);
         return ResponseResult.ok(page);
     }
-
 
     /**
      * ${tableComment}导出数据
