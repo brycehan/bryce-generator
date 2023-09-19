@@ -139,19 +139,25 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
             field.setFormItem(!this.defaultFormAttrNameIgnoreList.contains(field.getAttrName()));
             // 表单默认必填的属性处理
             field.setFormRequired(this.defaultFormAttrNameRequiredList.contains(field.getAttrName()));
+            // 表单默认status属性处理
+            if(field.getAttrName().equals("status")) {
+                field.setFormDict("sys_status");
+                field.setFormItemType("radio");
+            }
 
             // 查询显示默认处理
             field.setQueryFormType("text");
             if(this.defaultQuerySelectAttrNameList.contains(field.getAttrName())) {
-                field.setQueryType("select");
+                field.setQueryType("=");
+                field.setQueryFormType("select");
             }
             if(this.defaultQueryEqualAttrNameList.contains(field.getAttrName())){
-                field.setQueryItem(true);
                 field.setQueryType("=");
+                field.setQueryItem(true);
             }
             if(this.defaultQueryLikeAttrNameList.contains(field.getAttrName())) {
-                field.setQueryItem(true);
                 field.setQueryType("like");
+                field.setQueryItem(true);
             }
 
             // 列表显示默认忽略的属性处理

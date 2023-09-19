@@ -6,7 +6,7 @@
     <resultMap id="BaseResultMap" type="${packageName}.${moduleName}.entity.${entityName}">
         <#list fieldList as field>
         <#if field.primaryKey>
-        <id column="id" property="id" />
+        <id column="${field.fieldName}" property="${field.attrName}" />
         <#else>
         <result column="${field.fieldName}" property="${field.attrName}" />
         </#if>

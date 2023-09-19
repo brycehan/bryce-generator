@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover">
+  <el-card shadow="never">
     <el-form ref="queryFormRef" :model="state.queryForm" :inline="true" label-width="68px" @keyup.enter="getPage()" @submit.prevent>
 <#list queryList?filter(f -> f.attrName != "tenantId") as field>
   <#if field.queryType == "between">
@@ -12,7 +12,8 @@
             range-separator="-"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
-            value-format="YYYY-MM-DD"/>
+            value-format="YYYY-MM-DD"
+            clearable />
       </el-form-item>
     <#elseif field.queryFormType == 'datetime'>
       <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
@@ -23,18 +24,19 @@
             range-separator="-"
             start-placeholder="开始时间"
             end-placeholder="结束时间"
-            value-format="YYYY-MM-DD HH:mm"/>
+            value-format="YYYY-MM-DD HH:mm"
+            clearable />
       </el-form-item>
     </#if>
   <#else>
       <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
       <#if field.queryFormType == 'text' || field.queryFormType == 'textarea' || field.queryFormType == 'editor'>
-        <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" />
+        <el-input v-model="state.queryForm.${field.attrName}" placeholder="请输入${field.fieldComment!}" clearable />
       <#elseif field.queryFormType == 'select'>
         <#if field.formDict??>
         <dict-select v-model="state.queryForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" clearable />
         <#else>
-        <el-select v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}">
+        <el-select v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" clearable>
           <el-option label="选择" value="0"/>
         </el-select>
         </#if>
@@ -50,14 +52,16 @@
         <el-date-picker
           v-model="state.queryForm.${field.attrName}"
           type="daterange"
-          value-format="YYYY-MM-DD"/>
+          value-format="YYYY-MM-DD"
+          clearable />
       <#elseif field.queryFormType == 'datetime'>
         <el-date-picker
           v-model="state.queryForm.${field.attrName}"
           type="datetimerange"
-          value-format="YYYY-MM-DD HH:mm"/>
+          value-format="YYYY-MM-DD HH:mm"
+          clearable />
       <#else>
-        <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" />
+        <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" clearable />
       </#if>
       </el-form-item>
   </#if>
@@ -68,8 +72,8 @@
       </el-form-item>
     </el-form>
     <el-row class="mb-2">
-      <el-button type="primary" icon="Plus" @click="handleAddOrEdit()">新增</el-button>
-      <el-button type="danger" icon="Delete" @click="handleDeleteBatch()">删除</el-button>
+      <el-button v-auth="'${moduleName}:${functionName}:save'" type="primary" icon="Plus" @click="handleAddOrEdit()">新增</el-button>
+      <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" icon="Delete" @click="handleDeleteBatch()">删除</el-button>
     </el-row>
     <el-table
       v-loading="state.loading"
@@ -88,8 +92,8 @@
     </#list>
       <el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
         <template #default="scope">
-          <el-button type="primary" link @click="handleAddOrEdit(scope.row.id)">编辑</el-button>
-          <el-button type="danger" link @click="handleDeleteBatch(scope.row.id)">删除</el-button>
+          <el-button v-auth="'${moduleName}:${functionName}:update'" type="primary" link @click="handleAddOrEdit(scope.row.id)">编辑</el-button>
+          <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" link @click="handleDeleteBatch(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

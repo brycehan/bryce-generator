@@ -225,9 +225,6 @@ public class GeneratorServiceImpl implements GeneratorService {
         dataModel.put("formList", formList);
         dataModel.put("gridList", gridList);
         dataModel.put("queryList", queryList);
-        dataModel.put("queryListCataloged", queryList.stream()
-                .sorted(Comparator.comparing(TableField::getQueryType))
-                .toList());
     }
 
     /**

@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * ${tableComment}服务实现类
+ * ${tableComment}服务实现
  *
  * @author ${author}
  * @since ${date}
@@ -47,10 +47,8 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
      */
     private Wrapper<${entityName}> getWrapper(${entityPageDtoName} ${entityParam}PageDto){
         LambdaQueryWrapper<${entityName}> wrapper = new LambdaQueryWrapper<>();
-        <#list queryListCataloged as field>
-          <#if field.queryFormType == 'date' || field.queryFormType == 'datetime'>
-        wrapper.between(ArrayUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()), ${entityName}::get${field.attrName?cap_first}, ArrayUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()) ? ${entityParam}PageDto.get${field.attrName?cap_first}()[0] : null, ArrayUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()) ? ${entityParam}PageDto.get${field.attrName?cap_first}()[1] : null);
-          <#elseif field.queryType == '='>
+        <#list queryList?sort_by("queryType") as field>
+          <#if field.queryType == '='>
         wrapper.eq(Objects.nonNull(${entityParam}PageDto.get${field.attrName?cap_first}()), ${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}());
           <#elseif field.queryType == '!='>
         wrapper.ne(StringUtils.isNotEmpty(${entityParam}PageDto.get${field.attrName?cap_first}()), ${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}());
@@ -71,11 +69,11 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
           <#elseif field.queryType == 'between'>
 
         if(${entityParam}PageDto.get${field.attrName?cap_first}Start() != null && ${entityParam}PageDto.get${field.attrName?cap_first}End() != null) {
-            wrapper.between(SysDictType::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}Start(), ${entityParam}PageDto.get${field.attrName?cap_first}End());
+            wrapper.between(${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}Start(), ${entityParam}PageDto.get${field.attrName?cap_first}End());
         } else if(${entityParam}PageDto.get${field.attrName?cap_first}Start() != null) {
-            wrapper.ge(SysDictType::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}Start());
+            wrapper.ge(${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}Start());
         }else if(${entityParam}PageDto.get${field.attrName?cap_first}End() != null) {
-            wrapper.ge(SysDictType::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}End());
+            wrapper.ge(${entityName}::get${field.attrName?cap_first}, ${entityParam}PageDto.get${field.attrName?cap_first}End());
         }
 
           </#if>

@@ -1,6 +1,6 @@
 package ${packageName}.${moduleName}.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import ${packageName}.common.base.mapper.BryceBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import ${packageName}.${moduleName}.entity.${entityName};
 
@@ -11,6 +11,6 @@ import ${packageName}.${moduleName}.entity.${entityName};
 * @since ${date}
 */
 @Mapper
-public interface ${mapperName} extends BaseMapper<${entityName}> {
+public interface ${mapperName} extends BryceBaseMapper<${entityName}> {
 
 }

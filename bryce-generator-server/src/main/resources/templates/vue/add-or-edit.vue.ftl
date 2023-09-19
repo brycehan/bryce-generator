@@ -11,6 +11,7 @@
       :rules="rules"
       label-width="100px"
       @keyup.enter="handleSubmit()"
+      class="mr-4"
     >
 <#if formLayout == 2>
   <#list formList?chunk(2) as row>
@@ -90,53 +91,52 @@
         <el-input type="textarea" v-model="state.dataForm.${field.attrName}" placeholder="请输入内容" />
       </el-form-item>
     <#elseif field.formItemType == 'editor'>
-        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-          <el-input type="textarea" v-model="state.dataForm.${field.attrName}" placeholder="${field.fieldComment!}" />
-        </el-form-item>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <el-input type="textarea" v-model="state.dataForm.${field.attrName}" placeholder="${field.fieldComment!}" />
+      </el-form-item>
     <#elseif field.formItemType == 'select'>
       <#if field.formDict??>
-        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-          <dict-select v-model="state.dataForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" />
-        </el-form-item>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <dict-select v-model="state.dataForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" />
+      </el-form-item>
       <#else>
-          <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-            <el-select v-model="state.dataForm.${field.attrName}" placeholder="请选择">
-              <el-option label="请选择" value="0" />
-            </el-select>
-          </el-form-item>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <el-select v-model="state.dataForm.${field.attrName}" placeholder="请选择">
+          <el-option label="请选择" value="0" />
+        </el-select>
+      </el-form-item>
       </#if>
     <#elseif field.formItemType == 'radio'>
-        <#if field.formDict??>
-          <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-            <dict-radio-group v-model="state.dataForm.${field.attrName}" dict-type="${field.formDict}" />
-          </el-form-item>
-        <#else>
-          <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-            <el-radio-group v-model="state.dataForm.${field.attrName}">
-              <el-radio :label="0">启用</el-radio>
-              <el-radio :label="1">禁用</el-radio>
-            </el-radio-group>
-          </el-form-item>
-        </#if>
+      <#if field.formDict??>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <dict-radio-group v-model="state.dataForm.${field.attrName}" dict-type="${field.formDict}" />
+      </el-form-item>
+      <#else>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <el-radio-group v-model="state.dataForm.${field.attrName}">
+          <el-radio :label="0">启用</el-radio>
+        </el-radio-group>
+      </el-form-item>
+      </#if>
     <#elseif field.formItemType == 'checkbox'>
-        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-          <el-checkbox-group v-model="state.dataForm.${field.attrName}">
-            <el-checkbox :label="启用" name="type"/>
-            <el-checkbox :label="禁用" name="type"/>
-          </el-checkbox-group>
-        </el-form-item>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <el-checkbox-group v-model="state.dataForm.${field.attrName}">
+          <el-checkbox :label="启用" name="type"/>
+          <el-checkbox :label="禁用" name="type"/>
+        </el-checkbox-group>
+      </el-form-item>
     <#elseif field.formItemType == 'date'>
-        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-          <el-date-picker type="date" v-model="state.dataForm.${field.attrName}" placeholder="${field.fieldComment!}"/>
-        </el-form-item>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <el-date-picker type="date" v-model="state.dataForm.${field.attrName}" placeholder="${field.fieldComment!}"/>
+      </el-form-item>
     <#elseif field.formItemType == 'datetime'>
-        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-          <el-date-picker type="datetime" v-model="state.dataForm.${field.attrName}" placeholder="${field.fieldComment!}"/>
-        </el-form-item>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <el-date-picker type="datetime" v-model="state.dataForm.${field.attrName}" placeholder="${field.fieldComment!}"/>
+      </el-form-item>
     <#else>
-        <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
-          <el-input v-model="state.dataForm.${field.attrName}" placeholder="请输入${field.fieldComment!}" />
-        </el-form-item>
+      <el-form-item label="${field.fieldComment!}" prop="${field.attrName}">
+        <el-input v-model="state.dataForm.${field.attrName}" placeholder="请输入${field.fieldComment!}" />
+      </el-form-item>
     </#if>
 </#list>
 </#if>
@@ -175,15 +175,15 @@ const state: StateOptions  = reactive({
 const dataFormRef = ref()
 
 const rules = reactive({
-<#list formList?filter(f -> f.formRequired || f.characterMaximumLength?number gt 0) as field>
-  <#if field.formRequired && field.characterMaximumLength?number gt 0>
+<#list formList?filter(f -> f.formRequired || f.characterMaximumLength gt 0) as field>
+  <#if field.formRequired && field.characterMaximumLength gt 0>
     ${field.attrName}: [
       { required: true, message: '必填项不能为空', trigger: 'blur' },
       { min: 0, max: ${field.characterMaximumLength?number}, message: '${field.fieldComment!}长度不能超过${field.characterMaximumLength?number}个字符', trigger: 'blur' }
     ]<#sep>,</#sep>
   <#elseif field.formRequired>
     ${field.attrName}: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]<#sep>,</#sep>
-  <#elseif field.characterMaximumLength?number gt 0>
+  <#elseif field.characterMaximumLength?c?number gt 0>
     ${field.attrName}: [{ min: 0, max: ${field.characterMaximumLength}, message: '${field.fieldComment!}长度不能超过${field.characterMaximumLength}个字符', trigger: 'blur' }]<#sep>,</#sep>
   </#if>
 </#list>
