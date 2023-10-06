@@ -1,7 +1,7 @@
 package ${packageName}.${moduleName}.dto;
 
 <#if fieldList?filter(field -> field.characterMaximumLength gt 0)?size  gt 0>
-import com.brycehan.boot.common.validator.AddGroup;
+import com.brycehan.boot.common.validator.SaveGroup;
 import com.brycehan.boot.common.validator.UpdateGroup;
 import jakarta.validation.constraints.Size;
 </#if>
@@ -47,7 +47,7 @@ public class ${entityName}Dto implements Serializable {
     @NotNull(groups = UpdateGroup.class)
   </#if>
   <#if field.characterMaximumLength gt 0>
-    @Size(max = ${field.characterMaximumLength?c}, groups = {AddGroup.class, UpdateGroup.class})
+    @Size(max = ${field.characterMaximumLength?c}, groups = {SaveGroup.class, UpdateGroup.class})
   </#if>
     private ${field.attrType} ${field.attrName};
 

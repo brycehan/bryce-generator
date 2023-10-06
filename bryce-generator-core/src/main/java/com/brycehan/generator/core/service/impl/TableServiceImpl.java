@@ -72,10 +72,30 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
         this.baseMapper.insert(table);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void update(TableDto tableDto) {
         Table table = TableConvert.INSTANCE.convert(tableDto);
         this.baseMapper.updateById(table);
+
+        // 更新字段基类字段信息
+        List<TableField> fieldList = this.tableFieldService.getByTableId(tableDto.getId());
+        if(table.getBaseClassId() == null) {
+            fieldList.forEach(tableField -> tableField.setBaseField(false));
+        } else {
+            // 有基类时
+            BaseClass baseClass = this.baseClassService.getById(tableDto.getBaseClassId());
+            if(baseClass != null) {
+                // 基类字段
+                String[] fields = baseClass.getFields().split(",");
+
+                // 标注为基类字段
+                fieldList.forEach(tableField -> tableField.setBaseField(ArrayUtils.contains(fields, tableField.getFieldName())));
+            }
+        }
+
+        // 更新列数据
+        this.tableFieldService.updateBatchById(fieldList);
     }
 
     @Override

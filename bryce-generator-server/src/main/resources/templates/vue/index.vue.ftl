@@ -2,9 +2,15 @@
   <el-card shadow="never">
     <el-form ref="queryFormRef" :model="state.queryForm" :inline="true" label-width="68px" @keyup.enter="getPage()" @submit.prevent>
 <#list queryList?filter(f -> f.attrName != "tenantId") as field>
+  <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
+  <#if fieldCommentEnd == -1>
+    <#assign fieldComment = field.fieldComment!>
+  <#else>
+    <#assign fieldComment = field.fieldComment!?substring(0, fieldCommentEnd)>
+  </#if>
   <#if field.queryType == "between">
     <#if field.queryFormType == 'date'>
-      <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
+      <el-form-item label="${fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
         <el-date-picker
             v-model="state.range.${field.attrName}"
             type="daterange"
@@ -16,7 +22,7 @@
             clearable />
       </el-form-item>
     <#elseif field.queryFormType == 'datetime'>
-      <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
+      <el-form-item label="${fieldComment!}" <#if fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
         <el-date-picker
             v-model="state.range.${field.attrName}"
             type="datetimerange"
@@ -29,14 +35,14 @@
       </el-form-item>
     </#if>
   <#else>
-      <el-form-item label="${field.fieldComment!}" <#if field.fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
+      <el-form-item label="${fieldComment!}" <#if fieldComment!?length==2>label-width="40px" </#if>prop="${field.attrName}">
       <#if field.queryFormType == 'text' || field.queryFormType == 'textarea' || field.queryFormType == 'editor'>
-        <el-input v-model="state.queryForm.${field.attrName}" placeholder="请输入${field.fieldComment!}" clearable />
+        <el-input v-model="state.queryForm.${field.attrName}" placeholder="请输入${fieldComment!}" clearable />
       <#elseif field.queryFormType == 'select'>
         <#if field.formDict??>
-        <dict-select v-model="state.queryForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${field.fieldComment!}" clearable />
+        <dict-select v-model="state.queryForm.${field.attrName}" dict-type="${field.formDict}" placeholder="${fieldComment!}" clearable />
         <#else>
-        <el-select v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" clearable>
+        <el-select v-model="state.queryForm.${field.attrName}" placeholder="${fieldComment!}" clearable>
           <el-option label="选择" value="0"/>
         </el-select>
         </#if>
@@ -61,7 +67,7 @@
           value-format="YYYY-MM-DD HH:mm"
           clearable />
       <#else>
-        <el-input v-model="state.queryForm.${field.attrName}" placeholder="${field.fieldComment!}" clearable />
+        <el-input v-model="state.queryForm.${field.attrName}" placeholder="${fieldComment!}" clearable />
       </#if>
       </el-form-item>
   </#if>
@@ -84,10 +90,16 @@
     >
       <el-table-column type="selection" header-align="center" align="center" width="50" />
     <#list gridList as field>
-      <#if field.formDict??>
-      <dict-table-column label="${field.fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>dict-type="${field.formDict}" />
+      <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
+      <#if fieldCommentEnd == -1>
+        <#assign fieldComment = field.fieldComment!>
       <#else>
-      <el-table-column label="${field.fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>header-align="center" align="center" />
+        <#assign fieldComment = field.fieldComment!?substring(0, fieldCommentEnd)>
+      </#if>
+      <#if field.formDict??>
+      <dict-table-column label="${fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>dict-type="${field.formDict}" />
+      <#else>
+      <el-table-column label="${fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>header-align="center" align="center" />
       </#if>
     </#list>
       <el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">

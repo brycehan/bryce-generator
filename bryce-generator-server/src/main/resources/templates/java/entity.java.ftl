@@ -10,6 +10,8 @@ import ${item!};
 </#list>
 <#if baseClass??>
 import ${baseClass.packageName}.${baseClass.code};
+<#else>
+import java.io.Serializable;
 </#if>
 import java.io.Serial;
 

@@ -3,7 +3,7 @@ package ${packageName}.${moduleName}.controller;
 import ${packageName}.common.base.entity.PageResult;
 import ${packageName}.common.base.http.ResponseResult;
 import ${packageName}.common.base.dto.IdsDto;
-import ${packageName}.common.validator.AddGroup;
+import ${packageName}.common.validator.SaveGroup;
 import ${packageName}.common.validator.UpdateGroup;
 import ${packageName}.framework.operationlog.annotation.OperateLog;
 import ${packageName}.framework.operationlog.annotation.OperateType;
@@ -45,7 +45,7 @@ public class ${controllerName} {
     @OperateLog(type = OperateType.INSERT)
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:save')")
     @PostMapping
-    public ResponseResult<Void> save(@Validated(value = AddGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
+    public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
         this.${serviceParam}.save(${entityParam}Dto);
         return ResponseResult.ok();
     }
