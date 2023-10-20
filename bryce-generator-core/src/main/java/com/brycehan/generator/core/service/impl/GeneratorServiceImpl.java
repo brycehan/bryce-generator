@@ -13,7 +13,6 @@ import com.brycehan.generator.core.entity.TableField;
 import com.brycehan.generator.core.service.*;
 import com.brycehan.generator.core.util.JsonUtils;
 import com.brycehan.generator.core.util.TemplateUtils;
-import com.google.common.base.CaseFormat;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import lombok.RequiredArgsConstructor;
@@ -161,8 +160,10 @@ public class GeneratorServiceImpl implements GeneratorService {
         setBaseClass(dataModel, table);
 
         // entity导入包的列表
-        Set<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId());
+        Set<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "entity");
+        Set<String> voImportList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "vo");
         dataModel.put("importList", Sets.filter(importList, StringUtils::isNotBlank));
+        dataModel.put("voImportList", Sets.filter(voImportList, StringUtils::isNotBlank));
 
         // 表信息
         dataModel.put("tableName", table.getTableName());

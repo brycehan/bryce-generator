@@ -16,11 +16,14 @@ import ${packageName}.${moduleName}.mapper.${mapperName};
 <#if queryList?filter(f -> f.attrType == "String")?size gt 0>
 import org.apache.commons.lang3.StringUtils;
 </#if>
+<#if queryList?filter(f -> f.attrType != "String")?size gt 0>
+import java.util.Objects;
+</#if>
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
-import java.util.Objects;
+
 
 /**
  * ${tableComment}服务实现

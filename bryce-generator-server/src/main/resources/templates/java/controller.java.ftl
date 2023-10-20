@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
  * @author ${author}
  * @since ${date}
  */
-@Tag(name = "${entityParam}", description = "${tableComment}API")
+@Tag(name = "${tableComment}", description = "${entityParam}")
 @RequestMapping("/${moduleName}/${functionName}")
 @RestController
 @RequiredArgsConstructor

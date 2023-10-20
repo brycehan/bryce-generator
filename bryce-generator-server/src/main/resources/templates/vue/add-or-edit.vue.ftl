@@ -8,7 +8,7 @@
     <el-form
       ref="dataFormRef"
       :model="state.dataForm"
-      :rules="rules"
+      :rules="dataRules"
       label-width="100px"
       @keyup.enter="handleSubmit()"
       class="mr-4"
@@ -34,7 +34,7 @@
           </el-form-item>
         <#elseif field.formItemType == 'editor'>
           <el-form-item label="${fieldComment!}" prop="${field.attrName}">
-            <el-input type="textarea" v-model="state.dataForm.${field.attrName}" placeholder="${fieldComment!}" />
+            <el-input type="textarea1" v-model="state.dataForm.${field.attrName}" placeholder="${fieldComment!}" />
           </el-form-item>
         <#elseif field.formItemType == 'select'>
           <#if field.formDict??>
@@ -190,13 +190,13 @@ const state: StateOptions  = reactive({
 
 const dataFormRef = ref()
 
-const rules = reactive({
+const dataRules = reactive({
 <#list formList?filter(f -> f.formRequired || f.characterMaximumLength gt 0) as field>
   <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
   <#if fieldCommentEnd == -1>
   <#assign fieldComment = field.fieldComment!>
   <#else>
-  <#assign fieldComment = fieldComment!?substring(0, fieldCommentEnd)>
+  <#assign fieldComment = field.fieldComment!?substring(0, fieldCommentEnd)>
   </#if>
   <#if field.formRequired && field.characterMaximumLength?c?number gt 0>
     ${field.attrName}: [

@@ -2,7 +2,7 @@ package ${packageName}.${moduleName}.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-<#list importList as item>
+<#list voImportList as item>
 import ${item!};
 </#list>
 
@@ -22,7 +22,7 @@ public class ${entityName}Vo implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-<#list fieldList?filter(f -> f.primaryKey || f.gridItem || f.formItem || f.queryItem) as field>
+<#list fieldList?filter(f -> f.primaryKey || f.formItem || f.queryItem || f.gridItem) as field>
 	<#if field.fieldComment!?length gt 0>
     /**
      * ${field.fieldComment}

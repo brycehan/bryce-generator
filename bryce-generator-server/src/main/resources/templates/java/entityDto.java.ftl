@@ -5,6 +5,8 @@ import com.brycehan.boot.common.validator.SaveGroup;
 import com.brycehan.boot.common.validator.UpdateGroup;
 import jakarta.validation.constraints.Size;
 </#if>
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 <#list importList as item>
@@ -31,6 +33,8 @@ public class ${entityName}Dto implements Serializable {
     * ID
     */
     @Schema(description = "ID")
+    @Null(groups = SaveGroup.class)
+    @NotNull(groups = UpdateGroup.class)
     private Long id;
 
 </#if>

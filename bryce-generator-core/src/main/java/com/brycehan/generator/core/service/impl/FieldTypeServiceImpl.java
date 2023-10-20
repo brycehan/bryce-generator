@@ -95,8 +95,8 @@ public class FieldTypeServiceImpl extends BaseServiceImpl<FieldTypeMapper, Field
     }
 
     @Override
-    public Set<String> getPackageNameByTableId(Long tableId, Long baseClassId) {
-        return this.fieldTypeMapper.getPackageNameByTableId(tableId, baseClassId);
+    public Set<String> getPackageNameByTableId(Long tableId, Long baseClassId, String type) {
+        return this.fieldTypeMapper.getPackageNameByTableId(tableId, baseClassId, type);
     }
 
     @Override

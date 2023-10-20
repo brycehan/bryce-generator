@@ -19,8 +19,10 @@ public interface FieldTypeMapper extends BaseMapper<FieldType> {
      * 根据表ID查询包名列表
      *
      * @param tableId 表ID
+     * @param baseClassId 基类ID
+     * @param type 类型（vo, dto, pageDto, entity）
      * @return 包名列表
      */
-    Set<String> getPackageNameByTableId(Long tableId, Long baseClassId);
+    Set<String> getPackageNameByTableId(Long tableId, Long baseClassId, String type);
 
 }
