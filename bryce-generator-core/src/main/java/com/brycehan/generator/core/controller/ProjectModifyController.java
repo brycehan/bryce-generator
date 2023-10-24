@@ -27,7 +27,7 @@ import java.util.List;
  * @author Bryce Han
  * @since 2023/4/27
  */
-@RequestMapping("/projectModify")
+@RequestMapping("/generator-ui/gen/projectModify")
 @RestController
 @RequiredArgsConstructor
 public class ProjectModifyController {

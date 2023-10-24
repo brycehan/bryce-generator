@@ -32,7 +32,7 @@ import java.util.List;
  * @since 2023/4/27
  */
 @Slf4j
-@RequestMapping("/datasource")
+@RequestMapping("/generator-ui/gen/datasource")
 @RestController
 @RequiredArgsConstructor
 public class DatasourceController {

@@ -1,7 +1,7 @@
 <template>
   <el-container class="header-container">
     <div class="header-logo">
-      <el-avatar src="/favicon.ico"></el-avatar>
+      <el-avatar src="./favicon.ico"></el-avatar>
       <span class="logo-title">Bryce Generator</span>
     </div>
     <div class="header-content">代码生成器工作台</div>

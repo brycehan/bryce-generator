@@ -24,7 +24,7 @@ import java.util.List;
  * @author Bryce Han
  * @since 2023/4/27
  */
-@RequestMapping("/baseClass")
+@RequestMapping("/generator-ui/gen/baseClass")
 @RestController
 @RequiredArgsConstructor
 public class BaseClassController {

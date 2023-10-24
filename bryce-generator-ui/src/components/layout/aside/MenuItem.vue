@@ -42,8 +42,6 @@ const router = useRouter()
  * @param menu 菜单
  */
 const handleClick = (menu: any) => {
-  console.log('clickM:', menu, router)
-
   router.push(menu.path)
   return
 }

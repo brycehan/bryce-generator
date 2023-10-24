@@ -29,7 +29,7 @@ import java.util.List;
  * @author Bryce Han
  * @since 2023/4/27
  */
-@RequestMapping("/table")
+@RequestMapping("/generator-ui/gen/table")
 @RestController
 @RequiredArgsConstructor
 public class TableController {

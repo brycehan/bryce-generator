@@ -1,15 +1,8 @@
 server:
   port: 8100
-  servlet:
-    context-path: /gen
-
-bryce:
-  gen:
-    table-prefix: brc_
 spring:
   profiles:
     active: mysql
-
 mybatis-plus:
   mapper-locations: classpath*:com/brycehan/generator/*/mapper/xml/*Mapper.xml
   global-config:
@@ -22,6 +15,10 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: null
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+# 自定义
+bryce:
+  gen:
+    table-prefix: brc_
 # 日志
 logging:
   level:

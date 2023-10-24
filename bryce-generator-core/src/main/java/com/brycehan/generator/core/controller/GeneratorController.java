@@ -20,7 +20,7 @@ import java.util.zip.ZipOutputStream;
  * @author Bryce Han
  * @since 2023/4/27
  */
-@RequestMapping("/generator")
+@RequestMapping("/generator-ui/gen/generator")
 @RestController
 @RequiredArgsConstructor
 public class GeneratorController {

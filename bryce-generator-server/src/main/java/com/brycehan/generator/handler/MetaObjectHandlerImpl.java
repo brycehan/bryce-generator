@@ -1,4 +1,4 @@
-package com.brycehan.generator.core.common.handler;
+package com.brycehan.generator.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

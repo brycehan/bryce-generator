@@ -24,7 +24,7 @@ import java.util.List;
  * @author Bryce Han
  * @since 2023/4/27
  */
-@RequestMapping("/tableField")
+@RequestMapping("/generator-ui/gen/tableField")
 @RestController
 @RequiredArgsConstructor
 public class TableFieldController {

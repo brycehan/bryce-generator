@@ -1,4 +1,7 @@
 spring:
+  config:
+    activate:
+      on-profile: sqlserver
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     url: jdbc:sqlserver://localhost:1433;DatabaseName=bryce_generator;encrypt=true;trustServerCertificate=true
