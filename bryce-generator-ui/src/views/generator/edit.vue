@@ -256,14 +256,9 @@ const getFieldTypeList = async () => {
 /** 表单提交 */
 const handleSubmit = () => {
   updateFieldList(tableId.value, fieldList.value).then(() => {
-    ElMessage.success({
-      message: '操作成功',
-      duration: 500,
-      onClose: () => {
-        visible.value = false
-        emit('refreshPage')
-      }
-    })
+    visible.value = false
+    emit('refreshPage')
+    ElMessage.success('操作成功')
   })
 }
 

@@ -101,14 +101,9 @@ const handleSubmit = () => {
     }
 
     importTableList(dataForm.datasourceId, dataForm.tableNameListSelections).then(() => {
-      ElMessage.success({
-        message: '操作成功',
-        duration: 500,
-        onClose: () => {
-          visible.value = false
-          emit('refreshPage')
-        }
-      })
+      visible.value = false
+      emit('refreshPage')
+      ElMessage.success('导入成功')
     })
   })
 }
