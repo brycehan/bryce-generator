@@ -1,5 +1,6 @@
 package com.brycehan.generator.autoconfig;
 
+import com.brycehan.generator.core.config.GeneratorProperties;
 import com.brycehan.generator.core.config.template.GeneratorConfig;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,11 +17,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = "com.brycehan.generator")
 @MapperScan(basePackages = "com.brycehan.generator.*.mapper")
-@EnableConfigurationProperties(BryceGeneratorProperties.class)
+@EnableConfigurationProperties(GeneratorProperties.class)
 public class BryceGeneratorAutoConfiguration {
 
 	@Bean
-	GeneratorConfig generatorConfig(BryceGeneratorProperties properties) {
+	GeneratorConfig generatorConfig(GeneratorProperties properties) {
 		return new GeneratorConfig(properties.getTemplate());
 	}
 

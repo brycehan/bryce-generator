@@ -17,7 +17,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # 自定义
 bryce:
-  gen:
+  generator:
     table-prefix: brc_
 # 日志
 logging:

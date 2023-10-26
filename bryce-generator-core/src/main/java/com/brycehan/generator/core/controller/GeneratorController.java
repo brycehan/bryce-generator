@@ -3,8 +3,6 @@ package com.brycehan.generator.core.controller;
 import cn.hutool.core.io.IoUtil;
 import com.brycehan.generator.core.common.ResponseResult;
 import com.brycehan.generator.core.service.GeneratorService;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +34,6 @@ public class GeneratorController {
      * @return 代码数据
      */
     @GetMapping(path = "/preview/{tableId}")
-    @JsonSerialize(using = StringSerializer.class)
     public ResponseResult<Map<String, String>> preview(@PathVariable Long tableId) {
         Map<String, String> data = this.generatorService.previewCode(tableId);
         return ResponseResult.ok(data);

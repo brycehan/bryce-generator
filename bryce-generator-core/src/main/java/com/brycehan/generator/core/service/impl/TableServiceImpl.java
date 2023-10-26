@@ -8,7 +8,7 @@ import com.brycehan.generator.core.common.PageResult;
 import com.brycehan.generator.core.common.dto.IdsDto;
 import com.brycehan.generator.core.common.service.impl.BaseServiceImpl;
 import com.brycehan.generator.core.config.GenDatasource;
-import com.brycehan.generator.core.config.property.GenProperties;
+import com.brycehan.generator.core.config.GeneratorProperties;
 import com.brycehan.generator.core.config.template.GeneratorConfig;
 import com.brycehan.generator.core.config.template.GeneratorContent;
 import com.brycehan.generator.core.convert.TableConvert;
@@ -31,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -53,6 +54,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
+@EnableConfigurationProperties(GeneratorProperties.class)
 @RequiredArgsConstructor
 public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implements TableService {
 
@@ -64,7 +66,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
 
     private final GeneratorConfig generatorConfig;
 
-    private final GenProperties genProperties;
+    private final GeneratorProperties generatorProperties;
 
     @Override
     public void save(TableDto tableDto) {
@@ -160,9 +162,9 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
         table.setAuthor(generatorContent.getDeveloper().getAuthor());
         table.setFormLayout(FormLayoutEnum.ONE.value());
         table.setGeneratorType(GeneratorTypeEnum.ZIP_DOWNLOAD.value());
-        table.setClassName(TableUtils.getClassName(tableName, genProperties.getTablePrefix()));
-        table.setModuleName(TableUtils.getModuleName(tableName, genProperties.getTablePrefix()));
-        table.setFunctionName(TableUtils.getFunctionName(tableName, genProperties.getTablePrefix()));
+        table.setClassName(TableUtils.getClassName(tableName, generatorProperties.getTablePrefix()));
+        table.setModuleName(TableUtils.getModuleName(tableName, generatorProperties.getTablePrefix()));
+        table.setFunctionName(TableUtils.getFunctionName(tableName, generatorProperties.getTablePrefix()));
         table.setTableComment(TableUtils.getTableComment(table.getTableComment()));
 
         // 默认有基类
