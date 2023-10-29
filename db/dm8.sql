@@ -11,7 +11,7 @@ create table brc_gen_datasource
     primary key (id)
 );
 
-comment on table brc_gen_datasource is '数据源管理';
+comment on table brc_gen_datasource is '数据源表';
 comment on column brc_gen_datasource.id is 'ID';
 comment on column brc_gen_datasource.conn_name is '连接名称';
 comment on column brc_gen_datasource.db_type is '数据库类型';
@@ -34,7 +34,7 @@ create table brc_gen_field_type
 
 create unique index uk_brc_gen_column_type on brc_gen_field_type(column_type);
 
-comment on table brc_gen_field_type is '字段类型管理';
+comment on table brc_gen_field_type is '字段类型表';
 comment on column brc_gen_field_type.id is 'ID';
 comment on column brc_gen_field_type.column_type is '字段类型';
 comment on column brc_gen_field_type.attr_type is '属性类型';
@@ -87,7 +87,7 @@ create table brc_gen_base_class
     primary key (id)
 );
 
-comment on table brc_gen_base_class is '基类管理';
+comment on table brc_gen_base_class is '基类表';
 comment on column brc_gen_base_class.id is 'ID';
 comment on column brc_gen_base_class.code is '基类编码';
 comment on column brc_gen_base_class.package_name is '基类包名';
@@ -174,7 +174,7 @@ create table brc_gen_table_field
     primary key (id)
 );
 
-comment on table brc_gen_table_field is '代码生成表字段';
+comment on table brc_gen_table_field is '代码生成表的字段表';
 comment on column brc_gen_table_field.id is 'ID';
 comment on column brc_gen_table_field.table_id is '表ID';
 comment on column brc_gen_table_field.field_name is '字段名称';
@@ -218,7 +218,7 @@ create table brc_gen_project_modify
     primary key (id)
 );
 
-comment on table brc_gen_project_modify is '项目名变更';
+comment on table brc_gen_project_modify is '项目名变更表';
 comment on column brc_gen_project_modify.id is 'ID';
 comment on column brc_gen_project_modify.project_name is '项目名';
 comment on column brc_gen_project_modify.project_code is '项目标识';

@@ -15,7 +15,7 @@ create table brc_gen_datasource
     primary key (id)
 );
 
-comment on table brc_gen_datasource is '数据源管理';
+comment on table brc_gen_datasource is '数据源表';
 comment on column brc_gen_datasource.id is 'ID';
 comment on column brc_gen_datasource.conn_name is '连接名称';
 comment on column brc_gen_datasource.db_type is '数据库类型';
@@ -42,7 +42,7 @@ create table brc_gen_field_type
 
 create unique index uk_brc_gen_column_type on brc_gen_field_type(column_type);
 
-comment on table brc_gen_field_type is '字段类型管理';
+comment on table brc_gen_field_type is '字段类型表';
 comment on column brc_gen_field_type.id is 'ID';
 comment on column brc_gen_field_type.column_type is '字段类型';
 comment on column brc_gen_field_type.attr_type is '属性类型';
@@ -99,7 +99,7 @@ create table brc_gen_base_class
     primary key (id)
 );
 
-comment on table brc_gen_base_class is '基类管理';
+comment on table brc_gen_base_class is '基类表';
 comment on column brc_gen_base_class.id is 'ID';
 comment on column brc_gen_base_class.code is '基类编码';
 comment on column brc_gen_base_class.package_name is '基类包名';
@@ -131,8 +131,8 @@ create table brc_gen_table
     module_name    varchar(100),
     function_name  varchar(100),
     form_layout    integer,
-    datasource_id  bigserial    not null,
-    base_class_id   bigserial,
+    datasource_id  bigint    not null,
+    base_class_id  bigint,
     remark         varchar(300),
     create_time    timestamp,
     primary key (id)
@@ -168,7 +168,7 @@ drop table if exists brc_gen_table_field;
 create table brc_gen_table_field
 (
     id              bigserial       default nextval('seq_brc_gen_table_field_id'::regclass) not null,
-    table_id        bigserial       not null,
+    table_id        bigint       not null,
     field_name      varchar(200) not null,
     field_type      varchar(100) not null,
     field_comment   varchar(200),
@@ -178,7 +178,7 @@ create table brc_gen_table_field
     sort            integer  default '0',
     auto_fill       varchar(20),
     primary_key     boolean,
-    character_maximum_length bigserial,
+    character_maximum_length bigint,
     base_field      boolean,
     form_item       boolean,
     form_item_type  varchar(200),
@@ -194,7 +194,7 @@ create table brc_gen_table_field
     primary key (id)
 );
 
-comment on table brc_gen_table_field is '代码生成表字段';
+comment on table brc_gen_table_field is '代码生成表的字段表';
 comment on column brc_gen_table_field.id is 'ID';
 comment on column brc_gen_table_field.table_id is '表ID';
 comment on column brc_gen_table_field.field_name is '字段名称';
@@ -237,12 +237,12 @@ create table brc_gen_project_modify
     modify_project_package varchar(100),
     exclusions             varchar(200),
     modify_suffix          varchar(200),
-    modify_tmp_path       varchar(100),
+    modify_tmp_path        varchar(100),
     create_time            timestamp,
     primary key (id)
 );
 
-comment on table brc_gen_project_modify is '项目名变更';
+comment on table brc_gen_project_modify is '项目名变更表';
 comment on column brc_gen_project_modify.id is 'ID';
 comment on column brc_gen_project_modify.project_name is '项目名';
 comment on column brc_gen_project_modify.project_code is '项目标识';
