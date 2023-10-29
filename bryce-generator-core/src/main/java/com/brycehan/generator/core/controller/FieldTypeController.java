@@ -75,7 +75,7 @@ public class FieldTypeController {
      * @return 响应结果
      */
     @GetMapping(path = "/{id}")
-    public ResponseResult<FieldTypeVo> get(@PathVariable String id) {
+    public ResponseResult<FieldTypeVo> get(@PathVariable Long id) {
         FieldType fieldType = this.fieldTypeService.getById(id);
         return ResponseResult.ok(FieldTypeConvert.INSTANCE.convert(fieldType));
     }

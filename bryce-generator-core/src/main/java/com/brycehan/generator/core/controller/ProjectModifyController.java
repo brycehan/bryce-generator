@@ -78,7 +78,7 @@ public class ProjectModifyController {
      * @return 响应结果
      */
     @GetMapping(path = "/{id}")
-    public ResponseResult<ProjectModifyVo> get(@PathVariable String id) {
+    public ResponseResult<ProjectModifyVo> get(@PathVariable Long id) {
         ProjectModify projectModify = this.projectModifyService.getById(id);
         return ResponseResult.ok(ProjectModifyConvert.INSTANCE.convert(projectModify));
     }
@@ -113,7 +113,7 @@ public class ProjectModifyController {
      * @param response http响应体
      */
     @GetMapping(path = "/download/{id}")
-    public void download(@PathVariable String id, HttpServletResponse response) throws IOException {
+    public void download(@PathVariable Long id, HttpServletResponse response) throws IOException {
         ProjectModify projectModify = projectModifyService.getById(id);
         byte[] data = projectModifyService.download(projectModify);
         response.reset();

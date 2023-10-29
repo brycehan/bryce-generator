@@ -75,7 +75,7 @@ public class BaseClassController {
      * @return 响应结果
      */
     @GetMapping(path = "/{id}")
-    public ResponseResult<BaseClassVo> get(@PathVariable String id) {
+    public ResponseResult<BaseClassVo> get(@PathVariable Long id) {
         BaseClass baseClass = this.baseClassService.getById(id);
         return ResponseResult.ok(BaseClassConvert.INSTANCE.convert(baseClass));
     }

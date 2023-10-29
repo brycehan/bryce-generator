@@ -75,7 +75,7 @@ public class TableFieldController {
      * @return 响应结果
      */
     @GetMapping(path = "/{id}")
-    public ResponseResult<TableFieldVo> get(@PathVariable String id) {
+    public ResponseResult<TableFieldVo> get(@PathVariable Long id) {
         TableField tableField = this.tableFieldService.getById(id);
         return ResponseResult.ok(TableFieldConvert.INSTANCE.convert(tableField));
     }

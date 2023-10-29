@@ -83,7 +83,7 @@ public class DatasourceController {
      * @return 响应结果
      */
     @GetMapping(path = "/{id}")
-    public ResponseResult<DatasourceVo> get(@PathVariable String id) {
+    public ResponseResult<DatasourceVo> get(@PathVariable Long id) {
         Datasource datasource = this.datasourceService.getById(id);
         return ResponseResult.ok(DatasourceConvert.INSTANCE.convert(datasource));
     }
@@ -95,7 +95,7 @@ public class DatasourceController {
      * @return 响应结果
      */
     @GetMapping(path = "/test/{id}")
-    public ResponseResult<String> test(@PathVariable String id) {
+    public ResponseResult<String> test(@PathVariable Long id) {
         Datasource datasource = this.datasourceService.getById(id);
         try {
             DbUtils.getConnection(new GenDatasource(datasource));
