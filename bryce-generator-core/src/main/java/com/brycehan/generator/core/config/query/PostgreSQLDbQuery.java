@@ -50,7 +50,8 @@ public class PostgreSQLDbQuery implements DbQuery {
         return """
                 select t2.attname as column_name, pg_type.typname as data_type,
                     col_description(t2.attrelid,t2.attnum) as column_comment,
-                    (case t3.contype when 'p' then 'PRI' else '' end) as column_key
+                    (case t3.contype when 'p' then 'PRI' else '' end) as column_key,
+                    (case when t2.atttypmod-4>0 then t2.atttypmod-4 else 0 end) as character_maximum_length
                 from pg_class as t1, pg_attribute as t2
                 inner join pg_type on pg_type.oid=t2.atttypid
                 left join pg_constraint t3 on t2.attnum = t3.conKey[1] and t2.attrelid = t3.conrelid
@@ -80,7 +81,7 @@ public class PostgreSQLDbQuery implements DbQuery {
 
     @Override
     public String fieldCharacterMaximumLength() {
-        return null;
+        return "character_maximum_length";
     }
 
 }

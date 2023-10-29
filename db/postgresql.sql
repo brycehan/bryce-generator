@@ -1,18 +1,14 @@
 -- 1、数据源表
-drop sequence if exists seq_brc_gen_datasource_id;
-create sequence seq_brc_gen_datasource_id;
-
 drop table if exists brc_gen_datasource;
 create table brc_gen_datasource
 (
-    id          bigserial       default nextval('seq_brc_gen_datasource_id'::regclass) not null,
+    id          bigserial       primary key,
     conn_name   varchar(100)    not null,
     db_type     varchar(50),
     conn_url    varchar(200),
     username    varchar(100),
     password    varchar(200),
-    create_time timestamp,
-    primary key (id)
+    create_time timestamp
 );
 
 comment on table brc_gen_datasource is '数据源表';
@@ -25,19 +21,15 @@ comment on column brc_gen_datasource.password is '密码';
 comment on column brc_gen_datasource.create_time is '创建时间';
 
 -- 2、字段类型表
-drop sequence if exists seq_brc_gen_field_type_id;
-create sequence seq_brc_gen_field_type_id;
-
 drop table if exists brc_gen_field_type;
 create table brc_gen_field_type
 (
-    id           bigserial      default nextval('seq_brc_gen_field_type_id'::regclass) not null,
+    id           bigserial      primary key,
     column_type  varchar(50)    not null,
     attr_type    varchar(50)    not null,
     package_name varchar(200),
     remark       varchar(300),
-    create_time  timestamp,
-    primary key (id)
+    create_time  timestamp
 );
 
 create unique index uk_brc_gen_column_type on brc_gen_field_type(column_type);
@@ -84,19 +76,15 @@ insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (31, 'timestamp', 'LocalDateTime', 'java.time.LocalDateTime', null, now());
 
 -- 3、基类表
-drop sequence if exists seq_brc_gen_base_class_id;
-create sequence seq_brc_gen_base_class_id;
-
 drop table if exists brc_gen_base_class;
 create table brc_gen_base_class
 (
-    id           bigserial      default nextval('seq_brc_gen_base_class_id'::regclass) not null,
+    id           bigserial      primary key,
     code         varchar(100)   not null,
     package_name varchar(200)   not null,
     fields       varchar(500),
     remark       varchar(300),
-    create_time  timestamp,
-    primary key (id)
+    create_time  timestamp
 );
 
 comment on table brc_gen_base_class is '基类表';
@@ -111,13 +99,10 @@ comment on column brc_gen_base_class.create_time is '创建时间';
 insert into brc_gen_base_class (id,code,package_name,fields,remark,create_time) values (1,'BaseEntity','com.brycehan.boot.common.base.entity','id,create_user_id,create_time,update_user_id,update_time','使用该基类，则需要表里有这些字段',now());
 
 -- 4、代码生成表
-drop sequence if exists seq_brc_gen_table_id;
-create sequence seq_brc_gen_table_id;
-
 drop table if exists brc_gen_table;
 create table brc_gen_table
 (
-    id             bigserial    default nextval('seq_brc_gen_table_id'::regclass) not null,
+    id             bigserial    primary key,
     table_name     varchar(200) not null,
     class_name     varchar(200) not null,
     table_comment  varchar(200),
@@ -134,8 +119,7 @@ create table brc_gen_table
     datasource_id  bigint    not null,
     base_class_id  bigint,
     remark         varchar(300),
-    create_time    timestamp,
-    primary key (id)
+    create_time    timestamp
 );
 
 create unique index uk_brc_gen_table_name on brc_gen_table(table_name);
@@ -161,13 +145,10 @@ comment on column brc_gen_table.remark is '备注';
 comment on column brc_gen_table.create_time is '创建时间';
 
 -- 5、代码生成表字段
-drop sequence if exists seq_brc_gen_table_field_id;
-create sequence seq_brc_gen_table_field_id;
-
 drop table if exists brc_gen_table_field;
 create table brc_gen_table_field
 (
-    id              bigserial       default nextval('seq_brc_gen_table_field_id'::regclass) not null,
+    id              bigserial       not null,
     table_id        bigint       not null,
     field_name      varchar(200) not null,
     field_type      varchar(100) not null,
@@ -221,13 +202,10 @@ comment on column brc_gen_table_field.query_form_type is '查询表单类型';
 comment on column brc_gen_table_field.create_time is '创建时间';
 
 -- 6、项目名变更表
-drop sequence if exists seq_brc_gen_project_modify_id;
-create sequence seq_brc_gen_project_modify_id;
-
 drop table if exists brc_gen_project_modify;
 create table brc_gen_project_modify
 (
-    id                     bigserial       default nextval('seq_brc_gen_project_modify_id'::regclass) not null,
+    id                     bigserial       not null,
     project_name           varchar(100) not null,
     project_code           varchar(100) not null,
     project_package        varchar(100) not null,
