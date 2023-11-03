@@ -2,11 +2,11 @@ FROM public.ecr.aws/docker/library/eclipse-temurin:21-jre
 
 LABEL org.opencontainers.image.authors="Bryce Han"
 ADD ./bryce-generator-server/target/bryce-generator-server-0.0.1-SNAPSHOT.jar /app.jar
-
 WORKDIR /
 # 设置时区
 ENV TZ=Asia/Shanghai
 EXPOSE 8100
+
 ENTRYPOINT [\
     "java",\
     "-server",\
