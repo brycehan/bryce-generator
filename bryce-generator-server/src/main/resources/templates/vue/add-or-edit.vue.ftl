@@ -66,11 +66,11 @@
         </el-form-item>
       <#elseif field.formItemType == 'date'>
         <el-form-item label="${fieldComment!}" prop="${field.attrName}">
-          <el-date-picker type="date" v-model="state.dataForm.${field.attrName}" placeholder="${fieldComment!}"/>
+          <el-date-picker type="date" v-model="state.dataForm.${field.attrName}" placeholder="${fieldComment!}"<#if field.attrName=='createdTime'> class="w-100"</#if> />
         </el-form-item>
       <#elseif field.formItemType == 'datetime'>
         <el-form-item label="${fieldComment!}" prop="${field.attrName}">
-          <el-date-picker type="datetime" v-model="state.dataForm.${field.attrName}" placeholder="${fieldComment!}"/>
+          <el-date-picker type="datetime" v-model="state.dataForm.${field.attrName}" placeholder="${fieldComment!}"<#if field.attrName=='createdTime'> class="w-100"</#if> />
         </el-form-item>
       <#else>
         <el-form-item label="${fieldComment!}" prop="${field.attrName}">
