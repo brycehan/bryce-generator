@@ -57,7 +57,9 @@ public class GeneratorController {
 
         // zip 压缩包数据
         byte[] data = outputStream.toByteArray();
-        response.reset();
+        response.reset(); // 重置了跨域配置
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Expose-Headers", "Content-Disposition"); //在此处开放Content-Disposition权限，前端代码才能获取到
         response.setHeader("Content-Disposition", "attachment;filename*=utf-8''bryce.zip");
         response.addHeader("Content-Length", String.valueOf(data.length));
         response.setContentType("application/octet-stream; charset=UTF-8");
