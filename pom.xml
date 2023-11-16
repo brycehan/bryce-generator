@@ -8,7 +8,7 @@
         <version>3.1.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.brycehan</groupId>
+    <groupId>com.brycehan.boot</groupId>
     <artifactId>bryce-generator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bryce-generator</name>
@@ -41,13 +41,13 @@
         <dependencies>
             <!-- Generator核心组件 -->
             <dependency>
-                <groupId>com.brycehan</groupId>
+                <groupId>com.brycehan.boot</groupId>
                 <artifactId>bryce-generator-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- Generator Boot Starter组件 -->
             <dependency>
-                <groupId>com.brycehan</groupId>
+                <groupId>com.brycehan.boot</groupId>
                 <artifactId>bryce-generator-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>

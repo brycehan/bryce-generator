@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.brycehan.boot.generator.mapper.FieldTypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.FieldType">
+        <id column="id" property="id"/>
+        <result column="column_type" property="columnType"/>
+        <result column="attr_type" property="attrType"/>
+        <result column="package_name" property="packageName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , column_type, attr_type, package_name, sort, create_time, remark
+    </sql>
+
+    <select id="getPackageNameByTableId" resultType="String">
+        select bgft.package_name
+        from brc_gen_field_type bgft
+        inner join brc_gen_table_field bgtf on bgft.attr_type = bgtf.attr_type
+        where bgtf.table_id = #{tableId}
+        <if test="type == 'vo'">
+            and (
+                bgtf.primary_key = true
+                or bgtf.form_item = true
+                or bgtf.query_item = true
+                or bgtf.grid_item = true
+                )
+        </if>
+        <if test="type == 'entity' and baseClassId != null">
+            and bgtf.base_field = false
+        </if>
+    </select>
+</mapper>

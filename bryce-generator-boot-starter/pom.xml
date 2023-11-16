@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>com.brycehan</groupId>
+		<groupId>com.brycehan.boot</groupId>
 		<artifactId>bryce-generator</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 <!--		<relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;-->
@@ -20,7 +20,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.brycehan</groupId>
+			<groupId>com.brycehan.boot</groupId>
 			<artifactId>bryce-generator-core</artifactId>
 		</dependency>
 	</dependencies>

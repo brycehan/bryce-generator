@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.brycehan.boot.generator.mapper.TableMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.Table">
+        <id column="id" property="id"/>
+        <result column="table_name" property="tableName"/>
+        <result column="class_name" property="className"/>
+        <result column="table_comment" property="tableComment"/>
+        <result column="author" property="author"/>
+        <result column="email" property="email"/>
+        <result column="package_name" property="packageName"/>
+        <result column="version" property="version"/>
+        <result column="generator_type" property="generatorType"/>
+        <result column="backend_path" property="backendPath"/>
+        <result column="frontend_path" property="frontendPath"/>
+        <result column="module_name" property="moduleName"/>
+        <result column="function_name" property="functionName"/>
+        <result column="form_layout" property="formLayout"/>
+        <result column="datasource_id" property="datasourceId"/>
+        <result column="base_class_id" property="baseClassId"/>
+        <result column="remark" property="remark"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id
+        , table_name, class_name, table_comment, author, email, package_name, version, generator_type, backend_path, frontend_path, module_name, function_name, form_layout, datasource_id, base_class_id, remark, create_time
+    </sql>
+
+</mapper>

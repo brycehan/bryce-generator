@@ -5,7 +5,7 @@ spring:
     include: bryce
     active: mysql
 mybatis-plus:
-  mapper-locations: classpath*:com/brycehan/generator/*/mapper/xml/*Mapper.xml
+  mapper-locations: classpath*:com/brycehan/boot/generator/mapper/xml/*Mapper.xml
   global-config:
     banner: false
     db-config:
@@ -20,6 +20,7 @@ mybatis-plus:
 bryce:
   generator:
     table-prefix: brc_
+    package-name: com.brycehan.boot
 # 日志
 #logging:
 #  level:

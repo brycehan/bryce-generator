@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.brycehan</groupId>
+        <groupId>com.brycehan.boot</groupId>
         <artifactId>bryce-generator</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -20,7 +20,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.brycehan</groupId>
+            <groupId>com.brycehan.boot</groupId>
             <artifactId>bryce-generator-boot-starter</artifactId>
         </dependency>
         <!-- Tools -->
