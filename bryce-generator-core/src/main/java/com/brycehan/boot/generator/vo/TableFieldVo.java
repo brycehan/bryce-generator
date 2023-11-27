@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @since 2023/4/27
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public class TableFieldVo extends BasePageDto {
 
     @Serial

@@ -3,7 +3,6 @@ package com.brycehan.boot.generator.common.dto;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Range;
 
 import java.io.Serializable;
@@ -16,7 +15,6 @@ import java.util.List;
  * @since 2021/8/31
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class BasePageDto implements Serializable {
 
     /**

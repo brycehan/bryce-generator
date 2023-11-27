@@ -3,7 +3,6 @@ package com.brycehan.boot.generator.common.dto;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 
@@ -15,7 +14,6 @@ import java.io.Serializable;
  */
 @Data
 @Builder
-@EqualsAndHashCode(callSuper = false)
 public class OrderItemDto implements Serializable {
 
     /**

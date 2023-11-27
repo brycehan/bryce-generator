@@ -4,7 +4,6 @@ import com.brycehan.boot.generator.validator.group.QueryGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -18,7 +17,6 @@ import java.util.List;
  * @since 2023/4/27
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class TableVo implements Serializable {
 
     @Serial
