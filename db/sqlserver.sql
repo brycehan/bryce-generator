@@ -1,3 +1,16 @@
+/*
+    -- 创建库
+    create database if not exists bryce_generator default charset utf8mb4;
+    use bryce_generator;
+    -- 删除表
+    drop table if exists brc_gen_datasource;
+    drop table if exists brc_gen_field_type;
+    drop table if exists brc_gen_base_class;
+    drop table if exists brc_gen_table;
+    drop table if exists brc_gen_table_field;
+    drop table if exists brc_gen_project_modify;
+ */
+
 -- 1、数据源表
 create table brc_gen_datasource
 (

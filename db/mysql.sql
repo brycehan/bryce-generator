@@ -1,8 +1,17 @@
-create database if not exists bryce_generator default charset utf8mb4;
-use bryce_generator;
+/*
+    -- 创建数据库
+    create database if not exists bryce_generator default charset utf8mb4;
+    use bryce_generator;
+    -- 删除表
+    drop table if exists brc_gen_datasource;
+    drop table if exists brc_gen_field_type;
+    drop table if exists brc_gen_base_class;
+    drop table if exists brc_gen_table;
+    drop table if exists brc_gen_table_field;
+    drop table if exists brc_gen_project_modify;
+ */
 
 -- 1、数据源表
-drop table if exists brc_gen_datasource;
 create table brc_gen_datasource
 (
     id          bigint       primary key auto_increment comment 'ID',
@@ -15,7 +24,6 @@ create table brc_gen_datasource
 ) engine InnoDB comment '数据源表';
 
 -- 2、字段类型表
-drop table if exists brc_gen_field_type;
 create table brc_gen_field_type
 (
     id           bigint       primary key auto_increment comment 'ID',
@@ -61,7 +69,6 @@ insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark
 insert into brc_gen_field_type (id, column_type, attr_type, package_name, remark, create_time) values (31, 'timestamp', 'LocalDateTime', 'java.time.LocalDateTime', null, now());
 
 -- 3、基类表
-drop table if exists brc_gen_base_class;
 create table brc_gen_base_class
 (
     id           bigint       primary key auto_increment comment 'ID',
@@ -76,7 +83,6 @@ create table brc_gen_base_class
 INSERT INTO brc_gen_base_class (id, code, package_name, fields, remark, create_time) VALUES (1, 'BaseEntity', 'com.brycehan.boot.common.base.entity', 'id,version,deleted,created_user_id,created_time,updated_user_id,updated_time', '使用该基类，则需要表里有这些字段', now());
 
 -- 4、代码生成表
-drop table if exists brc_gen_table;
 create table brc_gen_table
 (
     id             bigint       primary key auto_increment comment 'ID',
@@ -100,7 +106,6 @@ create table brc_gen_table
 ) engine InnoDB comment '代码生成表';
 
 -- 5、代码生成表字段
-drop table if exists brc_gen_table_field;
 create table brc_gen_table_field
 (
     id                       bigint        primary key auto_increment comment 'ID',
@@ -130,7 +135,6 @@ create table brc_gen_table_field
 ) engine InnoDB comment '代码生成表的字段表';
 
 -- 6、项目名变更表
-drop table if exists brc_gen_project_modify;
 create table brc_gen_project_modify
 (
     id                     bigint       primary key auto_increment comment 'ID',
