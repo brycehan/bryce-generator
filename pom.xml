@@ -20,7 +20,7 @@
         <!-- Java版本 -->
         <java.version>17</java.version>
         <!-- MybatisPlus -->
-        <mybatis-plus.version>3.5.4</mybatis-plus.version>
+        <mybatis-plus.version>3.5.5</mybatis-plus.version>
         <!-- 实体转换器 -->
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <dameng.version>8.1.2.141</dameng.version>

@@ -1,7 +1,6 @@
 package ${packageName}.${moduleName}.service.impl;
 
 import ${packageName}.common.util.DateTimeUtils;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packageName}.common.base.entity.PageResult;
@@ -23,6 +22,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -31,6 +31,7 @@ import java.util.List;
  * @author ${author}
  * @since ${date}
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityName}> implements ${serviceName} {
@@ -47,7 +48,7 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
      * @param ${entityParam}PageDto ${tableComment}分页dto
      * @return 查询条件Wrapper
      */
-    private Wrapper<${entityName}> getWrapper(${entityPageDtoName} ${entityParam}PageDto){
+    private LambdaQueryWrapper<${entityName}> getWrapper(${entityPageDtoName} ${entityParam}PageDto){
         LambdaQueryWrapper<${entityName}> wrapper = new LambdaQueryWrapper<>();
         <#list queryList?sort_by("queryType") as field>
           <#if field.queryType == '=' && field.attrType == 'String'>
