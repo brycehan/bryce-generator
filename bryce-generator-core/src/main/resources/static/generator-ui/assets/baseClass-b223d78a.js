@@ -1,0 +1,1 @@
+import{r as e}from"./request-b68d8899.js";const a=s=>s.id?e.put("/gen/baseClass",s):e.post("/gen/baseClass",s),r=s=>e.delete("/gen/baseClass",{data:{ids:s}}),n=s=>e.get(`/gen/baseClass/${s}`),g=()=>e.get("/gen/baseClass/list"),l=s=>e.post("/gen/baseClass/page",s);export{r as d,n as g,g as l,l as p,a as s};
