@@ -4,6 +4,7 @@ import com.brycehan.boot.generator.dto.TableFieldDto;
 import com.brycehan.boot.generator.entity.TableField;
 import com.brycehan.boot.generator.vo.TableFieldVo;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author Bryce Han
  * @since 2023/4/13
  */
-@Mapper
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TableFieldConvert {
 
     TableFieldConvert INSTANCE = Mappers.getMapper(TableFieldConvert.class);
