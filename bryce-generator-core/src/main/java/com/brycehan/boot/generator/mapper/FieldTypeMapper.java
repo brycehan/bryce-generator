@@ -2,7 +2,6 @@ package com.brycehan.boot.generator.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.brycehan.boot.generator.entity.FieldType;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Set;
 
@@ -12,7 +11,6 @@ import java.util.Set;
  * @author Bryce Han
  * @since 2023/4/27
  */
-@Mapper
 public interface FieldTypeMapper extends BaseMapper<FieldType> {
 
     /**
