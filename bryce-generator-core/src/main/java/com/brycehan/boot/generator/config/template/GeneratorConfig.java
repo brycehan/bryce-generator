@@ -1,10 +1,13 @@
 package com.brycehan.boot.generator.config.template;
 
+import com.brycehan.boot.generator.config.GeneratorProperties;
+import com.brycehan.boot.generator.config.PlatformType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.StreamUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -21,8 +24,17 @@ public class GeneratorConfig {
 
     private String template;
 
-    public GeneratorConfig(String template) {
-        this.template = template;
+    public GeneratorConfig(GeneratorProperties properties) {
+        this.template = properties.getTemplate();
+
+        // 根据包名称，获取模板路径
+        String lastPackageName = properties.getPackageName().substring(properties.getPackageName().lastIndexOf(".") + 1);
+
+        if (PlatformType.boot.name().equals(lastPackageName)) {
+            template = template.concat(File.separator).concat(lastPackageName);
+        } else {
+            template = template.concat(File.separator).concat(PlatformType.cloud.name());
+        }
     }
 
     public GeneratorContent getGeneratorContent() {

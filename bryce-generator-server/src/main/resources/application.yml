@@ -20,7 +20,7 @@ mybatis-plus:
 bryce:
   generator:
     table-prefix: brc_
-    package-name: com.brycehan.boot
+    package-name: com.brycehan.cloud
 # 日志
 #logging:
 #  level:

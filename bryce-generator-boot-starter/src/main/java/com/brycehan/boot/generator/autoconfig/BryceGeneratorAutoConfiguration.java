@@ -22,7 +22,7 @@ public class BryceGeneratorAutoConfiguration {
 
 	@Bean
 	GeneratorConfig generatorConfig(GeneratorProperties properties) {
-		return new GeneratorConfig(properties.getTemplate());
+		return new GeneratorConfig(properties);
 	}
 
 }

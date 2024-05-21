@@ -5,9 +5,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.1.5</version>
+        <version>3.2.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.brycehan.boot</groupId>
     <artifactId>bryce-generator</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -15,18 +16,18 @@
     <description>Generator project for Spring Boot</description>
     <packaging>pom</packaging>
 
-    <!-- 版本属性 -->
+    <!-- 属性 -->
     <properties>
         <!-- Java版本 -->
         <java.version>17</java.version>
         <!-- MybatisPlus -->
-        <mybatis-plus.version>3.5.5</mybatis-plus.version>
+        <mybatis-plus.version>3.5.6</mybatis-plus.version>
         <!-- 实体转换器 -->
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <dameng.version>8.1.2.141</dameng.version>
         <clickhouse.version>0.3.2</clickhouse.version>
         <!-- 工具 -->
-        <guava.version>32.0.0-jre</guava.version>
+        <guava.version>33.2.0-jre</guava.version>
         <hutool.version>5.8.21</hutool.version>
         <commons-collections4.version>4.4</commons-collections4.version>
     </properties>
@@ -54,7 +55,7 @@
             <!-- Mybatis Plus框架 -->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- 实体转换器 -->

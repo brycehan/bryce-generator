@@ -131,7 +131,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         table.setFieldList(fieldList);
 
         // 数据模型
-        Map<String, Object> dataModel = Maps.newHashMap();
+        Map<String, Object> dataModel = new HashMap<>();
 
         // 获取数据库类型
         GenDatasource datasource = this.datasourceService.get(table.getDatasourceId());
