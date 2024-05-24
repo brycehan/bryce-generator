@@ -1,12 +1,12 @@
 package com.brycehan.boot.generator.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.brycehan.boot.generator.dto.TableFieldDto;
-import com.brycehan.boot.generator.dto.TableFieldPageDto;
-import com.brycehan.boot.generator.vo.TableFieldVo;
+import com.brycehan.boot.generator.entity.dto.TableFieldDto;
+import com.brycehan.boot.generator.entity.dto.TableFieldPageDto;
+import com.brycehan.boot.generator.entity.vo.TableFieldVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.entity.TableField;
+import com.brycehan.boot.generator.entity.po.TableField;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 

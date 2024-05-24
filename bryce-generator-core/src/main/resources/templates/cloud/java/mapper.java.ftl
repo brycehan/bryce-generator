@@ -2,7 +2,7 @@ package ${packageName}.${moduleName}.mapper;
 
 import ${packageName}.common.mybatis.mapper.BryceBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import ${packageName}.${moduleName}.entity.${entityName};
+import ${packageName}.${moduleName}.entity.po.${entityName};
 
 /**
 * ${tableComment}Mapper接口

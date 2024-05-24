@@ -2,7 +2,7 @@ package com.brycehan.boot.generator;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
-import com.brycehan.boot.generator.util.TemplateUtils;
+import com.brycehan.boot.generator.common.util.TemplateUtils;
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;

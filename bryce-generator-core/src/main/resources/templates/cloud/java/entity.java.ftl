@@ -1,4 +1,4 @@
-package ${packageName}.${moduleName}.entity;
+package ${packageName}.${moduleName}.entity.po;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

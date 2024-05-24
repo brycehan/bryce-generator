@@ -1,7 +1,7 @@
 package com.brycehan.boot.generator.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.brycehan.boot.generator.entity.FieldType;
+import com.brycehan.boot.generator.entity.po.FieldType;
 
 import java.util.Set;
 

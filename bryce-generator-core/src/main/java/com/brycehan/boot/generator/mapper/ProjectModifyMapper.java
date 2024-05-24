@@ -1,7 +1,7 @@
 package com.brycehan.boot.generator.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.brycehan.boot.generator.entity.ProjectModify;
+import com.brycehan.boot.generator.entity.po.ProjectModify;
 
 /**
  * 项目名变更Mapper接口

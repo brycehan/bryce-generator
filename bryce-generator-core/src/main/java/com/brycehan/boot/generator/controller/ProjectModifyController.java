@@ -1,17 +1,17 @@
 package com.brycehan.boot.generator.controller;
 
 import cn.hutool.core.io.IoUtil;
-import com.brycehan.boot.generator.dto.ProjectModifyDto;
-import com.brycehan.boot.generator.dto.ProjectModifyPageDto;
-import com.brycehan.boot.generator.vo.ProjectModifyVo;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyDto;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyPageDto;
+import com.brycehan.boot.generator.entity.vo.ProjectModifyVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.ResponseResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.convert.ProjectModifyConvert;
-import com.brycehan.boot.generator.entity.ProjectModify;
+import com.brycehan.boot.generator.entity.convert.ProjectModifyConvert;
+import com.brycehan.boot.generator.entity.po.ProjectModify;
 import com.brycehan.boot.generator.service.ProjectModifyService;
-import com.brycehan.boot.generator.validator.group.SaveGroup;
-import com.brycehan.boot.generator.validator.group.UpdateGroup;
+import com.brycehan.boot.generator.common.validator.SaveGroup;
+import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

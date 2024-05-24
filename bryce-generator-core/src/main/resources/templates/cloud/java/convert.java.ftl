@@ -1,8 +1,8 @@
-package ${packageName}.${moduleName}.convert;
+package ${packageName}.${moduleName}.entity.convert;
 
-import ${packageName}.${moduleName}.dto.${entityName}Dto;
-import ${packageName}.${moduleName}.entity.${entityName};
-import ${packageName}.${moduleName}.vo.${entityName}Vo;
+import ${packageName}.${moduleName}.entity.dto.${entityName}Dto;
+import ${packageName}.${moduleName}.entity.po.${entityName};
+import ${packageName}.${moduleName}.entity.vo.${entityName}Vo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import java.util.List;

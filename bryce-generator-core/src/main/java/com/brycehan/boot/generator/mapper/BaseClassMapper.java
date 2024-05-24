@@ -1,7 +1,7 @@
 package com.brycehan.boot.generator.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.brycehan.boot.generator.entity.BaseClass;
+import com.brycehan.boot.generator.entity.po.BaseClass;
 
 /**
  * 基类管理Mapper接口

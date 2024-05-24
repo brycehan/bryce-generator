@@ -1,9 +1,9 @@
 package com.brycehan.boot.generator.config;
 
 import com.brycehan.boot.generator.config.query.*;
-import com.brycehan.boot.generator.entity.Datasource;
-import com.brycehan.boot.generator.util.DbUtils;
-import com.brycehan.boot.generator.validator.group.QueryGroup;
+import com.brycehan.boot.generator.entity.po.Datasource;
+import com.brycehan.boot.generator.common.util.DbUtils;
+import com.brycehan.boot.generator.common.validator.QueryGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

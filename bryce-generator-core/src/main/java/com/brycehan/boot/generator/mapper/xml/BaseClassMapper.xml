@@ -3,7 +3,7 @@
 <mapper namespace="com.brycehan.boot.generator.mapper.BaseClassMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.BaseClass">
+    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.po.BaseClass">
         <id column="id" property="id"/>
         <result column="code" property="code"/>
         <result column="package_name" property="packageName"/>

@@ -1,12 +1,12 @@
 package com.brycehan.boot.generator.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.brycehan.boot.generator.dto.ProjectModifyDto;
-import com.brycehan.boot.generator.dto.ProjectModifyPageDto;
-import com.brycehan.boot.generator.vo.ProjectModifyVo;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyDto;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyPageDto;
+import com.brycehan.boot.generator.entity.vo.ProjectModifyVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.entity.ProjectModify;
+import com.brycehan.boot.generator.entity.po.ProjectModify;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.brycehan.boot.generator.mapper.FieldTypeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.FieldType">
+    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.po.FieldType">
         <id column="id" property="id"/>
         <result column="column_type" property="columnType"/>
         <result column="attr_type" property="attrType"/>

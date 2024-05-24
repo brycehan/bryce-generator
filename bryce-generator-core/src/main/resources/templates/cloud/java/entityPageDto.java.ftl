@@ -1,4 +1,4 @@
-package ${packageName}.${moduleName}.dto;
+package ${packageName}.${moduleName}.entity.dto;
 
 import ${packageName}.common.core.base.entity.BasePageDto;
 import com.fasterxml.jackson.annotation.JsonFormat;

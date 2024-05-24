@@ -9,7 +9,7 @@ import com.brycehan.boot.generator.common.convert.OrderItemConvert;
 import com.brycehan.boot.generator.common.dto.BasePageDto;
 import com.brycehan.boot.generator.common.dto.OrderItemDto;
 import com.brycehan.boot.generator.common.service.BaseService;
-import com.brycehan.boot.generator.util.JsonUtils;
+import com.brycehan.boot.generator.common.util.JsonUtils;
 import com.google.common.base.CaseFormat;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;

@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packageName}.common.core.base.entity.PageResult;
 import ${packageName}.common.mybatis.service.impl.BaseServiceImpl;
 import ${packageName}.common.core.util.ExcelUtils;
-import ${packageName}.${moduleName}.convert.${convertName};
-import ${packageName}.${moduleName}.dto.${entityPageDtoName};
-import ${packageName}.${moduleName}.entity.${entityName};
-import ${packageName}.${moduleName}.vo.${entityName}Vo;
+import ${packageName}.${moduleName}.entity.convert.${convertName};
+import ${packageName}.${moduleName}.entity.dto.${entityPageDtoName};
+import ${packageName}.${moduleName}.entity.po.${entityName};
+import ${packageName}.${moduleName}.entity.vo.${entityName}Vo;
 import ${packageName}.${moduleName}.service.${serviceName};
 import ${packageName}.${moduleName}.mapper.${mapperName};
 <#if queryList?filter(f -> f.attrType == "String")?size gt 0>

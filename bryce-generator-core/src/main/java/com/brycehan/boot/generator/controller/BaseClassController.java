@@ -1,16 +1,16 @@
 package com.brycehan.boot.generator.controller;
 
-import com.brycehan.boot.generator.dto.BaseClassDto;
-import com.brycehan.boot.generator.dto.BaseClassPageDto;
-import com.brycehan.boot.generator.vo.BaseClassVo;
+import com.brycehan.boot.generator.entity.dto.BaseClassDto;
+import com.brycehan.boot.generator.entity.dto.BaseClassPageDto;
+import com.brycehan.boot.generator.entity.vo.BaseClassVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.ResponseResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.convert.BaseClassConvert;
-import com.brycehan.boot.generator.entity.BaseClass;
+import com.brycehan.boot.generator.entity.convert.BaseClassConvert;
+import com.brycehan.boot.generator.entity.po.BaseClass;
 import com.brycehan.boot.generator.service.BaseClassService;
-import com.brycehan.boot.generator.validator.group.SaveGroup;
-import com.brycehan.boot.generator.validator.group.UpdateGroup;
+import com.brycehan.boot.generator.common.validator.SaveGroup;
+import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

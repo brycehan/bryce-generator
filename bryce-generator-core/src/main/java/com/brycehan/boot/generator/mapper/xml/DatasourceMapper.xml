@@ -3,7 +3,7 @@
 <mapper namespace="com.brycehan.boot.generator.mapper.DatasourceMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.Datasource">
+    <resultMap id="BaseResultMap" type="com.brycehan.boot.generator.entity.po.Datasource">
         <id column="id" property="id"/>
         <result column="conn_name" property="connName"/>
         <result column="db_type" property="dbType"/>

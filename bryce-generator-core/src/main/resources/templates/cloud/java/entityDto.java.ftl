@@ -1,4 +1,4 @@
-package ${packageName}.${moduleName}.dto;
+package ${packageName}.${moduleName}.entity.dto;
 
 <#if fieldList?filter(field -> field.characterMaximumLength gt 0)?size  gt 0>
 import ${packageName}.common.core.validator.SaveGroup;
