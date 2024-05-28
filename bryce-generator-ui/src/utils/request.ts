@@ -13,7 +13,7 @@ const request = axios.create({
 request.interceptors.request.use(
   (config) => {
     config.headers['Accept-Language'] = 'zh-CN'
-    config.headers['source-client'] = 'pc'
+    config.headers['X-Source-Client'] = 'pc'
     if (Object.values(config.headers).includes('application/x-www-form-urlencoded')) {
       config.data = qs.stringify(config.data)
     }
