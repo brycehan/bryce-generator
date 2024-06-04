@@ -11,23 +11,23 @@
   "templates": [
     {
       "templateName": "java/entity.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/${entityName}.java"
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/po/${entityName}.java"
     },
     {
       "templateName": "java/entityDto.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/dto/${entityName}Dto.java"
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/dto/${entityName}Dto.java"
     },
     {
       "templateName": "java/entityPageDto.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/dto/${entityName}PageDto.java"
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/dto/${entityName}PageDto.java"
     },
     {
       "templateName": "java/entityVo.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/vo/${entityName}Vo.java"
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/vo/${entityName}Vo.java"
     },
     {
       "templateName": "java/convert.java.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/convert/${entityName}Convert.java"
+      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/entity/convert/${entityName}Convert.java"
     },
     {
       "templateName": "java/controller.java.ftl",

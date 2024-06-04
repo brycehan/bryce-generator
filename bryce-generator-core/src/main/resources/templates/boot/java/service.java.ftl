@@ -3,11 +3,11 @@ package ${packageName}.${moduleName}.service;
 import ${packageName}.framework.mybatis.service.BaseService;
 import ${packageName}.common.base.entity.PageResult;
 import ${packageName}.common.base.id.IdGenerator;
-import ${packageName}.${moduleName}.convert.${entityName}Convert;
-import ${packageName}.${moduleName}.dto.${entityName}Dto;
-import ${packageName}.${moduleName}.dto.${entityPageDtoName};
-import ${packageName}.${moduleName}.entity.${entityName};
-import ${packageName}.${moduleName}.vo.${entityName}Vo;
+import ${packageName}.${moduleName}.entity.convert.${entityName}Convert;
+import ${packageName}.${moduleName}.entity.dto.${entityName}Dto;
+import ${packageName}.${moduleName}.entity.dto.${entityPageDtoName};
+import ${packageName}.${moduleName}.entity.po.${entityName};
+import ${packageName}.${moduleName}.entity.vo.${entityName}Vo;
 
 /**
  * ${tableComment}服务

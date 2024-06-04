@@ -3,7 +3,7 @@
 <mapper namespace="${packageName}.${moduleName}.mapper.${entityName}Mapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="${packageName}.${moduleName}.entity.${entityName}">
+    <resultMap id="BaseResultMap" type="${packageName}.${moduleName}.entity.po.${entityName}">
         <#list fieldList as field>
         <#if field.primaryKey>
         <id column="${field.fieldName}" property="${field.attrName}" />
