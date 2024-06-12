@@ -95,12 +95,12 @@ public class ${controllerName} {
     }
 
     /**
-     * 分页查询
+     * ${tableComment}分页查询
      *
      * @param ${entityParam}PageDto 查询条件
      * @return ${tableComment}分页列表
      */
-    @Operation(summary = "分页查询")
+    @Operation(summary = "${tableComment}分页查询")
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:page')")
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<${entityName}Vo>> page(@Validated @RequestBody ${entityPageDtoName} ${entityParam}PageDto) {
