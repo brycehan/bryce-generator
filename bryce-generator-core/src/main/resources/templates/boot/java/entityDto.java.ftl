@@ -1,5 +1,6 @@
 package ${packageName}.${moduleName}.entity.dto;
 
+import com.brycehan.cloud.common.core.base.entity.BaseDto;
 <#if fieldList?filter(field -> field.characterMaximumLength gt 0)?size  gt 0>
 import com.brycehan.boot.common.validator.SaveGroup;
 import com.brycehan.boot.common.validator.UpdateGroup;
@@ -12,8 +13,6 @@ import lombok.Data;
 <#list importList as item>
 import ${item!};
 </#list>
-import java.io.Serializable;
-import java.io.Serial;
 
 /**
  * ${tableComment}Dto
@@ -23,10 +22,7 @@ import java.io.Serial;
  */
 @Data
 @Schema(description = "${tableComment}Dto")
-public class ${entityName}Dto implements Serializable {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class ${entityName}Dto extends BaseDto {
 
 <#if baseClass??>
     /**
