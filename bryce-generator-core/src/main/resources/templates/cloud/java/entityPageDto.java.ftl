@@ -11,8 +11,6 @@ import jakarta.validation.constraints.Size;
 import ${item!};
 </#list>
 
-import java.io.Serial;
-
 /**
  * ${tableComment}PageDto
  *
@@ -23,9 +21,6 @@ import java.io.Serial;
 @Schema(description = "${tableComment}PageDto")
 @EqualsAndHashCode(callSuper = true)
 public class ${entityName}PageDto extends BasePageDto {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
 
 <#list queryList as field>
 <#-- 区间查询条件 -->
