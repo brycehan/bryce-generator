@@ -162,7 +162,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { getById, saveOrUpdate } from '@/api/${moduleName}/${functionName}'
+import { getByIdApi, saveOrUpdateApi } from '@/api/${moduleName}/${functionName}'
 import type { StateOptions } from "@/utils/state";
 import { crud } from "@/utils/state";
 
@@ -170,8 +170,8 @@ const emit = defineEmits(['refreshPage'])
 
 const state: StateOptions  = reactive({
   api: {
-    saveOrUpdate,
-    getById,
+    saveOrUpdateApi,
+    getByIdApi,
     emit
   },
   dataForm: {
