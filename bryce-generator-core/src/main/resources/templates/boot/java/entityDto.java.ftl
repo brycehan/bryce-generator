@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 <#list importList as item>
 import ${item!};
 </#list>
@@ -21,6 +22,7 @@ import ${item!};
  * @since ${date}
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Schema(description = "${tableComment}Dto")
 public class ${entityName}Dto extends BaseDto {
 
