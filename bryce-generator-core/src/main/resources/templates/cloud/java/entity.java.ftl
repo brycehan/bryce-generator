@@ -14,8 +14,8 @@ import ${packageName}.common.core.base.entity.${baseClass.code};
 import ${baseClass.packageName}.${baseClass.code};
 <#else>
 import java.io.Serializable;
-</#if>
 import java.io.Serial;
+</#if>
 
 /**
  * ${tableComment}entity
@@ -29,9 +29,11 @@ import java.io.Serial;
 </#if>
 @TableName("${tableName}")
 public class ${entityName} <#if baseClass??>extends ${baseClass.code}<#else>implements Serializable</#if> {
+<#if !baseClass??>
 
     @Serial
     private static final long serialVersionUID = 1L;
+</#if>
 
 <#list fieldList as field>
 <#if !field.baseField>
