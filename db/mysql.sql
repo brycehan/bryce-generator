@@ -81,7 +81,7 @@ create table brc_gen_base_class
 ) engine InnoDB comment '基类表';
 
 -- 初始化-基类表数据
-INSERT INTO brc_gen_base_class (id, code, package_name, fields, remark, create_time) VALUES (1, 'BaseEntity', 'com.brycehan.boot.common.base.entity', 'id,version,deleted,created_user_id,created_time,updated_user_id,updated_time', '使用该基类，则需要表里有这些字段', now());
+INSERT INTO brc_gen_base_class (id, code, package_name, fields, remark, create_time) VALUES (1, 'BaseEntity', 'com.brycehan.boot.common.entity', 'id,version,deleted,created_user_id,created_time,updated_user_id,updated_time', '使用该基类，则需要表里有这些字段', now());
 
 -- 4、代码生成表
 create table brc_gen_table

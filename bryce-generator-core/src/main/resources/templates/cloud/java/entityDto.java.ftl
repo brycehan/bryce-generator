@@ -1,6 +1,6 @@
 package ${packageName}.${moduleName}.entity.dto;
 
-import com.brycehan.cloud.common.core.base.entity.BaseDto;
+import com.brycehan.cloud.common.core.entity.BaseDto;
 <#if fieldList?filter(field -> field.characterMaximumLength gt 0)?size  gt 0>
 import ${packageName}.common.core.validator.SaveGroup;
 import ${packageName}.common.core.validator.UpdateGroup;

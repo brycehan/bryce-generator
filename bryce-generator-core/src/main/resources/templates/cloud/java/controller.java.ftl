@@ -1,8 +1,8 @@
 package ${packageName}.${moduleName}.controller;
 
-import ${packageName}.common.core.base.entity.PageResult;
-import ${packageName}.common.core.base.http.ResponseResult;
-import ${packageName}.common.core.base.dto.IdsDto;
+import ${packageName}.common.core.entity.PageResult;
+import ${packageName}.common.core.entity.dto.IdsDto;
+import ${packageName}.common.core.response.ResponseResult;
 import ${packageName}.common.core.validator.SaveGroup;
 import ${packageName}.common.core.validator.UpdateGroup;
 import ${packageName}.common.operatelog.annotation.OperateLog;

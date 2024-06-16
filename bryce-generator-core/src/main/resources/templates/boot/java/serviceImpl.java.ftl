@@ -3,7 +3,7 @@ package ${packageName}.${moduleName}.service.impl;
 import ${packageName}.common.util.DateTimeUtils;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import ${packageName}.common.base.entity.PageResult;
+import ${packageName}.common.entity.PageResult;
 import ${packageName}.framework.mybatis.service.impl.BaseServiceImpl;
 import ${packageName}.common.util.ExcelUtils;
 import ${packageName}.${moduleName}.entity.convert.${convertName};

@@ -8,10 +8,8 @@ import lombok.EqualsAndHashCode;
 <#list importList as item>
 import ${item!};
 </#list>
-<#if baseClass?? && packageName == "com.brycehan.cloud">
-import ${packageName}.common.core.base.entity.${baseClass.code};
-<#elseif baseClass??>
-import ${baseClass.packageName}.${baseClass.code};
+<#if baseClass??>
+import ${packageName}.common.core.entity.${baseClass.code};
 <#else>
 import java.io.Serializable;
 import java.io.Serial;

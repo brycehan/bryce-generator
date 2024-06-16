@@ -84,7 +84,7 @@ create table brc_gen_base_class
 );
 
 -- 初始化-基类表数据
-insert into brc_gen_base_class (id,code,package_name,fields,remark,create_time) values (1,'BaseEntity','com.brycehan.boot.common.base.entity','id,create_user_id,create_time,update_user_id,update_time','使用该基类，则需要表里有这些字段', getdate());
+insert into brc_gen_base_class (id,code,package_name,fields,remark,create_time) values (1,'BaseEntity','com.brycehan.boot.common.entity','id,create_user_id,create_time,update_user_id,update_time','使用该基类，则需要表里有这些字段', getdate());
 
 -- 4、代码生成表
 create table brc_gen_table

@@ -118,7 +118,7 @@ comment on column brc_gen_base_class.remark is '备注';
 comment on column brc_gen_base_class.create_time is '创建时间';
 
 -- 初始化-基类表数据
-insert into brc_gen_base_class (id,code,package_name,fields,remark,create_time) values (1,'BaseEntity','com.brycehan.boot.common.base.entity','id,create_user_id,create_time,update_user_id,update_time','使用该基类，则需要表里有这些字段',now());
+insert into brc_gen_base_class (id,code,package_name,fields,remark,create_time) values (1,'BaseEntity','com.brycehan.boot.common.entity','id,create_user_id,create_time,update_user_id,update_time','使用该基类，则需要表里有这些字段',now());
 
 -- 4、代码生成表
 drop sequence seq_brc_gen_table_id;

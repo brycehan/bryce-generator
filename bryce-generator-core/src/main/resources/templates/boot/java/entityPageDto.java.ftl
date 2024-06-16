@@ -1,6 +1,6 @@
 package ${packageName}.${moduleName}.entity.dto;
 
-import ${packageName}.common.base.entity.BasePageDto;
+import ${packageName}.common.entity.BasePageDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

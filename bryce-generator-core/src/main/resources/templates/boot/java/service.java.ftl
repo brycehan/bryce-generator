@@ -1,8 +1,8 @@
 package ${packageName}.${moduleName}.service;
 
 import ${packageName}.framework.mybatis.service.BaseService;
-import ${packageName}.common.base.entity.PageResult;
-import ${packageName}.common.base.id.IdGenerator;
+import ${packageName}.common.entity.PageResult;
+import ${packageName}.common.base.IdGenerator;
 import ${packageName}.${moduleName}.entity.convert.${entityName}Convert;
 import ${packageName}.${moduleName}.entity.dto.${entityName}Dto;
 import ${packageName}.${moduleName}.entity.dto.${entityPageDtoName};
