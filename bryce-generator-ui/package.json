@@ -1,6 +1,6 @@
 {
   "name": "bryce-generator-ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -22,7 +22,8 @@
     "sortablejs": "^1.15.0",
     "vue": "^3.4.28",
     "vue-router": "^4.3.3",
-    "vxe-table": "^4.4.7",
+    "vxe-pc-ui": "^4.0.19",
+    "vxe-table": "^4.7.19",
     "xe-utils": "^3.5.11"
   },
   "devDependencies": {
