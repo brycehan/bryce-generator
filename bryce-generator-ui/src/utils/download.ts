@@ -15,7 +15,7 @@ const download = (config?: any) => {
         // 请求结果处理
         if (toString.call(response.data) === '[object Blob]') {
             reader.readAsDataURL(blob);
-            reader.onload = function (e: any) {debugger
+            reader.onload = function (e: any) {
                 // 转换完成，创建一个a标签用于下载
                 const a = document.createElement('a');
                 const filename = decodeURI(response.headers['content-disposition']);
