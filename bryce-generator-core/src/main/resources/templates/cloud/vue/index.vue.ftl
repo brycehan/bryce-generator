@@ -1,6 +1,6 @@
 <template>
   <el-card shadow="never">
-    <el-form ref="queryFormRef" :model="state.queryForm" :inline="true" label-width="68px" @keyup.enter="getPage()" @submit.prevent>
+    <el-form ref="queryFormRef" :model="state.queryForm" :inline="true" v-show="showSearch" label-width="68px" @keyup.enter="getPage()" @submit.prevent>
 <#list queryList?filter(f -> f.attrName != "tenantId") as field>
   <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
   <#if fieldCommentEnd == -1>
@@ -78,8 +78,9 @@
       </el-form-item>
     </el-form>
     <el-row class="mb-2">
-      <el-button v-auth="'${moduleName}:${functionName}:save'" type="primary" icon="Plus" @click="handleAddOrEdit()">新增</el-button>
-      <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" icon="Delete" @click="handleDeleteBatch()">删除</el-button>
+      <el-button v-auth="'${moduleName}:${functionName}:save'" type="primary" icon="Plus" plain @click="handleAddOrEdit()">新增</el-button>
+      <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" icon="Delete" plain @click="handleDeleteBatch('${deleteTipColumn}', '${deleteTipColumnCNName}')">删除</el-button>
+			<right-toolbar v-model:showSearch="showSearch" @refresh-page="getPage" />
     </el-row>
     <el-table
       v-loading="state.loading"
@@ -104,8 +105,8 @@
     </#list>
       <el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
         <template #default="scope">
-          <el-button v-auth="'${moduleName}:${functionName}:update'" type="primary" link @click="handleAddOrEdit(scope.row.id)">编辑</el-button>
-          <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" link @click="handleDeleteBatch(scope.row.id)">删除</el-button>
+          <el-button v-auth="'${moduleName}:${functionName}:update'" type="primary" icon="Edit" link @click="handleAddOrEdit(scope.row)">修改</el-button>
+          <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" icon="Delete" link @click="handleDeleteBatch('${deleteTipColumn}', '${deleteTipColumnCNName}', scope.row)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -152,6 +153,8 @@ const state: StateOptions = reactive({
 
 const queryFormRef = ref()
 const addOrEditRef = ref()
+// 显示搜索条件
+const showSearch = ref(true)
 
 onMounted(() => {
   getPage()
@@ -165,7 +168,9 @@ const {
   handleSelectionChange,
 } = crud(state)
 
-/** 重置按钮操作 */
+/**
+ * 重置按钮操作
+ */
 const handleResetQuery = () => {
   for (const key in state.range) {
     state.range[key] = []
@@ -178,8 +183,12 @@ const handleResetQuery = () => {
   getPage()
 }
 
-/** 新增/修改 弹窗 */
-const handleAddOrEdit = (id?: bigint) => {
+/**
+ * 新增/修改 弹窗
+ *
+ * @param id 主键ID
+ */
+const handleAddOrEdit = (id?: string) => {
   addOrEditRef.value.init(id)
 }
 </script>

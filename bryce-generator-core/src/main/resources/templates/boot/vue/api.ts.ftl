@@ -18,7 +18,7 @@ export const saveOrUpdateApi = (data: any) => {
  *
  * @param ids ID数组
  */
-export const deleteByIdsApi = (ids: bigint[]) => {
+export const deleteByIdsApi = (ids: string[]) => {
     return request.delete('/${moduleName}/${functionName}', { data: { ids } })
 }
 
@@ -27,7 +27,7 @@ export const deleteByIdsApi = (ids: bigint[]) => {
  *
  * @param id ID
  */
-export const getByIdApi = (id: bigint) => {
+export const getByIdApi = (id: string) => {
     return request.get(`/${moduleName}/${functionName}/<#noparse>${id}</#noparse>`)
 }
 

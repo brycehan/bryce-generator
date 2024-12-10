@@ -165,6 +165,7 @@ import { reactive, ref } from 'vue'
 import { getByIdApi, saveOrUpdateApi } from '@/api/${moduleName}/${functionName}'
 import type { StateOptions } from "@/utils/state";
 import { crud } from "@/utils/state";
+import type { FormRules } from 'element-plus'
 
 const emit = defineEmits(['refreshPage'])
 
@@ -176,11 +177,11 @@ const state: StateOptions  = reactive({
   },
   dataForm: {
   <#if baseClass??>
-    id: undefined,
+    id: '',
   </#if>
   <#list fieldList?filter(f -> !f.baseField && f.attrName != "tenantId") as field>
     <#if field.attrName == 'status'>
-    ${field.attrName}: true<#sep>, </#sep>
+    ${field.attrName}: 1<#sep>, </#sep>
     <#else>
     ${field.attrName}: ''<#sep>, </#sep>
     </#if>
@@ -190,7 +191,7 @@ const state: StateOptions  = reactive({
 
 const dataFormRef = ref()
 
-const dataRules = reactive({
+const dataRules = reactive<FormRules>({
 <#list formList?filter(f -> f.formRequired || f.characterMaximumLength gt 0) as field>
   <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
   <#if fieldCommentEnd == -1>
@@ -201,7 +202,7 @@ const dataRules = reactive({
   <#if field.formRequired && field.characterMaximumLength?c?number gt 0>
     ${field.attrName}: [
       { required: true, message: '必填项不能为空', trigger: 'blur' },
-      { min: 0, max: ${field.characterMaximumLength?c?number}, message: '${fieldComment!}长度不能超过${field.characterMaximumLength?c}个字符', trigger: 'blur' }
+      { min: 2, max: ${field.characterMaximumLength?c?number}, message: '${fieldComment!}长度为2~${field.characterMaximumLength?c}个字符', trigger: 'blur' }
     ]<#sep>,</#sep>
   <#elseif field.formRequired>
     ${field.attrName}: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]<#sep>,</#sep>
@@ -213,7 +214,11 @@ const dataRules = reactive({
 
 const { getData, handleSaveOrUpdate } = crud(state)
 
-/** 初始化详情数据 */
+/**
+ * 初始化详情数据
+ *
+ * @param id 主键ID
+ */
 const init = (id?: bigint) => {
   state.visible = true
   state.dataForm.id = undefined
@@ -229,7 +234,9 @@ const init = (id?: bigint) => {
   }
 }
 
-/** 表单提交 */
+/**
+ * 表单提交
+ */
 const handleSubmit = () => {
   dataFormRef.value.validate((valid: boolean) => {
     if (!valid) {

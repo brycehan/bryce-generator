@@ -1,5 +1,6 @@
 package com.brycehan.boot.generator.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ArrayUtil;
@@ -12,7 +13,6 @@ import com.brycehan.boot.generator.entity.po.BaseClass;
 import com.brycehan.boot.generator.entity.po.Table;
 import com.brycehan.boot.generator.entity.po.TableField;
 import com.brycehan.boot.generator.service.*;
-import com.brycehan.boot.generator.common.util.JsonUtils;
 import com.brycehan.boot.generator.common.util.TableProcessUtils;
 import com.brycehan.boot.generator.common.util.TemplateUtils;
 import lombok.RequiredArgsConstructor;
@@ -148,7 +148,6 @@ public class GeneratorServiceImpl implements GeneratorService {
         dataModel.put("date", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         dataModel.put("datetime", LocalDateTime.now().format(formatter));
-        dataModel.put("JsonUtils", new JsonUtils());
 
         // 设置字段分类
         setFieldTypeList(dataModel, table);
@@ -183,6 +182,10 @@ public class GeneratorServiceImpl implements GeneratorService {
         dataModel.put("entityParam", entityParam);
         dataModel.put("serviceParam", entityParam.concat("Service"));
         dataModel.put("mapperParam", entityParam.concat("Mapper"));
+
+        // 扩展参数
+        dataModel.put("deleteTipColumn", getDeleteTipColumn(table));
+        dataModel.put("deleteTipColumnCNName", getDeleteTipColumnCNName(table));
 
         // 生成路径
         dataModel.put("backendPath", table.getBackendPath());
@@ -252,6 +255,58 @@ public class GeneratorServiceImpl implements GeneratorService {
                 field.setBaseField(true);
             }
         }
+    }
+
+    /**
+     * 获取删除提示列
+     *
+     * @param table 表信息
+     * @return 提示列数据库列名
+     */
+    private String getDeleteTipColumn(Table table) {
+        List<TableField> fieldList = table.getFieldList();
+        if (CollUtil.isNotEmpty(fieldList)) {
+            for (TableField field : fieldList) {
+                if (field.getAttrName().equals("code")
+                        || field.getAttrName().equals("name")
+                        || field.getAttrName().equals("title")
+                        || field.getAttrName().endsWith("Code")
+                        || field.getAttrName().endsWith("Name")
+                        || field.getAttrName().endsWith("Title")) {
+                    return field.getAttrName();
+                }
+            }
+        }
+        return "id";
+    }
+
+    /**
+     * 获取删除提示列中文名
+     *
+     * @param table 表信息
+     * @return 提示列中文名
+     */
+    private String getDeleteTipColumnCNName(Table table) {
+        List<TableField> fieldList = table.getFieldList();
+        if (CollUtil.isNotEmpty(fieldList)) {
+            for (TableField field : fieldList) {
+                if (field.getAttrName().equals("code")
+                        || field.getAttrName().equals("name")
+                        || field.getAttrName().equals("title")
+                        || field.getAttrName().endsWith("Code")
+                        || field.getAttrName().endsWith("Name")
+                        || field.getAttrName().endsWith("Title")) {
+                    return field.getFieldComment();
+                        }
+            }
+        }
+        // 默认取表名称 + 编号
+        String tipCNName = table.getTableComment();
+        if (StrUtil.isNotBlank(tipCNName)) {
+            tipCNName = StrUtil.subBefore(tipCNName, "表", false);
+            tipCNName = StrUtil.subAfter(tipCNName, "系统", false);
+        }
+        return tipCNName + "编号";
     }
 
 }
