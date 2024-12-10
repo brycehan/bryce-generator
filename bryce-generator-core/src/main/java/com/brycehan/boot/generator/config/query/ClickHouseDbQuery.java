@@ -1,8 +1,8 @@
 package com.brycehan.boot.generator.config.query;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.brycehan.boot.generator.config.DbType;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * ClickHouse查询
@@ -25,7 +25,7 @@ public class ClickHouseDbQuery implements DbQuery {
                 where 1=1
                 """);
         // 表名查询
-        if (StringUtils.isNotBlank(tableName)) {
+        if (StrUtil.isNotBlank(tableName)) {
             sql.append("and name = '").append(tableName).append("' ");
         }
         sql.append("order by name asc");

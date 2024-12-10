@@ -1,14 +1,19 @@
 package ${packageName}.${moduleName}.entity.dto;
 
 import ${packageName}.common.core.entity.BasePageDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
-<#list importList as item>
-import ${item!};
+import org.hibernate.validator.constraints.Length;
+<#-- 区间查询条件 -->
+<#list queryList as field>
+<#if field.attrType == "LocalDateTime" || field.attrType == "LocalDate" || field.attrType == "LocalTime">
+import java.time.${field.attrType};
+<#elseif field.attrType == "BigDecimal">
+import java.math.BigDecimal;
+<#elseif field.attrName == "status">
+import ${packageName}.common.core.enums.StatusType;
+</#if>
 </#list>
 
 /**
@@ -50,9 +55,13 @@ public class ${entityName}PageDto extends BasePageDto {
 	</#if>
     @Schema(description = "${field.fieldComment}")
   <#if field.characterMaximumLength gt 0>
-    @Size(max = ${field.characterMaximumLength?c})
+    @Length(max = ${field.characterMaximumLength?c})
   </#if>
+    <#if field.attrName == "status">
+    private StatusType ${field.attrName};
+    <#else>
     private ${field.attrType} ${field.attrName};
+    </#if>
 
 </#if>
 </#list>

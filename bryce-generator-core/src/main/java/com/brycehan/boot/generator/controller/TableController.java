@@ -1,5 +1,6 @@
 package com.brycehan.boot.generator.controller;
 
+import cn.hutool.core.util.StrUtil;
 import com.brycehan.boot.generator.entity.convert.TableConvert;
 import com.brycehan.boot.generator.entity.convert.TableFieldConvert;
 import com.brycehan.boot.generator.entity.dto.TableDto;
@@ -21,6 +22,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 /**
@@ -37,6 +39,9 @@ public class TableController {
     private final TableService tableService;
 
     private final TableFieldService tableFieldService;
+
+    // 定义表名的正则表达式
+    private static final String TABLE_NAME_PATTERN = "^[a-zA-Z_][a-zA-Z0-9_]{0,63}$";
 
     /**
      * 保存表
@@ -111,6 +116,9 @@ public class TableController {
     @PostMapping(path = "/import/{datasourceId}")
     public ResponseResult<Void> importTable(@PathVariable Long datasourceId,
                                             @RequestBody List<String> tableNameList) {
+        // 无效表名过滤
+        tableNameList.removeIf(tableName -> StrUtil.isBlank(tableName) || !Pattern.matches(TABLE_NAME_PATTERN, tableName));
+
         if (!CollectionUtils.isEmpty(tableNameList)) {
             for (String tableName : tableNameList) {
                 this.tableService.tableImport(datasourceId, tableName);

@@ -2,7 +2,7 @@ package com.brycehan.boot.generator.config.query;
 
 
 import com.brycehan.boot.generator.config.DbType;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * SQLServer查询
@@ -26,7 +26,7 @@ public class SQLServerDbQuery implements DbQuery {
                 where (xtype = 'U' or xtype = 'V')
                 """);
         // 表名查询
-        if (StringUtils.isNotBlank(tableName)) {
+        if (StrUtil.isNotBlank(tableName)) {
             sql.append("and cast(so.name as varcher(500)) = '").append(tableName).append("' ");
         }
         sql.append("order by cast(so.name as varcher(500)) asc");

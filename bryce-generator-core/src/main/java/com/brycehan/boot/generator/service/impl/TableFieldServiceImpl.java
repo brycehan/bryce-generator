@@ -4,19 +4,19 @@ import cn.hutool.core.text.NamingCase;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.brycehan.boot.generator.entity.dto.TableFieldDto;
 import com.brycehan.boot.generator.entity.dto.TableFieldPageDto;
 import com.brycehan.boot.generator.common.enums.AutoFillEnum;
 import com.brycehan.boot.generator.service.FieldTypeService;
-import com.brycehan.boot.generator.service.TableFieldService;
 import com.brycehan.boot.generator.entity.vo.TableFieldVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.common.service.impl.BaseServiceImpl;
 import com.brycehan.boot.generator.entity.convert.TableFieldConvert;
 import com.brycehan.boot.generator.entity.po.FieldType;
 import com.brycehan.boot.generator.entity.po.TableField;
 import com.brycehan.boot.generator.mapper.TableFieldMapper;
+import com.brycehan.boot.generator.service.TableFieldService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ import java.util.Objects;
  */
 @Service
 @RequiredArgsConstructor
-public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, TableField> implements TableFieldService {
+public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableField> implements TableFieldService {
 
     private final TableFieldMapper tableFieldMapper;
 
@@ -96,7 +96,7 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
     @Override
     public PageResult<TableFieldVo> page(@NotNull TableFieldPageDto tableFieldPageDto) {
 
-        IPage<TableField> page = this.tableFieldMapper.selectPage(getPage(tableFieldPageDto), getWrapper());
+        IPage<TableField> page = this.tableFieldMapper.selectPage(tableFieldPageDto.toPage(), getWrapper());
 
         return new PageResult<>(page.getTotal(), TableFieldConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -179,7 +179,7 @@ public class TableFieldServiceImpl extends BaseServiceImpl<TableFieldMapper, Tab
         return this.tableFieldMapper.selectList(queryWrapper);
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     @Override
     public void updateTableField(Long tableId, List<TableField> tableFieldList) {
         // 更新排序

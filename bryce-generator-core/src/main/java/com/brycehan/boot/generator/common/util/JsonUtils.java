@@ -1,13 +1,13 @@
 package com.brycehan.boot.generator.common.util;
 
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 
@@ -35,7 +35,7 @@ public class JsonUtils {
     }
 
     public static <T> T readValue(String content, Class<T> valueType) {
-        if (StringUtils.isBlank(content)) {
+        if (StrUtil.isBlank(content)) {
             return null;
         }
         try {
@@ -46,7 +46,7 @@ public class JsonUtils {
     }
 
     public static <T> T readValue(byte[] src, Class<T> valueType) {
-        if (ArrayUtils.isEmpty(src)) {
+        if (ArrayUtil.isEmpty(src)) {
             return null;
         }
         try {
@@ -57,7 +57,7 @@ public class JsonUtils {
     }
 
     public static <T> T readValue(String content, TypeReference<T> valueTypeRef) {
-        if (StringUtils.isEmpty(content)) {
+        if (StrUtil.isEmpty(content)) {
             return null;
         }
         try {
@@ -68,7 +68,7 @@ public class JsonUtils {
     }
 
     public static <T> T readValue(String content, JavaType valueType) {
-        if (StringUtils.isEmpty(content)) {
+        if (StrUtil.isEmpty(content)) {
             return null;
         }
         try {

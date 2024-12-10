@@ -2,11 +2,11 @@ package ${packageName}.${moduleName}.controller;
 
 import ${packageName}.common.core.entity.PageResult;
 import ${packageName}.common.core.entity.dto.IdsDto;
-import ${packageName}.common.core.response.ResponseResult;
-import ${packageName}.common.core.validator.SaveGroup;
-import ${packageName}.common.core.validator.UpdateGroup;
+import ${packageName}.common.core.base.response.ResponseResult;
+import ${packageName}.common.core.base.validator.SaveGroup;
+import ${packageName}.common.core.base.validator.UpdateGroup;
 import ${packageName}.common.operatelog.annotation.OperateLog;
-import ${packageName}.common.operatelog.annotation.OperateType;
+import ${packageName}.common.operatelog.annotation.OperatedType;
 import ${packageName}.${moduleName}.entity.convert.${convertName};
 import ${packageName}.${moduleName}.entity.dto.${entityName}Dto;
 import ${packageName}.${moduleName}.entity.dto.${entityPageDtoName};
@@ -42,7 +42,7 @@ public class ${controllerName} {
      * @return 响应结果
      */
     @Operation(summary = "保存${tableComment}")
-    @OperateLog(type = OperateType.INSERT)
+    @OperateLog(type = OperatedType.INSERT)
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:save')")
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
@@ -57,7 +57,7 @@ public class ${controllerName} {
      * @return 响应结果
      */
     @Operation(summary = "更新${tableComment}")
-    @OperateLog(type = OperateType.UPDATE)
+    @OperateLog(type = OperatedType.UPDATE)
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:update')")
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
@@ -72,7 +72,7 @@ public class ${controllerName} {
      * @return 响应结果
      */
     @Operation(summary = "删除${tableComment}")
-    @OperateLog(type = OperateType.DELETE)
+    @OperateLog(type = OperatedType.DELETE)
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:delete')")
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {

@@ -1,12 +1,16 @@
 package ${packageName}.${moduleName}.service.impl;
 
-import ${packageName}.common.core.util.DateTimeUtils;
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
+import java.util.Date;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packageName}.common.core.entity.PageResult;
 import ${packageName}.common.mybatis.service.impl.BaseServiceImpl;
 import ${packageName}.common.core.util.ExcelUtils;
+import ${packageName}.common.base.IdGenerator;
 import ${packageName}.${moduleName}.entity.convert.${convertName};
+import ${packageName}.${moduleName}.entity.dto.${entityName}Dto;
 import ${packageName}.${moduleName}.entity.dto.${entityPageDtoName};
 import ${packageName}.${moduleName}.entity.po.${entityName};
 import ${packageName}.${moduleName}.entity.vo.${entityName}Vo;
@@ -36,9 +40,30 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityName}> implements ${serviceName} {
 
+    /**
+     * 添加${tableComment}
+     *
+     * @param ${entityParam}Dto ${tableComment}Dto
+     */
+    public void save(${entityName}Dto ${entityParam}Dto) {
+        ${entityName} ${entityParam} = ${convertName}.INSTANCE.convert(${entityParam}Dto);
+        ${entityParam}.setId(IdGenerator.nextId());
+        this.baseMapper.insert(${entityParam});
+    }
+
+    /**
+     * 更新${tableComment}
+     *
+     * @param ${entityParam}Dto ${tableComment}Dto
+     */
+    public void update(${entityName}Dto ${entityParam}Dto) {
+        ${entityName} ${entityParam} = ${convertName}.INSTANCE.convert(${entityParam}Dto);
+        this.baseMapper.updateById(${entityParam});
+    }
+
     @Override
     public PageResult<${entityName}Vo> page(${entityPageDtoName} ${entityParam}PageDto) {
-        IPage<${entityName}> page = this.baseMapper.selectPage(getPage(${entityParam}PageDto), getWrapper(${entityParam}PageDto));
+        IPage<${entityName}> page = this.baseMapper.selectPage(${entityParam}PageDto.toPage(), getWrapper(${entityParam}PageDto));
         return new PageResult<>(page.getTotal(), ${convertName}.INSTANCE.convert(page.getRecords()));
     }
 
@@ -90,7 +115,8 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
     public void export(${entityPageDtoName} ${entityParam}PageDto) {
         List<${entityName}> ${entityParam}List = this.baseMapper.selectList(getWrapper(${entityParam}PageDto));
         List<${entityName}Vo> ${entityParam}VoList = ${convertName}.INSTANCE.convert(${entityParam}List);
-        ExcelUtils.export(${entityName}Vo.class, "${tableComment}_".concat(DateTimeUtils.today()), "${tableComment}", ${entityParam}VoList);
+        String today = DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN);
+        ExcelUtils.export(${entityName}Vo.class, "${tableComment}_".concat(today), "${tableComment}", ${entityParam}VoList);
     }
 
 }

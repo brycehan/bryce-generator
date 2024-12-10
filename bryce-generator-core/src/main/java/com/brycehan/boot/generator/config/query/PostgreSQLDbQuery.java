@@ -2,7 +2,7 @@ package com.brycehan.boot.generator.config.query;
 
 
 import com.brycehan.boot.generator.config.DbType;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * Postgresql查询
@@ -28,7 +28,7 @@ public class PostgreSQLDbQuery implements DbQuery {
                     and t1.tablename = t2.relname
                 """;
         // 表名查询
-        if (StringUtils.isNotBlank(tableName)) {
+        if (StrUtil.isNotBlank(tableName)) {
             sql = sql.concat("and t1.tablename = '").concat(tableName).concat("' ");
         }
 

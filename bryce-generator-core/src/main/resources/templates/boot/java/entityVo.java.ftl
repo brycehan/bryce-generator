@@ -1,11 +1,13 @@
 package ${packageName}.${moduleName}.entity.vo;
 
-import cn.hutool.core.date.DatePattern;
 import io.swagger.v3.oas.annotations.media.Schema;
-<#if fieldList?filter(f -> f.formItem || f.queryItem || f.gridItem)?filter(f -> f.attrType == 'LocalDateTime')?size gt 0>
-import com.fasterxml.jackson.annotation.JsonFormat;
-</#if>
 import lombok.Data;
+<#-- 字段列表 -->
+<#list fieldList as field>
+<#if field.attrName == "status">
+import ${packageName}.common.enums.StatusType;
+</#if>
+</#list>
 <#list voImportList as item>
 import ${item!};
 </#list>
@@ -33,10 +35,11 @@ public class ${entityName}Vo implements Serializable {
      */
 	</#if>
     @Schema(description = "${field.fieldComment}")
-  <#if field.attrType == 'LocalDateTime'>
-    @JsonFormat(pattern = DatePattern.NORM_DATETIME_PATTERN, timezone = "GMT+8")
-  </#if>
+    <#if field.attrName == "status">
+    private StatusType ${field.attrName};
+    <#else>
     private ${field.attrType} ${field.attrName};
+    </#if>
 
 </#list>
 }

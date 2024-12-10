@@ -8,6 +8,12 @@ import lombok.EqualsAndHashCode;
 <#list importList as item>
 import ${item!};
 </#list>
+<#-- 字段列表 -->
+<#list fieldList as field>
+<#if field.attrName == "status">
+import ${packageName}.common.core.enums.StatusType;
+</#if>
+</#list>
 <#if baseClass??>
 import ${packageName}.common.core.entity.${baseClass.code};
 <#else>
@@ -52,7 +58,11 @@ public class ${entityName} <#if baseClass??>extends ${baseClass.code}<#else>impl
 	<#if field.primaryKey>
     @TableId
 	</#if>
+	<#if field.attrName == "status">
+    private StatusType ${field.attrName};
+	<#else>
     private ${field.attrType} ${field.attrName};
+  </#if>
 
 </#if>
 </#list>

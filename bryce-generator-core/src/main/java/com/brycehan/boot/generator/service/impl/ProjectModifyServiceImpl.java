@@ -6,20 +6,19 @@ import cn.hutool.core.util.ZipUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.brycehan.boot.generator.entity.dto.ProjectModifyDto;
 import com.brycehan.boot.generator.entity.dto.ProjectModifyPageDto;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.common.service.impl.BaseServiceImpl;
 import com.brycehan.boot.generator.entity.convert.ProjectModifyConvert;
 import com.brycehan.boot.generator.entity.po.ProjectModify;
 import com.brycehan.boot.generator.mapper.ProjectModifyMapper;
-import com.brycehan.boot.generator.service.ProjectModifyService;
 import com.brycehan.boot.generator.common.util.ProjectUtils;
 import com.brycehan.boot.generator.entity.vo.ProjectModifyVo;
+import com.brycehan.boot.generator.service.ProjectModifyService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -40,7 +39,7 @@ import java.util.Objects;
  */
 @Service
 @RequiredArgsConstructor
-public class ProjectModifyServiceImpl extends BaseServiceImpl<ProjectModifyMapper, ProjectModify> implements ProjectModifyService {
+public class ProjectModifyServiceImpl extends ServiceImpl<ProjectModifyMapper, ProjectModify> implements ProjectModifyService {
 
     private final ProjectModifyMapper projectModifyMapper;
 
@@ -74,7 +73,7 @@ public class ProjectModifyServiceImpl extends BaseServiceImpl<ProjectModifyMappe
     @Override
     public PageResult<ProjectModifyVo> page(@NotNull ProjectModifyPageDto projectModifyPageDto) {
 
-        IPage<ProjectModify> page = this.projectModifyMapper.selectPage(getPage(projectModifyPageDto), getWrapper(projectModifyPageDto));
+        IPage<ProjectModify> page = this.projectModifyMapper.selectPage(projectModifyPageDto.toPage(), getWrapper(projectModifyPageDto));
 
         return new PageResult<>(page.getTotal(), ProjectModifyConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -87,7 +86,7 @@ public class ProjectModifyServiceImpl extends BaseServiceImpl<ProjectModifyMappe
      */
     private Wrapper<ProjectModify> getWrapper(ProjectModifyPageDto projectModifyPageDto) {
         LambdaQueryWrapper<ProjectModify> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(StringUtils.isNotBlank(projectModifyPageDto.getProjectName()), ProjectModify::getProjectName, projectModifyPageDto.getProjectName());
+        wrapper.like(StrUtil.isNotBlank(projectModifyPageDto.getProjectName()), ProjectModify::getProjectName, projectModifyPageDto.getProjectName());
         return wrapper;
     }
 

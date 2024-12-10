@@ -23,6 +23,10 @@
             <groupId>com.brycehan.boot</groupId>
             <artifactId>bryce-generator-boot-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
+        </dependency>
         <!-- Tools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

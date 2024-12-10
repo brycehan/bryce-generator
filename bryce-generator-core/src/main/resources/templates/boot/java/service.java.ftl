@@ -2,8 +2,6 @@ package ${packageName}.${moduleName}.service;
 
 import ${packageName}.framework.mybatis.service.BaseService;
 import ${packageName}.common.entity.PageResult;
-import ${packageName}.common.base.IdGenerator;
-import ${packageName}.${moduleName}.entity.convert.${entityName}Convert;
 import ${packageName}.${moduleName}.entity.dto.${entityName}Dto;
 import ${packageName}.${moduleName}.entity.dto.${entityPageDtoName};
 import ${packageName}.${moduleName}.entity.po.${entityName};
@@ -22,21 +20,14 @@ public interface ${serviceName} extends BaseService<${entityName}> {
      *
      * @param ${entityParam}Dto ${tableComment}Dto
      */
-    default void save(${entityName}Dto ${entityParam}Dto) {
-        ${entityName} ${entityParam} = ${convertName}.INSTANCE.convert(${entityParam}Dto);
-        ${entityParam}.setId(IdGenerator.nextId());
-        this.getBaseMapper().insert(${entityParam});
-    }
+    void save(${entityName}Dto ${entityParam}Dto);
 
     /**
      * 更新${tableComment}
      *
      * @param ${entityParam}Dto ${tableComment}Dto
      */
-    default void update(${entityName}Dto ${entityParam}Dto) {
-        ${entityName} ${entityParam} = ${convertName}.INSTANCE.convert(${entityParam}Dto);
-        this.getBaseMapper().updateById(${entityParam});
-    }
+    void update(${entityName}Dto ${entityParam}Dto);
 
     /**
      * ${tableComment}分页查询

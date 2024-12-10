@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>
+        <version>3.3.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,15 +23,13 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <!-- MybatisPlus -->
-        <mybatis-plus.version>3.5.6</mybatis-plus.version>
-        <!-- 实体转换器 -->
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
+        <mybatis-plus.version>3.5.9</mybatis-plus.version>
         <dameng.version>8.1.2.141</dameng.version>
         <clickhouse.version>0.3.2</clickhouse.version>
+        <!-- 实体转换器 -->
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <!-- 工具 -->
-        <guava.version>33.2.0-jre</guava.version>
-        <hutool.version>5.8.21</hutool.version>
-        <commons-collections4.version>4.4</commons-collections4.version>
+        <hutool.version>5.8.32</hutool.version>
     </properties>
 
     <modules>
@@ -42,23 +40,25 @@
     <!-- 依赖管理 -->
     <dependencyManagement>
         <dependencies>
-            <!-- Generator核心组件 -->
+            <!-- Generator 核心组件 -->
             <dependency>
                 <groupId>com.brycehan.boot</groupId>
                 <artifactId>bryce-generator-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- Generator Boot Starter组件 -->
+            <!-- Generator Boot Starter 组件 -->
             <dependency>
                 <groupId>com.brycehan.boot</groupId>
                 <artifactId>bryce-generator-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <!-- Mybatis Plus框架 -->
+            <!-- Mybatis Plus 框架 -->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <artifactId>mybatis-plus-bom</artifactId>
                 <version>${mybatis-plus.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <!-- 实体转换器 -->
             <dependency>
@@ -86,12 +86,6 @@
                 <groupId>ru.yandex.clickhouse</groupId>
                 <artifactId>clickhouse-jdbc</artifactId>
                 <version>${clickhouse.version}</version>
-            </dependency>
-            <!-- Guava库 -->
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
             </dependency>
             <!-- 糊涂工具 -->
             <dependency>

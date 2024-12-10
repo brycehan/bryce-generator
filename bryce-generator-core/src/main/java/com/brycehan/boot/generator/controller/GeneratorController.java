@@ -5,6 +5,7 @@ import com.brycehan.boot.generator.service.GeneratorService;
 import com.brycehan.boot.generator.common.ResponseResult;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.ByteArrayOutputStream;
@@ -57,9 +58,10 @@ public class GeneratorController {
 
         // zip 压缩包数据
         byte[] data = outputStream.toByteArray();
-        response.setHeader("Content-Disposition", "attachment;filename*=utf-8''bryce.zip");
-        response.addHeader("Content-Length", String.valueOf(data.length));
         response.setContentType("application/octet-stream; charset=UTF-8");
+        response.addHeader(HttpHeaders.CONTENT_LENGTH, String.valueOf(data.length));
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename*=utf-8''bryce.zip");
+        response.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION);
 
         try {
             IoUtil.write(response.getOutputStream(), false, data);

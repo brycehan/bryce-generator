@@ -2,6 +2,7 @@ package com.brycehan.boot.generator.service.impl;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.brycehan.boot.generator.config.GenDatasource;
 import com.brycehan.boot.generator.config.template.GeneratorContent;
@@ -14,13 +15,9 @@ import com.brycehan.boot.generator.service.*;
 import com.brycehan.boot.generator.common.util.JsonUtils;
 import com.brycehan.boot.generator.common.util.TableProcessUtils;
 import com.brycehan.boot.generator.common.util.TemplateUtils;
-import com.google.common.collect.Sets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -162,8 +159,9 @@ public class GeneratorServiceImpl implements GeneratorService {
         // entity导入包的列表
         Set<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "entity");
         Set<String> voImportList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "vo");
-        dataModel.put("importList", Sets.filter(importList, StringUtils::isNotBlank));
-        dataModel.put("voImportList", Sets.filter(voImportList, StringUtils::isNotBlank));
+
+        dataModel.put("importList", importList.stream().filter(StrUtil::isNotBlank).toList());
+        dataModel.put("voImportList", voImportList.stream().filter(StrUtil::isNotBlank).toList());
 
         // 表信息
         dataModel.put("tableName", table.getTableName());
@@ -250,7 +248,7 @@ public class GeneratorServiceImpl implements GeneratorService {
 
         // 标注为基类字段
         for (TableField field : table.getFieldList()) {
-            if (ArrayUtils.contains(fields, field.getFieldName())) {
+            if (ArrayUtil.contains(fields, field.getFieldName())) {
                 field.setBaseField(true);
             }
         }

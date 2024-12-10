@@ -3,20 +3,20 @@ package com.brycehan.boot.generator.service.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.brycehan.boot.generator.config.GenDatasource;
 import com.brycehan.boot.generator.entity.dto.DatasourceDto;
 import com.brycehan.boot.generator.entity.dto.DatasourcePageDto;
 import com.brycehan.boot.generator.entity.vo.DatasourceVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.common.service.impl.BaseServiceImpl;
 import com.brycehan.boot.generator.entity.convert.DatasourceConvert;
 import com.brycehan.boot.generator.entity.po.Datasource;
 import com.brycehan.boot.generator.mapper.DatasourceMapper;
 import com.brycehan.boot.generator.service.DatasourceService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -36,7 +36,7 @@ import java.util.Objects;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DatasourceServiceImpl extends BaseServiceImpl<DatasourceMapper, Datasource> implements DatasourceService {
+public class DatasourceServiceImpl extends ServiceImpl<DatasourceMapper, Datasource> implements DatasourceService {
 
     private final DatasourceMapper datasourceMapper;
 
@@ -89,7 +89,7 @@ public class DatasourceServiceImpl extends BaseServiceImpl<DatasourceMapper, Dat
     @Override
     public PageResult<DatasourceVo> page(DatasourcePageDto datasourcePageDto) {
 
-        IPage<Datasource> page = this.datasourceMapper.selectPage(getPage(datasourcePageDto), getWrapper(datasourcePageDto));
+        IPage<Datasource> page = this.datasourceMapper.selectPage(datasourcePageDto.toPage(), getWrapper(datasourcePageDto));
 
         return new PageResult<>(page.getTotal(), DatasourceConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -102,8 +102,8 @@ public class DatasourceServiceImpl extends BaseServiceImpl<DatasourceMapper, Dat
      */
     private Wrapper<Datasource> getWrapper(DatasourcePageDto datasourcePageDto) {
         LambdaQueryWrapper<Datasource> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(StringUtils.isNotBlank(datasourcePageDto.getConnName()), Datasource::getConnName, datasourcePageDto.getConnName());
-        wrapper.like(StringUtils.isNotBlank(datasourcePageDto.getDbType()), Datasource::getDbType, datasourcePageDto.getDbType());
+        wrapper.like(StrUtil.isNotBlank(datasourcePageDto.getConnName()), Datasource::getConnName, datasourcePageDto.getConnName());
+        wrapper.like(StrUtil.isNotBlank(datasourcePageDto.getDbType()), Datasource::getDbType, datasourcePageDto.getDbType());
         return wrapper;
     }
 

@@ -2,7 +2,7 @@ package com.brycehan.boot.generator.config.query;
 
 
 import com.brycehan.boot.generator.config.DbType;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * MySQL查询
@@ -25,7 +25,7 @@ public class MySQLDbQuery implements DbQuery {
                 where table_schema = (select database())
                 """);
         // 表名查询
-        if (StringUtils.isNotBlank(tableName)) {
+        if (StrUtil.isNotBlank(tableName)) {
             sql.append("and table_name = '").append(tableName).append("' ");
         }
         sql.append("order by table_name asc");

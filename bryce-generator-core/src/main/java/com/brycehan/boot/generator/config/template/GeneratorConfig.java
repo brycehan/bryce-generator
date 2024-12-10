@@ -4,7 +4,7 @@ import com.brycehan.boot.generator.config.GeneratorProperties;
 import com.brycehan.boot.generator.config.PlatformType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.util.StreamUtils;
 
 import java.io.File;
@@ -39,7 +39,7 @@ public class GeneratorConfig {
 
     public GeneratorContent getGeneratorContent() {
         // 模板路径，如果不是以/结尾，则添加/
-        if (!StringUtils.endsWith(template, "/")) {
+        if (!StrUtil.endWith(template, "/")) {
             template = template.concat("/");
         }
         // 模板配置文件

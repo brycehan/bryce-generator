@@ -3,19 +3,19 @@ package com.brycehan.boot.generator.service.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.brycehan.boot.generator.entity.dto.FieldTypeDto;
 import com.brycehan.boot.generator.entity.dto.FieldTypePageDto;
 import com.brycehan.boot.generator.entity.vo.FieldTypeVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.common.service.impl.BaseServiceImpl;
 import com.brycehan.boot.generator.entity.convert.FieldTypeConvert;
 import com.brycehan.boot.generator.entity.po.FieldType;
 import com.brycehan.boot.generator.mapper.FieldTypeMapper;
 import com.brycehan.boot.generator.service.FieldTypeService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -31,7 +31,7 @@ import java.util.*;
  */
 @Service
 @RequiredArgsConstructor
-public class FieldTypeServiceImpl extends BaseServiceImpl<FieldTypeMapper, FieldType> implements FieldTypeService {
+public class FieldTypeServiceImpl extends ServiceImpl<FieldTypeMapper, FieldType> implements FieldTypeService {
 
     private final FieldTypeMapper fieldTypeMapper;
 
@@ -65,7 +65,7 @@ public class FieldTypeServiceImpl extends BaseServiceImpl<FieldTypeMapper, Field
     @Override
     public PageResult<FieldTypeVo> page(@NotNull FieldTypePageDto fieldTypePageDto) {
 
-        IPage<FieldType> page = this.fieldTypeMapper.selectPage(getPage(fieldTypePageDto), getWrapper(fieldTypePageDto));
+        IPage<FieldType> page = this.fieldTypeMapper.selectPage(fieldTypePageDto.toPage(), getWrapper(fieldTypePageDto));
 
         return new PageResult<>(page.getTotal(), FieldTypeConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -78,8 +78,8 @@ public class FieldTypeServiceImpl extends BaseServiceImpl<FieldTypeMapper, Field
      */
     private Wrapper<FieldType> getWrapper(FieldTypePageDto fieldTypePageDto) {
         LambdaQueryWrapper<FieldType> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(StringUtils.isNotBlank(fieldTypePageDto.getColumnType()), FieldType::getColumnType, fieldTypePageDto.getColumnType());
-        wrapper.like(StringUtils.isNotBlank(fieldTypePageDto.getAttrType()), FieldType::getAttrType, fieldTypePageDto.getAttrType());
+        wrapper.like(StrUtil.isNotBlank(fieldTypePageDto.getColumnType()), FieldType::getColumnType, fieldTypePageDto.getColumnType());
+        wrapper.like(StrUtil.isNotBlank(fieldTypePageDto.getAttrType()), FieldType::getAttrType, fieldTypePageDto.getAttrType());
         return wrapper;
     }
 

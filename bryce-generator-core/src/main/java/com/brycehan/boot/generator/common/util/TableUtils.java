@@ -1,16 +1,14 @@
 package com.brycehan.boot.generator.common.util;
 
 import cn.hutool.core.text.NamingCase;
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.brycehan.boot.generator.config.query.DbQuery;
 import com.brycehan.boot.generator.config.DbType;
 import com.brycehan.boot.generator.config.GenDatasource;
 import com.brycehan.boot.generator.entity.po.Table;
 import com.brycehan.boot.generator.entity.po.TableField;
-import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -38,7 +36,6 @@ public class TableUtils {
         List<Table> tableList = new ArrayList<>();
         DbQuery query = datasource.getDbQuery();
         // 查询数据
-
         try {
             PreparedStatement preparedStatement = datasource.getConnection().prepareStatement(query.tableSql(null));
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -91,7 +88,7 @@ public class TableUtils {
      * @return 表字段列表
      */
     public static List<TableField> getTableFieldList(GenDatasource datasource, Long tableId, String tableName) {
-        List<TableField> tableFieldList = Lists.newArrayList();
+        List<TableField> tableFieldList = new ArrayList<>();
 
         DbQuery query = datasource.getDbQuery();
         String tableFieldsSql = query.tableFieldsSql();
@@ -115,7 +112,7 @@ public class TableUtils {
                 field.setFieldType(fieldType);
                 field.setFieldComment(resultSet.getString(query.fieldComment()));
                 String key = resultSet.getString(query.fieldKey());
-                field.setPrimaryKey(StringUtils.isNotBlank(key) && "PRI".equalsIgnoreCase(key));
+                field.setPrimaryKey(StrUtil.isNotBlank(key) && "PRI".equalsIgnoreCase(key));
                 field.setCharacterMaximumLength(resultSet.getLong(query.fieldCharacterMaximumLength()));
                 tableFieldList.add(field);
             }
@@ -137,7 +134,7 @@ public class TableUtils {
         String className = NamingCase.toPascalCase(tableName);
         // 去除前缀
         String[] prefixArray = tablePrefix.split(",");
-        if(ArrayUtils.isNotEmpty(prefixArray)){
+        if(ArrayUtil.isNotEmpty(prefixArray)){
             for (String  prefix : prefixArray) {
                 if(tableName.startsWith(prefix)) {
                     className = NamingCase.toPascalCase(StrUtil.subAfter(tableName, prefix, false));
@@ -160,7 +157,7 @@ public class TableUtils {
         String moduleName = StrUtil.subBefore(tableName, "_", false);
         // 获取模块名
         String[] prefixArray = tablePrefix.split(",");
-        if(ArrayUtils.isNotEmpty(prefixArray)){
+        if(ArrayUtil.isNotEmpty(prefixArray)){
             for (String  prefix : prefixArray) {
                 if(tableName.startsWith(prefix)) {
                     moduleName = StrUtil.subBetween(tableName, prefix, "_");
@@ -169,7 +166,7 @@ public class TableUtils {
             }
         }
 
-        if("sys".equals(moduleName) || StringUtils.isEmpty(moduleName)){
+        if("sys".equals(moduleName) || StrUtil.isEmpty(moduleName)){
             moduleName = "system";
         }
         return moduleName;
@@ -185,7 +182,7 @@ public class TableUtils {
         String functionName = NamingCase.toPascalCase(tableName);
         // 去除前缀
         String[] prefixArray = tablePrefix.split(",");
-        if(ArrayUtils.isNotEmpty(prefixArray)){
+        if(ArrayUtil.isNotEmpty(prefixArray)){
             for (String  prefix : prefixArray) {
                 if(tableName.startsWith(prefix)) {
                     functionName = StrUtil.subAfter(tableName, prefix, false);

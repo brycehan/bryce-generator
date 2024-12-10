@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.brycehan.boot.generator.config.template.GeneratorContent;
 import com.brycehan.boot.generator.entity.dto.TableDto;
 import com.brycehan.boot.generator.entity.dto.TablePageDto;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.common.service.impl.BaseServiceImpl;
 import com.brycehan.boot.generator.config.GenDatasource;
 import com.brycehan.boot.generator.config.GeneratorProperties;
 import com.brycehan.boot.generator.config.template.GeneratorConfig;
@@ -23,15 +23,15 @@ import com.brycehan.boot.generator.mapper.TableMapper;
 import com.brycehan.boot.generator.service.BaseClassService;
 import com.brycehan.boot.generator.service.DatasourceService;
 import com.brycehan.boot.generator.service.TableFieldService;
-import com.brycehan.boot.generator.service.TableService;
 import com.brycehan.boot.generator.common.util.TableProcessUtils;
 import com.brycehan.boot.generator.common.util.TableUtils;
 import com.brycehan.boot.generator.entity.vo.TableVo;
+import com.brycehan.boot.generator.service.TableService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.ArrayUtil;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +57,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @EnableConfigurationProperties(GeneratorProperties.class)
-public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implements TableService {
+public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements TableService {
 
     private final DatasourceService datasourceService;
 
@@ -95,7 +95,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
                 String[] fields = baseClass.getFields().split(",");
 
                 // 标注为基类字段
-                fieldList.forEach(tableField -> tableField.setBaseField(ArrayUtils.contains(fields, tableField.getFieldName())));
+                fieldList.forEach(tableField -> tableField.setBaseField(ArrayUtil.contains(fields, tableField.getFieldName())));
             }
         }
 
@@ -123,7 +123,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
     @Override
     public PageResult<TableVo> page(@NotNull TablePageDto tablePageDto) {
 
-        IPage<Table> page = this.baseMapper.selectPage(getPage(tablePageDto), getWrapper(tablePageDto));
+        IPage<Table> page = this.baseMapper.selectPage(tablePageDto.toPage(), getWrapper(tablePageDto));
 
         return new PageResult<>(page.getTotal(), TableConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -136,7 +136,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
      */
     private Wrapper<Table> getWrapper(TablePageDto tablePageDto) {
         LambdaQueryWrapper<Table> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(StringUtils.isNotBlank(tablePageDto.getTableName()), Table::getTableName, tablePageDto.getTableName());
+        wrapper.like(StrUtil.isNotBlank(tablePageDto.getTableName()), Table::getTableName, tablePageDto.getTableName());
         return wrapper;
     }
 
@@ -195,7 +195,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableMapper, Table> implem
 
             // 标注为基类字段
             for (TableField field : tableFieldList) {
-                if (ArrayUtils.contains(fields, field.getFieldName())) {
+                if (ArrayUtil.contains(fields, field.getFieldName())) {
                     field.setBaseField(true);
                 }
             }

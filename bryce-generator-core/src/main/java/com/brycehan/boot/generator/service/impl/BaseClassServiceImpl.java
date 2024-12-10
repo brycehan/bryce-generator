@@ -3,19 +3,19 @@ package com.brycehan.boot.generator.service.impl;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.brycehan.boot.generator.entity.dto.BaseClassDto;
 import com.brycehan.boot.generator.entity.dto.BaseClassPageDto;
 import com.brycehan.boot.generator.entity.vo.BaseClassVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.common.service.impl.BaseServiceImpl;
 import com.brycehan.boot.generator.entity.convert.BaseClassConvert;
 import com.brycehan.boot.generator.entity.po.BaseClass;
 import com.brycehan.boot.generator.mapper.BaseClassMapper;
 import com.brycehan.boot.generator.service.BaseClassService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.util.StrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -31,7 +31,7 @@ import java.util.Objects;
  */
 @Service
 @RequiredArgsConstructor
-public class BaseClassServiceImpl extends BaseServiceImpl<BaseClassMapper, BaseClass> implements BaseClassService {
+public class BaseClassServiceImpl extends ServiceImpl<BaseClassMapper, BaseClass> implements BaseClassService {
 
     private final BaseClassMapper baseClassMapper;
 
@@ -65,7 +65,7 @@ public class BaseClassServiceImpl extends BaseServiceImpl<BaseClassMapper, BaseC
     @Override
     public PageResult<BaseClassVo> page(@NotNull BaseClassPageDto baseClassPageDto) {
 
-        IPage<BaseClass> page = this.baseClassMapper.selectPage(getPage(baseClassPageDto), getWrapper(baseClassPageDto));
+        IPage<BaseClass> page = this.baseClassMapper.selectPage(baseClassPageDto.toPage(), getWrapper(baseClassPageDto));
 
         return new PageResult<>(page.getTotal(), BaseClassConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -78,7 +78,7 @@ public class BaseClassServiceImpl extends BaseServiceImpl<BaseClassMapper, BaseC
      */
     private Wrapper<BaseClass> getWrapper(BaseClassPageDto baseClassPageDto) {
         LambdaQueryWrapper<BaseClass> wrapper = new LambdaQueryWrapper<>();
-        wrapper.like(StringUtils.isNotBlank(baseClassPageDto.getCode()), BaseClass::getCode, baseClassPageDto.getCode());
+        wrapper.like(StrUtil.isNotBlank(baseClassPageDto.getCode()), BaseClass::getCode, baseClassPageDto.getCode());
         return wrapper;
     }
 
