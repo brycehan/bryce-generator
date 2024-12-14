@@ -103,7 +103,7 @@
       <el-table-column label="${fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>header-align="center" align="center"<#if field.attrName=='createdTime'> width="160"</#if> />
       </#if>
     </#list>
-      <el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
+      <el-table-column label="操作" fixed="right" header-align="center" align="center" width="160">
         <template #default="scope">
           <el-button v-auth="'${moduleName}:${functionName}:update'" type="primary" icon="Edit" link @click="handleAddOrEdit(scope.row)">修改</el-button>
           <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" icon="Delete" link @click="handleDeleteBatch('${deleteTipColumn}', '${deleteTipColumnCNName}', scope.row)">删除</el-button>

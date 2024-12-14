@@ -202,12 +202,12 @@ const dataRules = reactive<FormRules>({
   <#if field.formRequired && field.characterMaximumLength?c?number gt 0>
     ${field.attrName}: [
       { required: true, message: '必填项不能为空', trigger: 'blur' },
-      { min: 2, max: ${field.characterMaximumLength?c?number}, message: '${fieldComment!}长度为2~${field.characterMaximumLength?c}个字符', trigger: 'blur' }
+      { min: 2, max: ${field.characterMaximumLength?c?number}, message: '长度为2~${field.characterMaximumLength?c}个字符', trigger: 'blur' }
     ]<#sep>,</#sep>
   <#elseif field.formRequired>
     ${field.attrName}: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]<#sep>,</#sep>
   <#elseif field.characterMaximumLength?c?number gt 0>
-    ${field.attrName}: [{ min: 0, max: ${field.characterMaximumLength?c}, message: '${fieldComment!}长度不能超过${field.characterMaximumLength?c}个字符', trigger: 'blur' }]<#sep>,</#sep>
+    ${field.attrName}: [{ min: 0, max: ${field.characterMaximumLength?c}, message: '长度不能超过${field.characterMaximumLength?c}个字符', trigger: 'blur' }]<#sep>,</#sep>
   </#if>
 </#list>
 })
@@ -219,9 +219,9 @@ const { getData, handleSaveOrUpdate } = crud(state)
  *
  * @param id 主键ID
  */
-const init = (id?: bigint) => {
+const init = (id?: string) => {
   state.visible = true
-  state.dataForm.id = undefined
+  state.dataForm.id = ''
 
   // 重置表单数据
   if (dataFormRef.value) {
