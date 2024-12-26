@@ -12,7 +12,7 @@
 
   // 顶部区域
   --theme-header-height: 50px;
-  --theme-header-bg-color: #263238;
+  --theme-header-bg-color: var(--el-color-primary);
   --theme-header-text-color: white;
   --theme-header-hover-color: rgba(0, 0, 0, 0.1);
 

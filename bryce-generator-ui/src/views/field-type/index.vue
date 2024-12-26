@@ -2,10 +2,10 @@
   <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
-        <el-input v-model="state.queryForm.columnType" placeholder="字段类型" />
+        <el-input v-model="state.queryForm.columnType" placeholder="字段类型" clearable/>
       </el-form-item>
       <el-form-item>
-        <el-input v-model="state.queryForm.attrType" placeholder="属性类型" />
+        <el-input v-model="state.queryForm.attrType" placeholder="属性类型" clearable/>
       </el-form-item>
       <el-form-item>
         <el-button @click="getPage()">查询</el-button>

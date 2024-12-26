@@ -2,7 +2,7 @@
   <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
-        <el-input v-model="state.queryForm.code" placeholder="基类编码" />
+        <el-input v-model="state.queryForm.code" placeholder="基类编码" clearable/>
       </el-form-item>
       <el-form-item>
         <el-button @click="getPage()">查询</el-button>

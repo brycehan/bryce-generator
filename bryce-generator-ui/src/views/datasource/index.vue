@@ -2,10 +2,10 @@
   <el-card shadow="hover">
     <el-form :inline="true" :model="state.queryForm" @keyup.enter="getPage()" @submit.prevent>
       <el-form-item>
-        <el-input v-model="state.queryForm.connName" placeholder="连接名" />
+        <el-input v-model="state.queryForm.connName" placeholder="连接名" clearable/>
       </el-form-item>
-      <el-form-item prop="dbType">
-        <el-select v-model="state.queryForm.dbType" placeholder="数据库类型" clearable>
+      <el-form-item prop="dbType" style="width: 200px">
+        <el-select v-model="state.queryForm.dbType" placeholder="数据库类型" clearable style="width: 100%">
           <el-option value="MySQL" label="MySQL"></el-option>
           <el-option value="PostgreSQL" label="PostgreSQL"></el-option>
           <el-option value="Oracle" label="Oracle"></el-option>
