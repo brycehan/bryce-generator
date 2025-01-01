@@ -9,7 +9,7 @@
       ref="dataFormRef"
       :model="dataForm"
       :rules="rules"
-      label-width="120px"
+      label-width="120"
       @keyup.enter="handleSubmit()"
     >
       <el-row>

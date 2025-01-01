@@ -8,7 +8,7 @@
       ref="dataFormRef"
       :model="dataForm"
       :rules="rules"
-      label-width="120px"
+      label-width="120"
       @keyup.enter="handleSubmit()"
     >
       <el-form-item label="字段类型" prop="columnType">

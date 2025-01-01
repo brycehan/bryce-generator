@@ -8,7 +8,7 @@
       ref="dataFormRef"
       :model="dataForm"
       :rules="rules"
-      label-width="100px"
+      label-width="100"
       @keyup.enter="handleSubmit()"
     >
       <el-form-item label="项目名" prop="projectName">
