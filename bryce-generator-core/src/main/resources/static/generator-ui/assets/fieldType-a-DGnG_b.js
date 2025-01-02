@@ -1,0 +1,1 @@
+import{r as t}from"./request-C7Ncguaj.js";const r=e=>e.id?t.put("/gen/fieldType",e):t.post("/gen/fieldType",e),n=e=>t.delete("/gen/fieldType",{data:{ids:e}}),p=e=>t.get(`/gen/fieldType/${e}`),d=()=>t.get("/gen/fieldType/list"),g=e=>t.post("/gen/fieldType/page",e);export{n as d,p as g,d as l,g as p,r as s};
