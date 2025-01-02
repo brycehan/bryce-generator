@@ -145,20 +145,22 @@ create table brc_gen_table_field
 -- 6、项目名变更表
 create table brc_gen_project_modify
 (
-    id                      bigint          identity(1, 1) not null,
-    project_name            varchar(100)    not null,
-    project_code            varchar(100)    not null,
-    project_package         varchar(100)    not null,
-    project_path            varchar(200)    not null,
-    modify_project_name     varchar(100),
-    modify_project_code     varchar(100),
-    modify_project_package  varchar(100),
-    exclusions              varchar(200),
-    modify_suffix           varchar(200),
-    modify_tmp_path         varchar(100),
-    create_time            datetime,
+    id                             bigint          identity(1, 1) not null,
+    project_name                   varchar(100)    not null,
+    project_code                   varchar(100)    not null,
+    project_code_abbreviate        varchar(100)    not null,
+    project_package                varchar(100)    not null,
+    project_path                   varchar(200)    not null,
+    modify_project_name            varchar(100),
+    modify_project_code            varchar(100),
+    modify_project_code_abbreviate varchar(100),
+    modify_project_package         varchar(100),
+    exclusions                     varchar(200),
+    modify_suffix                  varchar(200),
+    modify_tmp_path                varchar(100),
+    create_time                    datetime,
     primary key (id)
 );
 
 -- 初始化-项目名变更表数据
-insert into brc_gen_project_modify (id,project_name,project_code,project_package,project_path,modify_project_name,modify_project_code,modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (2,'bryce-boot','bryce-boot','com.brycehan.boot','/Users/brycehan/git/bryce-boot','bryce-boo','br-boo','com.br.boo','.git,.idea,target,logs','java,xml,yml,sql,md,txt',NULL,getdate());
+insert into brc_gen_project_modify (id,project_name,project_code, project_code_abbreviate, project_package,project_path,modify_project_name,modify_project_code, modify_project_code_abbreviate, modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (1,'bryce-boot','bryce-boot','brc', 'com.brycehan.boot','/Users/brycehan/git/bryce-boot','test-boot','test-boot', 'tst', 'com.test.boot','.git,.idea,target,logs','java,xml,yml,sql,md,txt',null,getdate());

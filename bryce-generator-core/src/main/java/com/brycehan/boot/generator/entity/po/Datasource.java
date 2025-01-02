@@ -7,8 +7,8 @@ import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -38,31 +38,31 @@ public class Datasource implements Serializable {
     /**
      * 连接名称
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String connName;
 
     /**
      * 数据库类型
      */
-    @Size(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
     private String dbType;
 
     /**
      * 连接地址
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String connUrl;
 
     /**
      * 用户名
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String username;
 
     /**
      * 密码
      */
-    @Size(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
     private String password;
 
     /**

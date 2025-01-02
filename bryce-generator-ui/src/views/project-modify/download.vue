@@ -12,16 +12,9 @@
         @keyup.enter="handleSubmit()"
     >
       <el-row>
-        <el-col :span="12">
-          <el-form-item label="项目名" prop="projectName">
-            <el-input v-model="dataForm.projectName" disabled placeholder="项目名" />
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="项目路径" prop="projectPath">
-            <el-input v-model="dataForm.projectPath" disabled placeholder="项目路径" />
-          </el-form-item>
-        </el-col>
+        <el-form-item label="项目名" prop="projectName" style="width: 100%">
+          <el-input v-model="dataForm.projectName" disabled placeholder="项目名" />
+        </el-form-item>
       </el-row>
       <el-row>
         <el-col :span="12">
@@ -30,19 +23,36 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
+          <el-form-item label="标识缩写" prop="projectCode">
+            <el-input v-model="dataForm.projectCodeAbbreviate" disabled placeholder="标识缩写" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
           <el-form-item label="项目包名" prop="projectPackage">
             <el-input v-model="dataForm.projectPackage" disabled placeholder="项目包名" />
           </el-form-item>
         </el-col>
+        <el-col :span="12">
+          <el-form-item label="项目路径" prop="projectPath">
+            <el-input v-model="dataForm.projectPath" disabled placeholder="项目路径" />
+          </el-form-item>
+        </el-col>
       </el-row>
       <el-divider>变更后的信息</el-divider>
-      <el-form-item label="项目名" prop="modifyProjectName">
-        <el-input v-model="dataForm.modifyProjectName" placeholder="项目名" />
-      </el-form-item>
       <el-row>
+        <el-col :span="12">
+          <el-form-item label="项目名" prop="modifyProjectName">
+            <el-input v-model="dataForm.modifyProjectName" placeholder="项目名" />
+          </el-form-item>
+        </el-col>
         <el-col :span="12">
           <el-form-item label="项目标识" prop="modifyProjectCode">
             <el-input v-model="dataForm.modifyProjectCode" placeholder="项目标识" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="标识缩写" prop="modifyProjectCodeAbbreviate">
+            <el-input v-model="dataForm.modifyProjectCodeAbbreviate" placeholder="标识缩写" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -50,8 +60,7 @@
             <el-input v-model="dataForm.modifyProjectPackage" placeholder="项目包名" />
           </el-form-item>
         </el-col>
-      </el-row>
-      <el-row>
+
         <el-col :span="12">
           <el-form-item label="排除文件" prop="exclusions">
             <el-input v-model="dataForm.exclusions" placeholder="排除文件" />
@@ -72,8 +81,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { getById, saveOrUpdate, sourceDownload } from '@/api/projectModify'
+import {reactive, ref} from 'vue'
+import {getById, saveOrUpdate, sourceDownload} from '@/api/projectModify'
 
 const visible = ref(false)
 const dataFormRef = ref()
@@ -83,9 +92,11 @@ const dataForm = reactive({
   projectName: '',
   projectPath: '',
   projectCode: '',
+  projectCodeAbbreviate: '',
   projectPackage: '',
   modifyProjectName: '',
   modifyProjectCode: '',
+  modifyProjectCodeAbbreviate: '',
   modifyProjectPackage: '',
   exclusions: 1,
   modifySuffix: '',
@@ -94,6 +105,7 @@ const dataForm = reactive({
 const rules = reactive({
   modifyProjectName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
   modifyProjectCode: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+  modifyProjectCodeAbbreviate: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
   modifyProjectPackage: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
   exclusions: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
   modifySuffix: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],

@@ -1,19 +1,20 @@
 package com.brycehan.boot.generator.controller;
 
 import cn.hutool.core.io.IoUtil;
-import com.brycehan.boot.generator.entity.dto.ProjectModifyDto;
-import com.brycehan.boot.generator.entity.dto.ProjectModifyPageDto;
-import com.brycehan.boot.generator.entity.vo.ProjectModifyVo;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.ResponseResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.entity.convert.ProjectModifyConvert;
-import com.brycehan.boot.generator.entity.po.ProjectModify;
-import com.brycehan.boot.generator.service.ProjectModifyService;
 import com.brycehan.boot.generator.common.validator.SaveGroup;
 import com.brycehan.boot.generator.common.validator.UpdateGroup;
+import com.brycehan.boot.generator.entity.convert.ProjectModifyConvert;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyDto;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyPageDto;
+import com.brycehan.boot.generator.entity.po.ProjectModify;
+import com.brycehan.boot.generator.entity.vo.ProjectModifyVo;
+import com.brycehan.boot.generator.service.ProjectModifyService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -116,12 +117,10 @@ public class ProjectModifyController {
     public void download(@PathVariable Long id, HttpServletResponse response) throws IOException {
         ProjectModify projectModify = projectModifyService.getById(id);
         byte[] data = projectModifyService.download(projectModify);
-        response.reset();
-        response.setHeader("Content-Disposition", "attachment;filename*=utf-8''"
-                .concat(projectModify.getModifyProjectName())
-                .concat(".zip"));
-        response.addHeader("Content-Length", String.valueOf(data.length));
         response.setContentType("application/octet-stream;charset=UTF-8");
+        response.setHeader("Content-Disposition", "attachment;filename*=utf-8''".concat(projectModify.getModifyProjectName()).concat(".zip"));
+        response.addHeader("Content-Length", String.valueOf(data.length));
+        response.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION);
         IoUtil.write(response.getOutputStream(), false, data);
     }
 }

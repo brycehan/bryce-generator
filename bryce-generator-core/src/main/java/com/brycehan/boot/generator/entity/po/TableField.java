@@ -9,8 +9,8 @@ import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -45,37 +45,37 @@ public class TableField implements Serializable {
     /**
      * 字段名
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String fieldName;
 
     /**
      * 字段类型
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String fieldType;
 
     /**
      * 字段说明
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String fieldComment;
 
     /**
      * 属性名称
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String attrName;
 
     /**
      * 属性类型
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String attrType;
 
     /**
      * 属性包名
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String packageName;
 
     /**
@@ -86,7 +86,7 @@ public class TableField implements Serializable {
     /**
      * 自动填充（DEFAULT, INSERT, UPDATE, INSERT_UPDATE）
      */
-    @Size(max = 20, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 20, groups = {SaveGroup.class, UpdateGroup.class})
     private String autoFill;
 
     /**
@@ -112,13 +112,13 @@ public class TableField implements Serializable {
     /**
      * 表单项类型
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String formItemType;
 
     /**
      * 表单字典类型
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String formDict;
 
     /**
@@ -129,7 +129,7 @@ public class TableField implements Serializable {
     /**
      * 表单校验器
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String formValidator;
 
     /**
@@ -150,13 +150,13 @@ public class TableField implements Serializable {
     /**
      * 查询方式
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String queryType;
 
     /**
      * 查询表单类型
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String queryFormType;
 
     /**

@@ -3,9 +3,9 @@ package com.brycehan.boot.generator.entity.dto;
 import com.brycehan.boot.generator.common.dto.BasePageDto;
 import com.brycehan.boot.generator.common.validator.QueryGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.time.LocalDateTime;
@@ -36,37 +36,37 @@ public class TableFieldPageDto extends BasePageDto {
     /**
      * 字段名称
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String fieldName;
 
     /**
      * 字段类型
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String fieldType;
 
     /**
      * 字段说明
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String fieldComment;
 
     /**
      * 属性名称
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String attrName;
 
     /**
      * 属性类型
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String attrType;
 
     /**
      * 属性包名
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String packageName;
 
     /**
@@ -77,7 +77,7 @@ public class TableFieldPageDto extends BasePageDto {
     /**
      * 自动填充（DEFAULT, INSERT, UPDATE, INSERT_UPDATE）
      */
-    @Size(max = 20, groups = QueryGroup.class)
+    @Length(max = 20, groups = QueryGroup.class)
     private String autoFill;
 
     /**
@@ -98,13 +98,13 @@ public class TableFieldPageDto extends BasePageDto {
     /**
      * 表单项类型
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String formItemType;
 
     /**
      * 表单字典类型
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String formDict;
 
     /**
@@ -115,7 +115,7 @@ public class TableFieldPageDto extends BasePageDto {
     /**
      * 表单校验器
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String formValidator;
 
     /**
@@ -136,13 +136,13 @@ public class TableFieldPageDto extends BasePageDto {
     /**
      * 查询方式
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String queryType;
 
     /**
      * 查询表单类型
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String queryFormType;
 
     /**

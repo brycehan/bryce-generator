@@ -7,8 +7,8 @@ import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -38,61 +38,67 @@ public class ProjectModify implements Serializable {
     /**
      * 项目名称
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String projectName;
 
     /**
      * 项目标识
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String projectCode;
+
+    /**
+     * 项目标识缩写
+     */
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    private String projectCodeAbbreviate;
 
     /**
      * 项目包名
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String projectPackage;
 
     /**
      * 项目路径
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String projectPath;
 
     /**
      * 变更项目名称
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String modifyProjectName;
 
     /**
      * 变更项目标识
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String modifyProjectCode;
 
     /**
      * 变更项目包名
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String modifyProjectPackage;
 
     /**
      * 排除文件
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String exclusions;
 
     /**
      * 变更文件
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String modifySuffix;
 
     /**
      * 变更临时路径
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String modifyTmpPath;
 
     /**

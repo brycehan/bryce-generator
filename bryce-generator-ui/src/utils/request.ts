@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
+import {ElMessage} from 'element-plus'
 import qs from 'qs'
 
 /** axios实例 */
@@ -48,7 +48,17 @@ request.interceptors.response.use(
 
   },
   (error) => {
-    ElMessage.error(error.message || 'Error')
+    console.error('响应', error)
+    // 错误提示
+    let { message } = error
+    if (message === 'Network Error') {
+      message = '后端接口连接异常'
+    } else if (message.includes('timeout')) {
+      message = '系统接口请求超时'
+    } else if (message.includes('Request failed with status code')) {
+      message = '系统接口' + message.substring(message.length - 3) + '异常'
+    }
+    ElMessage.error(message)
     return Promise.reject(error)
   }
 )

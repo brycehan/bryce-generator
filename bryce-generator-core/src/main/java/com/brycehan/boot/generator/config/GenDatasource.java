@@ -1,13 +1,13 @@
 package com.brycehan.boot.generator.config;
 
-import com.brycehan.boot.generator.config.query.*;
-import com.brycehan.boot.generator.entity.po.Datasource;
 import com.brycehan.boot.generator.common.util.DbUtils;
 import com.brycehan.boot.generator.common.validator.QueryGroup;
+import com.brycehan.boot.generator.config.query.*;
+import com.brycehan.boot.generator.entity.po.Datasource;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -36,25 +36,24 @@ public class GenDatasource implements Serializable {
     /**
      * 数据库类型
      */
-    @Size(max = 50, groups = QueryGroup.class)
     private DbType dbType;
 
     /**
      * 连接地址
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String connUrl;
 
     /**
      * 用户名
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String username;
 
     /**
      * 密码
      */
-    @Size(max = 50, groups = QueryGroup.class)
+    @Length(max = 50, groups = QueryGroup.class)
     private String password;
 
     /**

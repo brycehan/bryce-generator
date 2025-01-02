@@ -3,6 +3,7 @@
     v-model="visible"
     :title="!dataForm.id ? '新增' : '修改'"
     :close-on-click-modal="false"
+    width="800"
   >
     <el-form
       ref="dataFormRef"
@@ -14,16 +15,30 @@
       <el-form-item label="项目名" prop="projectName">
         <el-input v-model="dataForm.projectName" placeholder="项目名" />
       </el-form-item>
-
-      <el-form-item label="项目标识" prop="projectCode">
-        <el-input v-model="dataForm.projectCode" placeholder="项目标识" />
-      </el-form-item>
-      <el-form-item label="项目包名" prop="projectPackage">
-        <el-input v-model="dataForm.projectPackage" placeholder="项目包名" />
-      </el-form-item>
-      <el-form-item label="项目路径" prop="projectPath">
-        <el-input v-model="dataForm.projectPath" placeholder="项目路径" />
-      </el-form-item>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="项目标识" prop="projectCode">
+            <el-input v-model="dataForm.projectCode" placeholder="项目标识名" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="标识缩写" prop="projectCodeAbbreviate">
+            <el-input v-model="dataForm.projectCodeAbbreviate" placeholder="标识缩写" />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="项目包名" prop="projectPackage">
+            <el-input v-model="dataForm.projectPackage" placeholder="项目包名" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="项目路径" prop="projectPath">
+            <el-input v-model="dataForm.projectPath" placeholder="项目路径" />
+          </el-form-item>
+        </el-col>
+      </el-row>
     </el-form>
     <template #footer>
       <el-button @click="visible = false">取消</el-button>
@@ -33,9 +48,9 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { getById, saveOrUpdate } from '@/api/projectModify'
-import { ElMessage } from 'element-plus'
+import {reactive, ref} from 'vue'
+import {getById, saveOrUpdate} from '@/api/projectModify'
+import {ElMessage} from 'element-plus'
 
 const emit = defineEmits(['refreshPage'])
 
@@ -46,15 +61,17 @@ const dataForm = reactive({
   id: '',
   projectName: '',
   projectCode: '',
+  projectCodeAbbreviate: '',
   projectPackage: '',
-  projectPath: '',
+  projectPath: ''
 })
 
 const rules = reactive({
   projectName: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
   projectCode: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+  projectCodeAbbreviate: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
   projectPackage: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
-  projectPath: [{ required: true, message: '必填项不能为空', trigger: 'blur' }],
+  projectPath: [{ required: true, message: '必填项不能为空', trigger: 'blur' }]
 })
 
 const init = (id?: string) => {

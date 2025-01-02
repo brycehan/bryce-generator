@@ -138,19 +138,21 @@ create table brc_gen_table_field
 -- 6、项目名变更表
 create table brc_gen_project_modify
 (
-    id                     bigint       primary key auto_increment comment 'ID',
-    project_name           varchar(100) not null comment '项目名',
-    project_code           varchar(100) not null comment '项目标识',
-    project_package        varchar(100) not null comment '项目包名',
-    project_path           varchar(200) not null comment '项目路径',
-    modify_project_name    varchar(100) null comment '变更项目名',
-    modify_project_code    varchar(100) null comment '变更项目标识',
-    modify_project_package varchar(100) null comment '变更项目包名',
-    exclusions             varchar(200) null comment '排除文件',
-    modify_suffix          varchar(200) null comment '变更文件',
-    modify_tmp_path        varchar(100) null comment '变更临时路径',
-    create_time            datetime     null comment '创建时间'
+    id                             bigint       primary key auto_increment comment 'ID',
+    project_name                   varchar(100) not null comment '项目名',
+    project_code                   varchar(100) not null comment '项目标识',
+    project_code_abbreviate        varchar(100) not null comment '项目标识缩写',
+    project_package                varchar(100) not null comment '项目包名',
+    project_path                   varchar(200) not null comment '项目路径',
+    modify_project_name            varchar(100) null comment '变更项目名',
+    modify_project_code            varchar(100) null comment '变更项目标识',
+    modify_project_code_abbreviate varchar(100) null comment '变更项目标识缩写',
+    modify_project_package         varchar(100) null comment '变更项目包名',
+    exclusions                     varchar(200) null comment '排除文件',
+    modify_suffix                  varchar(200) null comment '变更文件',
+    modify_tmp_path                varchar(100) null comment '变更临时路径',
+    create_time                    datetime     null comment '创建时间'
 ) engine InnoDB comment '项目名变更表';
 
 -- 初始化-项目名变更表数据
-insert into brc_gen_project_modify (id,project_name,project_code,project_package,project_path,modify_project_name,modify_project_code,modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (2,'bryce-boot','bryce-boot','com.brycehan.boot','/Users/brycehan/git/bryce-boot','bryce-boo','br-boo','com.br.boo','.git,.idea,target,logs','java,xml,yml,sql,md,txt',null,now());
+insert into brc_gen_project_modify (id,project_name,project_code, project_code_abbreviate, project_package,project_path,modify_project_name,modify_project_code, modify_project_code_abbreviate, modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (1,'bryce-boot','bryce-boot', 'brc', 'com.brycehan.boot','/Users/brycehan/git/bryce-boot','test-boot','test-boot', 'tst', 'com.test.boot','.git,.idea,target,logs','java,xml,yml,sql,md,txt',null,now());

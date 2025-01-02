@@ -2,9 +2,9 @@ package com.brycehan.boot.generator.entity.vo;
 
 import com.brycehan.boot.generator.common.validator.QueryGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -31,25 +31,25 @@ public class BaseClassVo implements Serializable {
     /**
      * 基类编码
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String code;
 
     /**
      * 基类包名
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String packageName;
 
     /**
      * 基类字段，多个用英文逗号分隔
      */
-    @Size(max = 500, groups = QueryGroup.class)
+    @Length(max = 500, groups = QueryGroup.class)
     private String fields;
 
     /**
      * 备注
      */
-    @Size(max = 300, groups = QueryGroup.class)
+    @Length(max = 300, groups = QueryGroup.class)
     private String remark;
 
     /**

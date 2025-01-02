@@ -7,8 +7,8 @@ import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -38,25 +38,25 @@ public class BaseClass implements Serializable {
     /**
      * 基类编码
      */
-    @Size(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String code;
 
     /**
      * 基类包名
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String packageName;
 
     /**
      * 基类字段，多个用英文逗号分隔
      */
-    @Size(max = 500, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 500, groups = {SaveGroup.class, UpdateGroup.class})
     private String fields;
 
     /**
      * 备注
      */
-    @Size(max = 300, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 300, groups = {SaveGroup.class, UpdateGroup.class})
     private String remark;
 
     /**

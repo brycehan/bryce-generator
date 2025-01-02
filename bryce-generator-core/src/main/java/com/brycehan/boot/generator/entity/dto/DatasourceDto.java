@@ -2,8 +2,8 @@ package com.brycehan.boot.generator.entity.dto;
 
 import com.brycehan.boot.generator.common.validator.QueryGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -29,31 +29,31 @@ public class DatasourceDto implements Serializable {
     /**
      * 连接名称
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String connName;
 
     /**
      * 数据库类型
      */
-    @Size(max = 50, groups = QueryGroup.class)
+    @Length(max = 50, groups = QueryGroup.class)
     private String dbType;
 
     /**
      * 连接地址
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String connUrl;
 
     /**
      * 用户名
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String username;
 
     /**
      * 密码
      */
-    @Size(max = 50, groups = QueryGroup.class)
+    @Length(max = 50, groups = QueryGroup.class)
     private String password;
 
     /**

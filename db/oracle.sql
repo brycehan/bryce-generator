@@ -237,18 +237,20 @@ create sequence seq_brc_gen_project_modify_id;
 drop table brc_gen_project_modify;
 create table brc_gen_project_modify
 (
-    id                      number(20, 0)    default seq_brc_gen_project_modify_id.nextval not null,
-    project_name            varchar2(100)    not null,
-    project_code            varchar2(100)    not null,
-    project_package         varchar2(100)    not null,
-    project_path            varchar2(200)    not null,
-    modify_project_name     varchar2(100),
-    modify_project_code     varchar2(100),
-    modify_project_package  varchar2(100),
-    exclusions              varchar2(200),
-    modify_suffix           varchar2(200),
-    modify_tmp_path         varchar2(100),
-    create_time            date,
+    id                             number(20, 0)    default seq_brc_gen_project_modify_id.nextval not null,
+    project_name                   varchar2(100)    not null,
+    project_code                   varchar2(100)    not null,
+    project_code_abbreviate        varchar2(100)    not null,
+    project_package                varchar2(100)    not null,
+    project_path                   varchar2(200)    not null,
+    modify_project_name            varchar2(100),
+    modify_project_code            varchar2(100),
+    modify_project_code_abbreviate varchar2(100),
+    modify_project_package         varchar2(100),
+    exclusions                     varchar2(200),
+    modify_suffix                  varchar2(200),
+    modify_tmp_path                varchar2(100),
+    create_time                    date,
     primary key (id)
 );
 
@@ -256,10 +258,12 @@ comment on table brc_gen_project_modify is '项目名变更表';
 comment on column brc_gen_project_modify.id is 'ID';
 comment on column brc_gen_project_modify.project_name is '项目名';
 comment on column brc_gen_project_modify.project_code is '项目标识';
+comment on column brc_gen_project_modify.project_code_abbreviate is '项目标识缩写';
 comment on column brc_gen_project_modify.project_package is '项目包名';
 comment on column brc_gen_project_modify.project_path is '项目路径';
 comment on column brc_gen_project_modify.modify_project_name is '变更项目名';
 comment on column brc_gen_project_modify.modify_project_code is '变更项目标识';
+comment on column brc_gen_project_modify.modify_project_code_abbreviate is '变更项目标识缩写';
 comment on column brc_gen_project_modify.modify_project_package is '变更项目包名';
 comment on column brc_gen_project_modify.exclusions is '排除文件';
 comment on column brc_gen_project_modify.modify_suffix is '变更文件';
@@ -267,4 +271,4 @@ comment on column brc_gen_project_modify.modify_tmp_path is '变更临时路径'
 comment on column brc_gen_project_modify.create_time is '创建时间';
 
 -- 初始化-项目名变更表数据
-insert into brc_gen_project_modify (id,project_name,project_code,project_package,project_path,modify_project_name,modify_project_code,modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (2,'bryce-boot','bryce-boot','com.brycehan.boot','/Users/brycehan/git/bryce-boot','bryce-boo','br-boo','com.br.boo','.git,.idea,target,logs','java,xml,yml,sql,md,txt',NULL,now());
+insert into brc_gen_project_modify (id,project_name,project_code, project_code_abbreviate, project_package,project_path,modify_project_name,modify_project_code, modify_project_code_abbreviate, modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (1,'bryce-boot','bryce-boot', 'brc', 'com.brycehan.boot','/Users/brycehan/git/bryce-boot','test-boot','test-boot', 'tst', 'com.test.boot','.git,.idea,target,logs','java,xml,yml,sql,md,txt',null,now());

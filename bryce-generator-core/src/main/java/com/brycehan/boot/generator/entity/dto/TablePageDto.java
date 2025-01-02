@@ -3,9 +3,9 @@ package com.brycehan.boot.generator.entity.dto;
 import com.brycehan.boot.generator.common.dto.BasePageDto;
 import com.brycehan.boot.generator.common.validator.QueryGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.time.LocalDateTime;
@@ -31,43 +31,43 @@ public class TablePageDto extends BasePageDto {
     /**
      * 表名
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String tableName;
 
     /**
      * 类名
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String className;
 
     /**
      * 说明
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String tableComment;
 
     /**
      * 作者
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String author;
 
     /**
      * 邮箱
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String email;
 
     /**
      * 项目包名
      */
-    @Size(max = 200, groups = QueryGroup.class)
+    @Length(max = 200, groups = QueryGroup.class)
     private String packageName;
 
     /**
      * 项目版本号
      */
-    @Size(max = 20, groups = QueryGroup.class)
+    @Length(max = 20, groups = QueryGroup.class)
     private String version;
 
     /**
@@ -78,25 +78,25 @@ public class TablePageDto extends BasePageDto {
     /**
      * 后端生成路径
      */
-    @Size(max = 300, groups = QueryGroup.class)
+    @Length(max = 300, groups = QueryGroup.class)
     private String backendPath;
 
     /**
      * 前端生成路径
      */
-    @Size(max = 300, groups = QueryGroup.class)
+    @Length(max = 300, groups = QueryGroup.class)
     private String frontendPath;
 
     /**
      * 模块名
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String moduleName;
 
     /**
      * 功能名
      */
-    @Size(max = 100, groups = QueryGroup.class)
+    @Length(max = 100, groups = QueryGroup.class)
     private String functionName;
 
     /**
@@ -123,7 +123,7 @@ public class TablePageDto extends BasePageDto {
     /**
      * 备注
      */
-    @Size(max = 300, groups = QueryGroup.class)
+    @Length(max = 300, groups = QueryGroup.class)
     private String remark;
 
 }

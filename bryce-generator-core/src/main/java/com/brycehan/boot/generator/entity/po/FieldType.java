@@ -2,13 +2,13 @@ package com.brycehan.boot.generator.entity.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.*;
-import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import com.brycehan.boot.generator.common.validator.SaveGroup;
+import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -38,19 +38,19 @@ public class FieldType implements Serializable {
     /**
      * 列类型
      */
-    @Size(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
     private String columnType;
 
     /**
      * 属性类型
      */
-    @Size(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 50, groups = {SaveGroup.class, UpdateGroup.class})
     private String attrType;
 
     /**
      * 属性包名
      */
-    @Size(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 200, groups = {SaveGroup.class, UpdateGroup.class})
     private String packageName;
 
     /**
@@ -64,7 +64,7 @@ public class FieldType implements Serializable {
     /**
      * 备注
      */
-    @Size(max = 300, groups = {SaveGroup.class, UpdateGroup.class})
+    @Length(max = 300, groups = {SaveGroup.class, UpdateGroup.class})
     private String remark;
 
 }
