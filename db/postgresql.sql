@@ -252,4 +252,4 @@ comment on column brc_gen_project_modify.modify_tmp_path is '变更临时路径'
 comment on column brc_gen_project_modify.create_time is '创建时间';
 
 -- 初始化-项目名变更表数据
-insert into brc_gen_project_modify (id,project_name,project_code, project_code_abbreviate, project_package,project_path,modify_project_name,modify_project_code, modify_project_code_abbreviate, modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (1,'bryce-boot','bryce-boot', 'brc', 'com.brycehan.boot','/Users/brycehan/git/bryce-boot','test-boot','test-boot', 'tst', 'com.test.boot','.git,.idea,target,logs','java,xml,yml,sql,md,txt',null,now());
+insert into brc_gen_project_modify (id,project_name,project_code, project_code_abbreviate, project_package,project_path,modify_project_name,modify_project_code, modify_project_code_abbreviate, modify_project_package,exclusions,modify_suffix,modify_tmp_path,create_time) values (1,'Bryce Boot','bryce-boot', 'brc', 'com.brycehan.boot','/Users/brycehan/git/bryce-boot','Test Boot','test-boot', 'tst', 'com.test.boot','.git,.idea,target,logs','java,xml,yml,sql,md,txt',null,now());

@@ -2,6 +2,7 @@ package com.brycehan.boot.generator.entity.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.*;
+import com.brycehan.boot.generator.common.validator.QueryGroup;
 import com.brycehan.boot.generator.common.validator.SaveGroup;
 import com.brycehan.boot.generator.common.validator.UpdateGroup;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -76,6 +77,12 @@ public class ProjectModify implements Serializable {
      */
     @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String modifyProjectCode;
+
+    /**
+     * 变更项目标识缩写
+     */
+    @Length(max = 100, groups = QueryGroup.class)
+    private String modifyProjectCodeAbbreviate;
 
     /**
      * 变更项目包名

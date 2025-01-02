@@ -39,6 +39,12 @@ public class ProjectModifyVo implements Serializable {
     private String projectCode;
 
     /**
+     * 项目标识缩写
+     */
+    @Length(max = 100, groups = QueryGroup.class)
+    private String projectCodeAbbreviate;
+
+    /**
      * 项目包名
      */
     @Length(max = 100, groups = QueryGroup.class)
@@ -61,6 +67,12 @@ public class ProjectModifyVo implements Serializable {
      */
     @Length(max = 100, groups = QueryGroup.class)
     private String modifyProjectCode;
+
+    /**
+     * 变更项目标识缩写
+     */
+    @Length(max = 100, groups = QueryGroup.class)
+    private String modifyProjectCodeAbbreviate;
 
     /**
      * 变更项目包名

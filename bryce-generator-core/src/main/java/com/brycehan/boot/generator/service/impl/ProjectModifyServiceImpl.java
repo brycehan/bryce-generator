@@ -7,15 +7,15 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.brycehan.boot.generator.entity.dto.ProjectModifyDto;
-import com.brycehan.boot.generator.entity.dto.ProjectModifyPageDto;
 import com.brycehan.boot.generator.common.PageResult;
 import com.brycehan.boot.generator.common.dto.IdsDto;
-import com.brycehan.boot.generator.entity.convert.ProjectModifyConvert;
-import com.brycehan.boot.generator.entity.po.ProjectModify;
-import com.brycehan.boot.generator.mapper.ProjectModifyMapper;
 import com.brycehan.boot.generator.common.util.ProjectUtils;
+import com.brycehan.boot.generator.entity.convert.ProjectModifyConvert;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyDto;
+import com.brycehan.boot.generator.entity.dto.ProjectModifyPageDto;
+import com.brycehan.boot.generator.entity.po.ProjectModify;
 import com.brycehan.boot.generator.entity.vo.ProjectModifyVo;
+import com.brycehan.boot.generator.mapper.ProjectModifyMapper;
 import com.brycehan.boot.generator.service.ProjectModifyService;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -96,7 +96,7 @@ public class ProjectModifyServiceImpl extends ServiceImpl<ProjectModifyMapper, P
         File srcRoot = new File(project.getProjectPath());
 
         // 临时项目根路径
-        File destRoot = new File(ProjectUtils.getTmpDirPath(project.getModifyProjectName()));
+        File destRoot = new File(ProjectUtils.getTmpDirPath(project.getModifyProjectCode()));
 
         // 排除的文件
         List<String> exclusions = StrUtil.split(project.getExclusions(), ProjectUtils.SPLIT);
@@ -139,10 +139,19 @@ public class ProjectModifyServiceImpl extends ServiceImpl<ProjectModifyMapper, P
 
         // 项目包名替换
         rules.put(project.getProjectPackage(), project.getModifyProjectPackage());
-
         // 项目标识替换
         rules.put(project.getProjectCode(), project.getModifyProjectCode());
-        rules.put(StrUtil.upperFirst(project.getProjectCode()), StrUtil.upperFirst(project.getModifyProjectCode()));
+        if (StrUtil.isNotBlank(project.getProjectCode()) && StrUtil.isNotBlank(project.getModifyProjectCode())) {
+            // 项目标识前缀替换
+            rules.put(project.getProjectCode().split("-")[0], project.getModifyProjectCode().split("-")[0]);
+            // 数据库标识替换
+            rules.put(project.getProjectCode().replaceAll("-", "_"), project.getModifyProjectCode().replaceAll("-", "_"));
+        }
+        // 项目标识缩写替换
+        rules.put(project.getProjectCodeAbbreviate(), project.getModifyProjectCodeAbbreviate());
+        // 项目名称替换
+        rules.put(project.getProjectName(), project.getModifyProjectName());
+
         return rules;
     }
 }

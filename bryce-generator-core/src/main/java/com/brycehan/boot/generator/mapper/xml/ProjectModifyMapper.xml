@@ -7,10 +7,12 @@
         <id column="id" property="id"/>
         <result column="project_name" property="projectName"/>
         <result column="project_code" property="projectCode"/>
+        <result column="project_code_abbreviate" property="projectCodeAbbreviate"/>
         <result column="project_package" property="projectPackage"/>
         <result column="project_path" property="projectPath"/>
         <result column="modify_project_name" property="modifyProjectName"/>
         <result column="modify_project_code" property="modifyProjectCode"/>
+        <result column="modify_project_code_abbreviate" property="modifyProjectCodeAbbreviate"/>
         <result column="modify_project_package" property="modifyProjectPackage"/>
         <result column="exclusions" property="exclusions"/>
         <result column="modify_suffix" property="modifySuffix"/>
@@ -20,8 +22,9 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , project_name, project_code, project_package, project_path, modify_project_name, modify_project_code, modify_project_package, exclusions, modify_suffix, modify_tmp_path, create_time
+        id, project_name, project_code, project_code_abbreviate, project_package,
+        project_path, modify_project_name, modify_project_code, modify_project_code_abbreviate, modify_project_package,
+        exclusions, modify_suffix, modify_tmp_path, create_time
     </sql>
 
 </mapper>

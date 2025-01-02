@@ -118,7 +118,7 @@ public class ProjectModifyController {
         ProjectModify projectModify = projectModifyService.getById(id);
         byte[] data = projectModifyService.download(projectModify);
         response.setContentType("application/octet-stream;charset=UTF-8");
-        response.setHeader("Content-Disposition", "attachment;filename*=utf-8''".concat(projectModify.getModifyProjectName()).concat(".zip"));
+        response.setHeader("Content-Disposition", "attachment;filename*=utf-8''".concat(projectModify.getModifyProjectCode()).concat(".zip"));
         response.addHeader("Content-Length", String.valueOf(data.length));
         response.addHeader(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, HttpHeaders.CONTENT_DISPOSITION);
         IoUtil.write(response.getOutputStream(), false, data);
