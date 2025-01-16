@@ -1,6 +1,6 @@
 <template>
   <el-card shadow="never">
-    <el-form ref="queryFormRef" :model="state.queryForm" :inline="true" v-show="showSearch" label-width="78" @keyup.enter="getPage()" @submit.prevent>
+    <el-form ref="queryFormRef" :model="state.queryForm" :inline="true" v-show="showSearch" @keyup.enter="getPage()" @submit.prevent>
 <#list queryList?filter(f -> f.attrName != "tenantId") as field>
   <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
   <#if fieldCommentEnd == -1>
