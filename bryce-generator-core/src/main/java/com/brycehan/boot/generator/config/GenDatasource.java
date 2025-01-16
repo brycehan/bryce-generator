@@ -73,45 +73,45 @@ public class GenDatasource implements Serializable {
     private LocalDateTime createTime;
 
     public GenDatasource(Datasource datasource) {
-        this.id = datasource.getId();
-        this.dbType = DbType.dbType(datasource.getDbType());
-        this.connUrl = datasource.getConnUrl();
-        this.username = datasource.getUsername();
-        this.password = datasource.getPassword();
-        setDbQuery(this.dbType);
+        id = datasource.getId();
+        dbType = DbType.dbType(datasource.getDbType());
+        connUrl = datasource.getConnUrl();
+        username = datasource.getUsername();
+        password = datasource.getPassword();
+        setDbQuery(dbType);
 
         try {
-            this.connection = DbUtils.getConnection(this);
+            connection = DbUtils.getConnection(this);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
     }
 
     public GenDatasource(Connection connection) {
-        this.id = 0L;
+        id = 0L;
         try {
-            this.dbType = DbType.dbType(connection.getMetaData().getDatabaseProductName());
+            dbType = DbType.dbType(connection.getMetaData().getDatabaseProductName());
         } catch (SQLException e) {
             log.error(e.getMessage(), e);
         }
 
-        setDbQuery(this.dbType);
+        setDbQuery(dbType);
         this.connection = connection;
     }
 
     private void setDbQuery(DbType dbType) {
         if (dbType == DbType.MySQL) {
-            this.dbQuery = new MySQLDbQuery();
+            dbQuery = new MySQLDbQuery();
         } else if (dbType == DbType.PostgreSQL) {
-            this.dbQuery = new PostgreSQLDbQuery();
+            dbQuery = new PostgreSQLDbQuery();
         } else if (dbType == DbType.Oracle) {
-            this.dbQuery = new OracleDbQuery();
+            dbQuery = new OracleDbQuery();
         } else if (dbType == DbType.SQLServer) {
-            this.dbQuery = new SQLServerDbQuery();
+            dbQuery = new SQLServerDbQuery();
         } else if (dbType == DbType.DM) {
-            this.dbQuery = new DmDbQuery();
+            dbQuery = new DmDbQuery();
         } else if (dbType == DbType.Clickhouse) {
-            this.dbQuery = new ClickHouseDbQuery();
+            dbQuery = new ClickHouseDbQuery();
         }
     }
 

@@ -72,7 +72,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
     @Override
     public void save(TableDto tableDto) {
         Table table = TableConvert.INSTANCE.convert(tableDto);
-        this.baseMapper.insert(table);
+        baseMapper.insert(table);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -81,15 +81,15 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         Table table = TableConvert.INSTANCE.convert(tableDto);
         TableProcessUtils.processBackendPath(table);
 
-        this.baseMapper.updateById(table);
+        baseMapper.updateById(table);
 
         // 更新字段基类字段信息
-        List<TableField> fieldList = this.tableFieldService.getByTableId(tableDto.getId());
+        List<TableField> fieldList = tableFieldService.getByTableId(tableDto.getId());
         if(table.getBaseClassId() == null) {
             fieldList.forEach(tableField -> tableField.setBaseField(false));
         } else {
             // 有基类时
-            BaseClass baseClass = this.baseClassService.getById(tableDto.getBaseClassId());
+            BaseClass baseClass = baseClassService.getById(tableDto.getBaseClassId());
             if(baseClass != null) {
                 // 基类字段
                 String[] fields = baseClass.getFields().split(",");
@@ -100,7 +100,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         }
 
         // 更新列数据
-        this.tableFieldService.updateBatchById(fieldList);
+        tableFieldService.updateBatchById(fieldList);
     }
 
     @Override
@@ -117,13 +117,13 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         // 删除
         removeByIds(ids);
         // 删除对应字段数据
-        this.tableFieldService.remove(new LambdaQueryWrapper<TableField>().in(TableField::getTableId, ids));
+        tableFieldService.remove(new LambdaQueryWrapper<TableField>().in(TableField::getTableId, ids));
     }
 
     @Override
     public PageResult<TableVo> page(@NotNull TablePageDto tablePageDto) {
 
-        IPage<Table> page = this.baseMapper.selectPage(tablePageDto.toPage(), getWrapper(tablePageDto));
+        IPage<Table> page = baseMapper.selectPage(tablePageDto.toPage(), getWrapper(tablePageDto));
 
         return new PageResult<>(page.getTotal(), TableConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -147,7 +147,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         GenDatasource datasource = datasourceService.get(datasourceId);
 
         // 查询表是否存在
-        Table table = this.getByTableName(tableName);
+        Table table = getByTableName(tableName);
         if (table != null) {
             throw new RuntimeException(tableName.concat("已存在"));
         }
@@ -158,7 +158,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         GeneratorContent generatorContent = generatorConfig.getGeneratorContent();
 
         // 保存表信息
-        table.setPackageName(this.generatorProperties.getPackageName());
+        table.setPackageName(generatorProperties.getPackageName());
         table.setVersion(generatorContent.getProject().getVersion());
 
         table.setBackendPath(generatorContent.getProject().getBackendPath());
@@ -168,25 +168,25 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         table.setAuthor(generatorContent.getDeveloper().getAuthor());
         table.setFormLayout(FormLayoutEnum.ONE.value());
         table.setGeneratorType(GeneratorTypeEnum.ZIP_DOWNLOAD.value());
-        table.setClassName(TableUtils.getClassName(tableName, this.generatorProperties.getTablePrefix()));
-        table.setModuleName(TableUtils.getModuleName(tableName, this.generatorProperties.getTablePrefix()));
-        table.setFunctionName(TableUtils.getFunctionName(tableName, this.generatorProperties.getTablePrefix()));
+        table.setClassName(TableUtils.getClassName(tableName, generatorProperties.getTablePrefix()));
+        table.setModuleName(TableUtils.getModuleName(tableName, generatorProperties.getTablePrefix()));
+        table.setFunctionName(TableUtils.getFunctionName(tableName, generatorProperties.getTablePrefix()));
         table.setTableComment(TableUtils.getTableComment(table.getTableComment()));
 
         // 默认有基类
-        Optional<BaseClass> optionalBaseClass = this.baseClassService.list().stream().findFirst();
+        Optional<BaseClass> optionalBaseClass = baseClassService.list().stream().findFirst();
         if(optionalBaseClass.isPresent()) {
             table.setBaseClassId(optionalBaseClass.get().getId());
         }
 
         table.setCreateTime(LocalDateTime.now());
-        this.baseMapper.insert(table);
+        baseMapper.insert(table);
 
         // 获取数据库表字段数据
         List<TableField> tableFieldList = TableUtils.getTableFieldList(datasource, table.getId(), table.getTableName());
 
         // 初始化列数据
-        this.tableFieldService.initFieldList(tableFieldList);
+        tableFieldService.initFieldList(tableFieldList);
 
         // 初始化基类字段
         if(optionalBaseClass.isPresent()) {
@@ -202,7 +202,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         }
 
         // 保存列数据
-        this.tableFieldService.saveBatch(tableFieldList);
+        tableFieldService.saveBatch(tableFieldList);
 
         // 释放数据源
         try {
@@ -219,16 +219,16 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         queryWrapper = queryWrapper.eq(Table::getTableName, tableName)
                 .last("limit 1");
 
-        return this.baseMapper.selectOne(queryWrapper);
+        return baseMapper.selectOne(queryWrapper);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void sync(Long id) {
-        Table table = this.baseMapper.selectById(id);
+        Table table = baseMapper.selectById(id);
 
         // 初始化配置信息
-        GenDatasource datasource = this.datasourceService.get(table.getDatasourceId());
+        GenDatasource datasource = datasourceService.get(table.getDatasourceId());
 
         // 从数据库获取表字段列表
         List<TableField> dbTableFieldList = TableUtils.getTableFieldList(datasource, table.getId(), table.getTableName());
@@ -239,18 +239,18 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         List<String> dbTableFieldNameList = dbTableFieldList.stream()
                 .map(TableField::getFieldName).toList();
         // 表字段列表
-        List<TableField> tableFieldList = this.tableFieldService.getByTableId(id);
+        List<TableField> tableFieldList = tableFieldService.getByTableId(id);
         Map<String, TableField> tableFieldMap = tableFieldList.stream()
                 .collect(Collectors.toMap(TableField::getFieldName, Function.identity()));
 
         // 初始化字段数据
-        this.tableFieldService.initFieldList(dbTableFieldList);
+        tableFieldService.initFieldList(dbTableFieldList);
 
         // 同步表结构字段
         dbTableFieldList.forEach(tableField -> {
             // 新增字段
             if (!tableFieldMap.containsKey(tableField.getFieldName())) {
-                this.tableFieldService.save(tableField);
+                tableFieldService.save(tableField);
                 return;
             }
 
@@ -261,7 +261,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
             updateField.setFieldType(tableField.getFieldType());
             updateField.setAttrType(tableField.getAttrType());
 
-            this.tableFieldService.updateById(updateField);
+            tableFieldService.updateById(updateField);
         });
 
         // 删除数据库表中没有的字段
@@ -271,7 +271,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
         if (!CollectionUtils.isEmpty(deleteFieldList)) {
             List<Long> deleteIds = deleteFieldList.stream()
                     .map(TableField::getId).toList();
-            this.tableFieldService.removeBatchByIds(deleteIds);
+            tableFieldService.removeBatchByIds(deleteIds);
         }
     }
 }

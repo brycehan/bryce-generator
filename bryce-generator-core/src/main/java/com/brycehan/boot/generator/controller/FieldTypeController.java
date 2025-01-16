@@ -39,7 +39,7 @@ public class FieldTypeController {
      */
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody FieldTypeDto fieldTypeDto) {
-        this.fieldTypeService.save(fieldTypeDto);
+        fieldTypeService.save(fieldTypeDto);
         return ResponseResult.ok();
     }
 
@@ -51,7 +51,7 @@ public class FieldTypeController {
      */
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody FieldTypeDto fieldTypeDto) {
-        this.fieldTypeService.update(fieldTypeDto);
+        fieldTypeService.update(fieldTypeDto);
         return ResponseResult.ok();
     }
 
@@ -64,7 +64,7 @@ public class FieldTypeController {
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.fieldTypeService.delete(idsDto);
+        fieldTypeService.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -76,7 +76,7 @@ public class FieldTypeController {
      */
     @GetMapping(path = "/{id}")
     public ResponseResult<FieldTypeVo> get(@PathVariable Long id) {
-        FieldType fieldType = this.fieldTypeService.getById(id);
+        FieldType fieldType = fieldTypeService.getById(id);
         return ResponseResult.ok(FieldTypeConvert.INSTANCE.convert(fieldType));
     }
 
@@ -87,7 +87,7 @@ public class FieldTypeController {
      */
     @GetMapping(path = "/list")
     public ResponseResult<List<String>> list() {
-        List<String> list = this.fieldTypeService.getAttrTypeList();
+        List<String> list = fieldTypeService.getAttrTypeList();
         return ResponseResult.ok(list);
     }
 
@@ -99,7 +99,7 @@ public class FieldTypeController {
      */
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<FieldTypeVo>> page(@Validated @RequestBody FieldTypePageDto fieldTypePageDto) {
-        PageResult<FieldTypeVo> page = this.fieldTypeService.page(fieldTypePageDto);
+        PageResult<FieldTypeVo> page = fieldTypeService.page(fieldTypePageDto);
         return ResponseResult.ok(page);
     }
 

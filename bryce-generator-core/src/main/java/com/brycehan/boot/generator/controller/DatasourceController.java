@@ -47,7 +47,7 @@ public class DatasourceController {
      */
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody DatasourceDto datasourceDto) {
-        this.datasourceService.save(datasourceDto);
+        datasourceService.save(datasourceDto);
         return ResponseResult.ok();
     }
 
@@ -59,7 +59,7 @@ public class DatasourceController {
      */
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody DatasourceDto datasourceDto) {
-        this.datasourceService.update(datasourceDto);
+        datasourceService.update(datasourceDto);
         return ResponseResult.ok();
     }
 
@@ -72,7 +72,7 @@ public class DatasourceController {
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.datasourceService.delete(idsDto);
+        datasourceService.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -84,7 +84,7 @@ public class DatasourceController {
      */
     @GetMapping(path = "/{id}")
     public ResponseResult<DatasourceVo> get(@PathVariable Long id) {
-        Datasource datasource = this.datasourceService.getById(id);
+        Datasource datasource = datasourceService.getById(id);
         return ResponseResult.ok(DatasourceConvert.INSTANCE.convert(datasource));
     }
 
@@ -96,7 +96,7 @@ public class DatasourceController {
      */
     @GetMapping(path = "/test/{id}")
     public ResponseResult<String> test(@PathVariable Long id) {
-        Datasource datasource = this.datasourceService.getById(id);
+        Datasource datasource = datasourceService.getById(id);
         try {
             DbUtils.getConnection(new GenDatasource(datasource));
             return ResponseResult.ok("连接成功");
@@ -114,7 +114,7 @@ public class DatasourceController {
      */
     @GetMapping(path = "/list")
     public ResponseResult<List<DatasourceVo>> list() {
-        List<Datasource> list = this.datasourceService.list();
+        List<Datasource> list = datasourceService.list();
         return ResponseResult.ok(DatasourceConvert.INSTANCE.convert(list));
     }
 
@@ -127,7 +127,7 @@ public class DatasourceController {
     @GetMapping(path = "/table/list/{datasourceId}")
     public ResponseResult<List<TableVo>> list(@PathVariable Long datasourceId) {
         // 获取数据源
-        GenDatasource datasource = this.datasourceService.get(datasourceId);
+        GenDatasource datasource = datasourceService.get(datasourceId);
         // 根据数据源，获取全部数据表
         List<Table> tableList = TableUtils.getTableList(datasource);
         return ResponseResult.ok(TableConvert.INSTANCE.convert(tableList));
@@ -141,7 +141,7 @@ public class DatasourceController {
      */
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<DatasourceVo>> page(@Validated @RequestBody DatasourcePageDto datasourcePageDto) {
-        PageResult<DatasourceVo> page = this.datasourceService.page(datasourcePageDto);
+        PageResult<DatasourceVo> page = datasourceService.page(datasourcePageDto);
         return ResponseResult.ok(page);
     }
 

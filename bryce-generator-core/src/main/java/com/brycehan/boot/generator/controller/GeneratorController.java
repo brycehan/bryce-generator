@@ -36,7 +36,7 @@ public class GeneratorController {
      */
     @GetMapping(path = "/preview/{tableId}")
     public ResponseResult<Map<String, String>> preview(@PathVariable Long tableId) {
-        Map<String, String> data = this.generatorService.previewCode(tableId);
+        Map<String, String> data = generatorService.previewCode(tableId);
         return ResponseResult.ok(data);
     }
 
@@ -52,7 +52,7 @@ public class GeneratorController {
 
         // 生成代码
         for (Long tableId : tableIds) {
-            this.generatorService.downloadCode(tableId, zip);
+            generatorService.downloadCode(tableId, zip);
         }
         IoUtil.close(zip);
 
@@ -79,7 +79,7 @@ public class GeneratorController {
     @PostMapping(path = "/custom")
     public ResponseResult<Void> custom(@RequestBody Long[] tableIds) {
         for (Long tableId : tableIds) {
-            this.generatorService.generatorCode(tableId);
+            generatorService.generatorCode(tableId);
         }
         return ResponseResult.ok();
     }

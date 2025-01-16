@@ -51,7 +51,7 @@ public class TableController {
      */
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody TableDto tableDto) {
-        this.tableService.save(tableDto);
+        tableService.save(tableDto);
         return ResponseResult.ok();
     }
 
@@ -63,7 +63,7 @@ public class TableController {
      */
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody TableDto tableDto) {
-        this.tableService.update(tableDto);
+        tableService.update(tableDto);
         return ResponseResult.ok();
     }
 
@@ -76,7 +76,7 @@ public class TableController {
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.tableService.delete(idsDto);
+        tableService.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -88,9 +88,9 @@ public class TableController {
      */
     @GetMapping(path = "/{id}")
     public ResponseResult<TableVo> get(@PathVariable Long id) {
-        Table table = this.tableService.getById(id);
+        Table table = tableService.getById(id);
         // 获取表的字段列表
-        List<TableField> fieldList = this.tableFieldService.getByTableId(id);
+        List<TableField> fieldList = tableFieldService.getByTableId(id);
         table.setFieldList(fieldList);
         return ResponseResult.ok(TableConvert.INSTANCE.convert(table));
     }
@@ -103,7 +103,7 @@ public class TableController {
      */
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<TableVo>> page(@Validated @RequestBody TablePageDto tablePageDto) {
-        PageResult<TableVo> page = this.tableService.page(tablePageDto);
+        PageResult<TableVo> page = tableService.page(tablePageDto);
         return ResponseResult.ok(page);
     }
 
@@ -121,7 +121,7 @@ public class TableController {
 
         if (!CollectionUtils.isEmpty(tableNameList)) {
             for (String tableName : tableNameList) {
-                this.tableService.tableImport(datasourceId, tableName);
+                tableService.tableImport(datasourceId, tableName);
             }
         }
         return ResponseResult.ok();
@@ -135,7 +135,7 @@ public class TableController {
      */
     @GetMapping(path = "/sync/{id}")
     public ResponseResult<Void> sync(@PathVariable Long id) {
-        this.tableService.sync(id);
+        tableService.sync(id);
         return ResponseResult.ok();
     }
 
@@ -148,7 +148,7 @@ public class TableController {
      */
     @PutMapping(path = "/field/{tableId}")
     public ResponseResult<Void> updateTableFields(@PathVariable Long tableId, @RequestBody List<TableFieldDto> tableFieldList) {
-        this.tableFieldService.updateTableField(tableId, TableFieldConvert.INSTANCE.convertDto(tableFieldList));
+        tableFieldService.updateTableField(tableId, TableFieldConvert.INSTANCE.convertDto(tableFieldList));
         return ResponseResult.ok();
     }
 

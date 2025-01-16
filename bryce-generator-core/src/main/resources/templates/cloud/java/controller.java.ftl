@@ -46,7 +46,7 @@ public class ${controllerName} {
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:save')")
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
-        this.${serviceParam}.save(${entityParam}Dto);
+        ${serviceParam}.save(${entityParam}Dto);
         return ResponseResult.ok();
     }
 
@@ -61,7 +61,7 @@ public class ${controllerName} {
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:update')")
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
-        this.${serviceParam}.update(${entityParam}Dto);
+        ${serviceParam}.update(${entityParam}Dto);
         return ResponseResult.ok();
     }
 
@@ -76,7 +76,7 @@ public class ${controllerName} {
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:delete')")
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
-        this.${serviceParam}.delete(idsDto);
+        ${serviceParam}.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -90,7 +90,7 @@ public class ${controllerName} {
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:info')")
     @GetMapping(path = "/{id}")
     public ResponseResult<${entityName}Vo> get(@Parameter(description = "${tableComment}ID", required = true) @PathVariable Long id) {
-        ${entityName} ${entityParam} = this.${serviceParam}.getById(id);
+        ${entityName} ${entityParam} = ${serviceParam}.getById(id);
         return ResponseResult.ok(${convertName}.INSTANCE.convert(${entityParam}));
     }
 
@@ -104,7 +104,7 @@ public class ${controllerName} {
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:page')")
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<${entityName}Vo>> page(@Validated @RequestBody ${entityPageDtoName} ${entityParam}PageDto) {
-        PageResult<${entityName}Vo> page = this.${serviceParam}.page(${entityParam}PageDto);
+        PageResult<${entityName}Vo> page = ${serviceParam}.page(${entityParam}PageDto);
         return ResponseResult.ok(page);
     }
 
@@ -117,7 +117,7 @@ public class ${controllerName} {
     @PreAuthorize("hasAuthority('${moduleName}:${functionName}:export')")
     @PostMapping(path = "/export")
     public void export(@Validated @RequestBody ${entityPageDtoName} ${entityParam}PageDto) {
-        this.${serviceParam}.export(${entityParam}PageDto);
+        ${serviceParam}.export(${entityParam}PageDto);
     }
 
 }

@@ -48,7 +48,7 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
     public void save(${entityName}Dto ${entityParam}Dto) {
         ${entityName} ${entityParam} = ${convertName}.INSTANCE.convert(${entityParam}Dto);
         ${entityParam}.setId(IdGenerator.nextId());
-        this.baseMapper.insert(${entityParam});
+        baseMapper.insert(${entityParam});
     }
 
     /**
@@ -58,12 +58,12 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
      */
     public void update(${entityName}Dto ${entityParam}Dto) {
         ${entityName} ${entityParam} = ${convertName}.INSTANCE.convert(${entityParam}Dto);
-        this.baseMapper.updateById(${entityParam});
+        baseMapper.updateById(${entityParam});
     }
 
     @Override
     public PageResult<${entityName}Vo> page(${entityPageDtoName} ${entityParam}PageDto) {
-        IPage<${entityName}> page = this.baseMapper.selectPage(${entityParam}PageDto.toPage(), getWrapper(${entityParam}PageDto));
+        IPage<${entityName}> page = baseMapper.selectPage(${entityParam}PageDto.toPage(), getWrapper(${entityParam}PageDto));
         return new PageResult<>(page.getTotal(), ${convertName}.INSTANCE.convert(page.getRecords()));
     }
 
@@ -113,7 +113,7 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
 
     @Override
     public void export(${entityPageDtoName} ${entityParam}PageDto) {
-        List<${entityName}> ${entityParam}List = this.baseMapper.selectList(getWrapper(${entityParam}PageDto));
+        List<${entityName}> ${entityParam}List = baseMapper.selectList(getWrapper(${entityParam}PageDto));
         List<${entityName}Vo> ${entityParam}VoList = ${convertName}.INSTANCE.convert(${entityParam}List);
         String today = DateUtil.format(new Date(), DatePattern.PURE_DATE_PATTERN);
         ExcelUtils.export(${entityName}Vo.class, "${tableComment}_".concat(today), "${tableComment}", ${entityParam}VoList);

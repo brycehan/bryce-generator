@@ -45,13 +45,13 @@ public class DatasourceServiceImpl extends ServiceImpl<DatasourceMapper, Datasou
     @Override
     public void save(DatasourceDto datasourceDto) {
         Datasource datasource = DatasourceConvert.INSTANCE.convert(datasourceDto);
-        this.datasourceMapper.insert(datasource);
+        datasourceMapper.insert(datasource);
     }
 
     @Override
     public void update(DatasourceDto datasourceDto) {
         Datasource datasource = DatasourceConvert.INSTANCE.convert(datasourceDto);
-        this.datasourceMapper.updateById(datasource);
+        datasourceMapper.updateById(datasource);
     }
 
     @Override
@@ -76,12 +76,12 @@ public class DatasourceServiceImpl extends ServiceImpl<DatasourceMapper, Datasou
         // 默认数据源
         if (datasourceId.intValue() == 0) {
             try {
-                datasource = new GenDatasource(this.dataSource.getConnection());
+                datasource = new GenDatasource(dataSource.getConnection());
             } catch (SQLException e) {
                 log.error(e.getMessage(), e);
             }
         } else {
-            datasource = new GenDatasource(this.datasourceMapper.selectById(datasourceId));
+            datasource = new GenDatasource(datasourceMapper.selectById(datasourceId));
         }
         return datasource;
     }
@@ -89,7 +89,7 @@ public class DatasourceServiceImpl extends ServiceImpl<DatasourceMapper, Datasou
     @Override
     public PageResult<DatasourceVo> page(DatasourcePageDto datasourcePageDto) {
 
-        IPage<Datasource> page = this.datasourceMapper.selectPage(datasourcePageDto.toPage(), getWrapper(datasourcePageDto));
+        IPage<Datasource> page = datasourceMapper.selectPage(datasourcePageDto.toPage(), getWrapper(datasourcePageDto));
 
         return new PageResult<>(page.getTotal(), DatasourceConvert.INSTANCE.convert(page.getRecords()));
     }

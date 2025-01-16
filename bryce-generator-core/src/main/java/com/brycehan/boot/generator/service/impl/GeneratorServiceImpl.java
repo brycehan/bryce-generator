@@ -122,15 +122,15 @@ public class GeneratorServiceImpl implements GeneratorService {
      */
     private Map<String, Object> getDataModel(Long tableId) {
         // 表信息
-        Table table = this.tableService.getById(tableId);
-        List<TableField> fieldList = this.tableFieldService.getByTableId(tableId);
+        Table table = tableService.getById(tableId);
+        List<TableField> fieldList = tableFieldService.getByTableId(tableId);
         table.setFieldList(fieldList);
 
         // 数据模型
         Map<String, Object> dataModel = new HashMap<>();
 
         // 获取数据库类型
-        GenDatasource datasource = this.datasourceService.get(table.getDatasourceId());
+        GenDatasource datasource = datasourceService.get(table.getDatasourceId());
         dataModel.put("dbType", datasource.getDbType().name());
 
         // 项目信息
@@ -156,8 +156,8 @@ public class GeneratorServiceImpl implements GeneratorService {
         setBaseClass(dataModel, table);
 
         // entity导入包的列表
-        Set<String> importList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "entity");
-        Set<String> voImportList = this.fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "vo");
+        Set<String> importList = fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "entity");
+        Set<String> voImportList = fieldTypeService.getPackageNameByTableId(table.getId(), table.getBaseClassId(), "vo");
 
         dataModel.put("importList", importList.stream().filter(StrUtil::isNotBlank).toList());
         dataModel.put("voImportList", voImportList.stream().filter(StrUtil::isNotBlank).toList());
@@ -241,7 +241,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         }
 
         // 基类
-        BaseClass baseClass = this.baseClassService.getById(table.getBaseClassId());
+        BaseClass baseClass = baseClassService.getById(table.getBaseClassId());
         TableProcessUtils.processBaseEntityPackageName(table, baseClass);
 
         dataModel.put("baseClass", baseClass);

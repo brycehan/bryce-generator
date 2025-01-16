@@ -43,7 +43,7 @@ public class ProjectModifyController {
      */
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody ProjectModifyDto projectModifyDto) {
-        this.projectModifyService.save(projectModifyDto);
+        projectModifyService.save(projectModifyDto);
         return ResponseResult.ok();
     }
 
@@ -55,7 +55,7 @@ public class ProjectModifyController {
      */
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody ProjectModifyDto projectModifyDto) {
-        this.projectModifyService.update(projectModifyDto);
+        projectModifyService.update(projectModifyDto);
         return ResponseResult.ok();
     }
 
@@ -68,7 +68,7 @@ public class ProjectModifyController {
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.projectModifyService.delete(idsDto);
+        projectModifyService.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -80,7 +80,7 @@ public class ProjectModifyController {
      */
     @GetMapping(path = "/{id}")
     public ResponseResult<ProjectModifyVo> get(@PathVariable Long id) {
-        ProjectModify projectModify = this.projectModifyService.getById(id);
+        ProjectModify projectModify = projectModifyService.getById(id);
         return ResponseResult.ok(ProjectModifyConvert.INSTANCE.convert(projectModify));
     }
 
@@ -91,7 +91,7 @@ public class ProjectModifyController {
      */
     @PostMapping(path = "/list")
     public ResponseResult<List<ProjectModifyVo>> list() {
-        List<ProjectModify> list = this.projectModifyService.list();
+        List<ProjectModify> list = projectModifyService.list();
         return ResponseResult.ok(ProjectModifyConvert.INSTANCE.convert(list));
     }
 
@@ -103,7 +103,7 @@ public class ProjectModifyController {
      */
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<ProjectModifyVo>> page(@Validated @RequestBody ProjectModifyPageDto projectModifyPageDto) {
-        PageResult<ProjectModifyVo> page = this.projectModifyService.page(projectModifyPageDto);
+        PageResult<ProjectModifyVo> page = projectModifyService.page(projectModifyPageDto);
         return ResponseResult.ok(page);
     }
 

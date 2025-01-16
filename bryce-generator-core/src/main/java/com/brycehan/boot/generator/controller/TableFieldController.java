@@ -39,7 +39,7 @@ public class TableFieldController {
      */
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody TableFieldDto tableFieldDto) {
-        this.tableFieldService.save(tableFieldDto);
+        tableFieldService.save(tableFieldDto);
         return ResponseResult.ok();
     }
 
@@ -51,7 +51,7 @@ public class TableFieldController {
      */
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody TableFieldDto tableFieldDto) {
-        this.tableFieldService.update(tableFieldDto);
+        tableFieldService.update(tableFieldDto);
         return ResponseResult.ok();
     }
 
@@ -64,7 +64,7 @@ public class TableFieldController {
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.tableFieldService.delete(idsDto);
+        tableFieldService.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -76,7 +76,7 @@ public class TableFieldController {
      */
     @GetMapping(path = "/{id}")
     public ResponseResult<TableFieldVo> get(@PathVariable Long id) {
-        TableField tableField = this.tableFieldService.getById(id);
+        TableField tableField = tableFieldService.getById(id);
         return ResponseResult.ok(TableFieldConvert.INSTANCE.convert(tableField));
     }
 
@@ -87,7 +87,7 @@ public class TableFieldController {
      */
     @PostMapping(path = "/list")
     public ResponseResult<List<TableFieldVo>> list() {
-        List<TableField> list = this.tableFieldService.list();
+        List<TableField> list = tableFieldService.list();
         return ResponseResult.ok(TableFieldConvert.INSTANCE.convert(list));
     }
 
@@ -99,7 +99,7 @@ public class TableFieldController {
      */
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<TableFieldVo>> page(@Validated @RequestBody TableFieldPageDto tableFieldPageDto) {
-        PageResult<TableFieldVo> page = this.tableFieldService.page(tableFieldPageDto);
+        PageResult<TableFieldVo> page = tableFieldService.page(tableFieldPageDto);
         return ResponseResult.ok(page);
     }
 

@@ -50,23 +50,23 @@ public class BasePageDto implements Serializable {
      * @return 分页对象
      */
     public  <T> IPage<T> toPage() {
-        Page<T> page = new Page<>(this.current, this.pageSize);
+        Page<T> page = new Page<>(current, pageSize);
 
-        List<OrderItem> orderItems = new ArrayList<>();
+        List<OrderItem> orderItemList = new ArrayList<>();
 
         // 处理排序参数
-        if (CollUtil.isNotEmpty(this.orderItems)) {
+        if (CollUtil.isNotEmpty(orderItems)) {
             // 驼峰转下划线命名
-            this.orderItems.forEach(orderItem -> orderItem.setColumn(NamingCase.toUnderlineCase(orderItem.getColumn())));
-            orderItems.addAll(BeanUtil.copyToList(this.orderItems, OrderItem.class));
+            orderItems.forEach(orderItem -> orderItem.setColumn(NamingCase.toUnderlineCase(orderItem.getColumn())));
+            orderItemList.addAll(BeanUtil.copyToList(orderItems, OrderItem.class));
         }
 
         // 默认按id降序排序
-        if (CollUtil.isEmpty(orderItems)) {
-            orderItems.add(OrderItem.desc("id"));
+        if (CollUtil.isEmpty(orderItemList)) {
+            orderItemList.add(OrderItem.desc("id"));
         }
 
-        page.addOrder(orderItems);
+        page.addOrder(orderItemList);
 
         return page;
     }

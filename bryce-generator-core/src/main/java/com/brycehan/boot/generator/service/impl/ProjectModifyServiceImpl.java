@@ -46,13 +46,13 @@ public class ProjectModifyServiceImpl extends ServiceImpl<ProjectModifyMapper, P
     @Override
     public void save(ProjectModifyDto projectModifyDto) {
         ProjectModify projectModify = ProjectModifyConvert.INSTANCE.convert(projectModifyDto);
-        this.projectModifyMapper.insert(projectModify);
+        projectModifyMapper.insert(projectModify);
     }
 
     @Override
     public void update(ProjectModifyDto projectModifyDto) {
         ProjectModify projectModify = ProjectModifyConvert.INSTANCE.convert(projectModifyDto);
-        this.projectModifyMapper.updateById(projectModify);
+        projectModifyMapper.updateById(projectModify);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class ProjectModifyServiceImpl extends ServiceImpl<ProjectModifyMapper, P
     @Override
     public PageResult<ProjectModifyVo> page(@NotNull ProjectModifyPageDto projectModifyPageDto) {
 
-        IPage<ProjectModify> page = this.projectModifyMapper.selectPage(projectModifyPageDto.toPage(), getWrapper(projectModifyPageDto));
+        IPage<ProjectModify> page = projectModifyMapper.selectPage(projectModifyPageDto.toPage(), getWrapper(projectModifyPageDto));
 
         return new PageResult<>(page.getTotal(), ProjectModifyConvert.INSTANCE.convert(page.getRecords()));
     }

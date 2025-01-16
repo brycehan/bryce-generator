@@ -39,7 +39,7 @@ public class BaseClassController {
      */
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody BaseClassDto baseClassDto) {
-        this.baseClassService.save(baseClassDto);
+        baseClassService.save(baseClassDto);
         return ResponseResult.ok();
     }
 
@@ -51,7 +51,7 @@ public class BaseClassController {
      */
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody BaseClassDto baseClassDto) {
-        this.baseClassService.update(baseClassDto);
+        baseClassService.update(baseClassDto);
         return ResponseResult.ok();
     }
 
@@ -64,7 +64,7 @@ public class BaseClassController {
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         // 批量删除
-        this.baseClassService.delete(idsDto);
+        baseClassService.delete(idsDto);
         return ResponseResult.ok();
     }
 
@@ -76,7 +76,7 @@ public class BaseClassController {
      */
     @GetMapping(path = "/{id}")
     public ResponseResult<BaseClassVo> get(@PathVariable Long id) {
-        BaseClass baseClass = this.baseClassService.getById(id);
+        BaseClass baseClass = baseClassService.getById(id);
         return ResponseResult.ok(BaseClassConvert.INSTANCE.convert(baseClass));
     }
 
@@ -87,7 +87,7 @@ public class BaseClassController {
      */
     @GetMapping(path = "/list")
     public ResponseResult<List<BaseClassVo>> list() {
-        List<BaseClass> list = this.baseClassService.list();
+        List<BaseClass> list = baseClassService.list();
 //        LambdaQueryWrapper<BaseClass> queryWrapper = new LambdaQueryWrapper<>();
 //        queryWrapper.between()
         return ResponseResult.ok(BaseClassConvert.INSTANCE.convert(list));
@@ -101,7 +101,7 @@ public class BaseClassController {
      */
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<BaseClassVo>> page(@Validated @RequestBody BaseClassPageDto baseClassPageDto) {
-        PageResult<BaseClassVo> page = this.baseClassService.page(baseClassPageDto);
+        PageResult<BaseClassVo> page = baseClassService.page(baseClassPageDto);
         return ResponseResult.ok(page);
     }
 

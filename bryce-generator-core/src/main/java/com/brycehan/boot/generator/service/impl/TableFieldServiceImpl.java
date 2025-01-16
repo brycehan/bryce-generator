@@ -69,13 +69,13 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
     @Override
     public void save(TableFieldDto tableFieldDto) {
         TableField tableField = TableFieldConvert.INSTANCE.convert(tableFieldDto);
-        this.tableFieldMapper.insert(tableField);
+        tableFieldMapper.insert(tableField);
     }
 
     @Override
     public void update(TableFieldDto tableFieldDto) {
         TableField tableField = TableFieldConvert.INSTANCE.convert(tableFieldDto);
-        this.tableFieldMapper.updateById(tableField);
+        tableFieldMapper.updateById(tableField);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
     @Override
     public PageResult<TableFieldVo> page(@NotNull TableFieldPageDto tableFieldPageDto) {
 
-        IPage<TableField> page = this.tableFieldMapper.selectPage(tableFieldPageDto.toPage(), getWrapper());
+        IPage<TableField> page = tableFieldMapper.selectPage(tableFieldPageDto.toPage(), getWrapper());
 
         return new PageResult<>(page.getTotal(), TableFieldConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -113,7 +113,7 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
     @Override
     public void initFieldList(List<TableField> tableFieldList) {
         // 字段类型映射
-        Map<String, FieldType> fieldTypeMap = this.fieldTypeService.getMap();
+        Map<String, FieldType> fieldTypeMap = fieldTypeService.getMap();
         for (int i = 0; i < tableFieldList.size(); i++) {
             var field = tableFieldList.get(i);
             var fieldType = fieldTypeMap.get(field.getFieldType().toLowerCase());
@@ -126,9 +126,9 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
                 field.setPackageName(fieldType.getPackageName());
             }
             // 字段自动填充初始化
-            if(this.autoFillInsertAttrNameList.contains(field.getAttrName())){
+            if(autoFillInsertAttrNameList.contains(field.getAttrName())){
                 field.setAutoFill(AutoFillEnum.INSERT.name());
-            }else if(this.autoFillUpdateAttrNameList.contains(field.getAttrName())){
+            }else if(autoFillUpdateAttrNameList.contains(field.getAttrName())){
                 field.setAutoFill(AutoFillEnum.UPDATE.name());
             }else {
                 field.setAutoFill(AutoFillEnum.DEFAULT.name());
@@ -136,9 +136,9 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
 
             field.setFormItemType("text");
             // 表单默认忽略的属性处理
-            field.setFormItem(!this.defaultFormAttrNameIgnoreList.contains(field.getAttrName()));
+            field.setFormItem(!defaultFormAttrNameIgnoreList.contains(field.getAttrName()));
             // 表单默认必填的属性处理
-            field.setFormRequired(this.defaultFormAttrNameRequiredList.contains(field.getAttrName()));
+            field.setFormRequired(defaultFormAttrNameRequiredList.contains(field.getAttrName()));
             // 表单默认status属性处理
             if(field.getAttrName().equals("status")) {
                 field.setFormDict("sys_status");
@@ -147,21 +147,21 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
 
             // 查询显示默认处理
             field.setQueryFormType("text");
-            if(this.defaultQuerySelectAttrNameList.contains(field.getAttrName())) {
+            if(defaultQuerySelectAttrNameList.contains(field.getAttrName())) {
                 field.setQueryType("=");
                 field.setQueryFormType("select");
             }
-            if(this.defaultQueryEqualAttrNameList.contains(field.getAttrName())){
+            if(defaultQueryEqualAttrNameList.contains(field.getAttrName())){
                 field.setQueryType("=");
                 field.setQueryItem(true);
             }
-            if(this.defaultQueryLikeAttrNameList.contains(field.getAttrName())) {
+            if(defaultQueryLikeAttrNameList.contains(field.getAttrName())) {
                 field.setQueryType("like");
                 field.setQueryItem(true);
             }
 
             // 列表显示默认忽略的属性处理
-            field.setGridItem(!this.defaultGridAttrNameIgnoreList.contains(field.getAttrName()));
+            field.setGridItem(!defaultGridAttrNameIgnoreList.contains(field.getAttrName()));
             // 列表默认排序处理
             if("sort".equals(field.getAttrName())) {
                 field.setGridSort(true);
@@ -176,7 +176,7 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
         LambdaQueryWrapper<TableField> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(TableField::getTableId, tableId);
         queryWrapper.orderByAsc(TableField::getSort);
-        return this.tableFieldMapper.selectList(queryWrapper);
+        return tableFieldMapper.selectList(queryWrapper);
     }
 
     @Transactional
@@ -186,7 +186,7 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
         for (int i = 0; i < tableFieldList.size(); i++) {
             TableField field = tableFieldList.get(i);
             field.setSort(i);
-            this.tableFieldMapper.updateById(field);
+            tableFieldMapper.updateById(field);
         }
     }
 }

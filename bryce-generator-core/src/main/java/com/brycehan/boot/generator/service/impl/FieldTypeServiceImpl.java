@@ -38,13 +38,13 @@ public class FieldTypeServiceImpl extends ServiceImpl<FieldTypeMapper, FieldType
     @Override
     public void save(FieldTypeDto fieldTypeDto) {
         FieldType fieldType = FieldTypeConvert.INSTANCE.convert(fieldTypeDto);
-        this.fieldTypeMapper.insert(fieldType);
+        fieldTypeMapper.insert(fieldType);
     }
 
     @Override
     public void update(FieldTypeDto fieldTypeDto) {
         FieldType fieldType = FieldTypeConvert.INSTANCE.convert(fieldTypeDto);
-        this.fieldTypeMapper.updateById(fieldType);
+        fieldTypeMapper.updateById(fieldType);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class FieldTypeServiceImpl extends ServiceImpl<FieldTypeMapper, FieldType
     @Override
     public PageResult<FieldTypeVo> page(@NotNull FieldTypePageDto fieldTypePageDto) {
 
-        IPage<FieldType> page = this.fieldTypeMapper.selectPage(fieldTypePageDto.toPage(), getWrapper(fieldTypePageDto));
+        IPage<FieldType> page = fieldTypeMapper.selectPage(fieldTypePageDto.toPage(), getWrapper(fieldTypePageDto));
 
         return new PageResult<>(page.getTotal(), FieldTypeConvert.INSTANCE.convert(page.getRecords()));
     }
@@ -85,7 +85,7 @@ public class FieldTypeServiceImpl extends ServiceImpl<FieldTypeMapper, FieldType
 
     @Override
     public Map<String, FieldType> getMap() {
-        List<FieldType> list = this.fieldTypeMapper.selectList(null);
+        List<FieldType> list = fieldTypeMapper.selectList(null);
         Map<String, FieldType> map = new LinkedHashMap<>(list.size());
         for (FieldType fieldType : list) {
             map.put(fieldType.getColumnType().toLowerCase(), fieldType);
@@ -96,7 +96,7 @@ public class FieldTypeServiceImpl extends ServiceImpl<FieldTypeMapper, FieldType
 
     @Override
     public Set<String> getPackageNameByTableId(Long tableId, Long baseClassId, String type) {
-        return this.fieldTypeMapper.getPackageNameByTableId(tableId, baseClassId, type);
+        return fieldTypeMapper.getPackageNameByTableId(tableId, baseClassId, type);
     }
 
     @Override
@@ -105,7 +105,7 @@ public class FieldTypeServiceImpl extends ServiceImpl<FieldTypeMapper, FieldType
         queryWrapper.select(FieldType::getAttrType)
                 .orderByDesc(FieldType::getAttrType);
 
-        return this.listObjs(queryWrapper, Object::toString).stream()
+        return listObjs(queryWrapper, Object::toString).stream()
                 .distinct().toList();
     }
 }

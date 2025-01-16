@@ -25,7 +25,7 @@ public class GeneratorConfig {
     private String template;
 
     public GeneratorConfig(GeneratorProperties properties) {
-        this.template = properties.getTemplate();
+        template = properties.getTemplate();
 
         // 根据包名称，获取模板路径
         String lastPackageName = properties.getPackageName().substring(properties.getPackageName().lastIndexOf(".") + 1);

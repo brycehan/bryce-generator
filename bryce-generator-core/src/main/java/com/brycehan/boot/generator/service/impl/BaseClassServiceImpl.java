@@ -38,13 +38,13 @@ public class BaseClassServiceImpl extends ServiceImpl<BaseClassMapper, BaseClass
     @Override
     public void save(BaseClassDto baseClassDto) {
         BaseClass baseClass = BaseClassConvert.INSTANCE.convert(baseClassDto);
-        this.baseClassMapper.insert(baseClass);
+        baseClassMapper.insert(baseClass);
     }
 
     @Override
     public void update(BaseClassDto baseClassDto) {
         BaseClass baseClass = BaseClassConvert.INSTANCE.convert(baseClassDto);
-        this.baseClassMapper.updateById(baseClass);
+        baseClassMapper.updateById(baseClass);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class BaseClassServiceImpl extends ServiceImpl<BaseClassMapper, BaseClass
     @Override
     public PageResult<BaseClassVo> page(@NotNull BaseClassPageDto baseClassPageDto) {
 
-        IPage<BaseClass> page = this.baseClassMapper.selectPage(baseClassPageDto.toPage(), getWrapper(baseClassPageDto));
+        IPage<BaseClass> page = baseClassMapper.selectPage(baseClassPageDto.toPage(), getWrapper(baseClassPageDto));
 
         return new PageResult<>(page.getTotal(), BaseClassConvert.INSTANCE.convert(page.getRecords()));
     }
