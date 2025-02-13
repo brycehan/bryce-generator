@@ -34,7 +34,7 @@ bryce-generator
 │       └── sqlserver.sql                   // SQLServer数据库
 ├── docker                          // 容器模块
 ├── images                          // 图片
-├──pom.xml                          // 公共依赖
+├── pom.xml                          // 公共依赖
 ~~~
 
 ## 内置功能
