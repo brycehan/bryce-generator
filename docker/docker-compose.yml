@@ -1,0 +1,43 @@
+# 项目名称
+name: bryce-generator
+
+# 服务
+services:
+  # mysql 服务
+  generator-mysql:
+    container_name: generator-mysql
+    image:  public.ecr.aws/docker/library/mysql:8.0.33
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=bryce_generator
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./mysql:/etc/mysql/conf.d
+      - ./mysql/db:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
+    restart: unless-stopped
+    networks:
+      - generator
+  # server 服务
+  generator-server:
+    container_name: generator-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8100:8100"
+    restart: unless-stopped
+    networks:
+      - generator
+    depends_on:
+      - generator-mysql
+
+# 存储卷
+volumes:
+  mysql-data: {}
+
+# 网络
+networks:
+  generator:
+    driver: bridge

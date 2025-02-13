@@ -1,9 +1,13 @@
+# 服务
 server:
   port: 8100
+
+# Spring 配置
 spring:
   profiles:
-    include: bryce
     active: mysql
+
+# Mybatis Plus 配置
 mybatis-plus:
   mapper-locations: classpath*:com/brycehan/boot/generator/mapper/xml/*Mapper.xml
   global-config:
@@ -16,11 +20,13 @@ mybatis-plus:
     call-setters-on-nulls: true
     jdbc-type-for-null: null
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-# 自定义
+
+# 自定义配置
 bryce:
   generator:
     table-prefix: brc_
-    package-name: com.brycehan.cloud
+    package-name: com.brycehan.boot
+
 # 日志
 #logging:
 #  level:

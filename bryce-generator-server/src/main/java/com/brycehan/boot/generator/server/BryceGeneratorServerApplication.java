@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @MapperScan(basePackages = "com.brycehan.boot.generator.mapper")
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.brycehan.boot.generator")
 public class BryceGeneratorServerApplication {
 
     public static void main(String[] args) {

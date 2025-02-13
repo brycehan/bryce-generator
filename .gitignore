@@ -34,3 +34,5 @@ build/
 
 ### 自定义
 /bryce-generator-ui/tsconfig.node.tsbuildinfo
+docker/mysql/db/*.sql
+docker/server/jar/*.jar
