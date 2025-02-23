@@ -43,7 +43,7 @@ public class ${controllerName} {
      */
     @Operation(summary = "保存${tableComment}")
     @OperateLog(type = OperatedType.INSERT)
-    @PreAuthorize("hasAuthority('${moduleName}:${functionName}:save')")
+    @PreAuthorize("@auth.hasAuthority('${moduleName}:${functionName}:save')")
     @PostMapping
     public ResponseResult<Void> save(@Validated(value = SaveGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
         ${serviceParam}.save(${entityParam}Dto);
@@ -58,7 +58,7 @@ public class ${controllerName} {
      */
     @Operation(summary = "更新${tableComment}")
     @OperateLog(type = OperatedType.UPDATE)
-    @PreAuthorize("hasAuthority('${moduleName}:${functionName}:update')")
+    @PreAuthorize("@auth.hasAuthority('${moduleName}:${functionName}:update')")
     @PutMapping
     public ResponseResult<Void> update(@Validated(value = UpdateGroup.class) @RequestBody ${entityName}Dto ${entityParam}Dto) {
         ${serviceParam}.update(${entityParam}Dto);
@@ -73,7 +73,7 @@ public class ${controllerName} {
      */
     @Operation(summary = "删除${tableComment}")
     @OperateLog(type = OperatedType.DELETE)
-    @PreAuthorize("hasAuthority('${moduleName}:${functionName}:delete')")
+    @PreAuthorize("@auth.hasAuthority('${moduleName}:${functionName}:delete')")
     @DeleteMapping
     public ResponseResult<Void> delete(@Validated @RequestBody IdsDto idsDto) {
         ${serviceParam}.delete(idsDto);
@@ -87,7 +87,7 @@ public class ${controllerName} {
      * @return 响应结果
      */
     @Operation(summary = "查询${tableComment}详情")
-    @PreAuthorize("hasAuthority('${moduleName}:${functionName}:info')")
+    @PreAuthorize("@auth.hasAuthority('${moduleName}:${functionName}:info')")
     @GetMapping(path = "/{id}")
     public ResponseResult<${entityName}Vo> get(@Parameter(description = "${tableComment}ID", required = true) @PathVariable Long id) {
         ${entityName} ${entityParam} = ${serviceParam}.getById(id);
@@ -101,7 +101,7 @@ public class ${controllerName} {
      * @return ${tableComment}分页列表
      */
     @Operation(summary = "${tableComment}分页查询")
-    @PreAuthorize("hasAuthority('${moduleName}:${functionName}:page')")
+    @PreAuthorize("@auth.hasAuthority('${moduleName}:${functionName}:page')")
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<${entityName}Vo>> page(@Validated @RequestBody ${entityPageDtoName} ${entityParam}PageDto) {
         PageResult<${entityName}Vo> page = ${serviceParam}.page(${entityParam}PageDto);
@@ -114,7 +114,7 @@ public class ${controllerName} {
      * @param ${entityParam}PageDto 查询条件
      */
     @Operation(summary = "${tableComment}导出")
-    @PreAuthorize("hasAuthority('${moduleName}:${functionName}:export')")
+    @PreAuthorize("@auth.hasAuthority('${moduleName}:${functionName}:export')")
     @PostMapping(path = "/export")
     public void export(@Validated @RequestBody ${entityPageDtoName} ${entityParam}PageDto) {
         ${serviceParam}.export(${entityParam}PageDto);
