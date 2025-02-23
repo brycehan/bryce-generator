@@ -186,9 +186,9 @@ const handleResetQuery = () => {
 /**
  * 新增/修改 弹窗
  *
- * @param id 主键ID
+ * @param row 当前行数据
  */
-const handleAddOrEdit = (id?: string) => {
-  addOrEditRef.value.init(id)
+const handleAddOrEdit = (row?: any) => {
+  addOrEditRef.value.init(row?.id)
 }
 </script>
