@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import ${packageName}.common.entity.PageResult;
 import ${packageName}.framework.mybatis.service.impl.BaseServiceImpl;
-import ${packageName}.common.util.ExcelUtils;
+import ${packageName}.common.util.excel.ExcelUtils;
 import ${packageName}.common.base.IdGenerator;
 import ${packageName}.${moduleName}.entity.convert.${convertName};
 import ${packageName}.${moduleName}.entity.dto.${entityName}Dto;
