@@ -89,7 +89,7 @@
       style="width: 100%"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" header-align="center" align="center" width="50" />
+      <el-table-column type="selection" header-align="center" align="center" min-width="50" />
     <#list gridList as field>
       <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
       <#if fieldCommentEnd == -1>
@@ -100,10 +100,10 @@
       <#if field.formDict??>
       <dict-table-column label="${fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>dict-type="${field.formDict}" />
       <#else>
-      <el-table-column label="${fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>header-align="center" align="center"<#if field.attrName=='createdTime'> width="170"</#if> />
+      <el-table-column label="${fieldComment!}" prop="${field.attrName}" <#if field.gridSort>sortable="custom" </#if>header-align="center" align="center"<#if field.attrName=='createdTime'> min-width="170"</#if> />
       </#if>
     </#list>
-      <el-table-column label="操作" fixed="right" header-align="center" align="center" width="170">
+      <el-table-column label="操作" fixed="right" header-align="center" align="center" min-width="170">
         <template #default="scope">
           <el-button v-auth="'${moduleName}:${functionName}:update'" type="primary" icon="Edit" link @click="handleAddOrEdit(scope.row)">修改</el-button>
           <el-button v-auth="'${moduleName}:${functionName}:delete'" type="danger" icon="Delete" link @click="handleDeleteBatch('${deleteTipColumn}', '${deleteTipColumnCNName}', scope.row)">删除</el-button>
