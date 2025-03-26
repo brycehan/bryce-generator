@@ -22,7 +22,7 @@ import java.io.Serial;
 </#if>
 
 /**
- * ${tableComment}entity
+ * ${tableComment} entity
  *
  * @author ${author}
  * @since ${date}

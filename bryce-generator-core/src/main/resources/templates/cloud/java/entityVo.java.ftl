@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.io.Serial;
 
 /**
- * ${tableComment}Vo
+ * ${tableComment} Vo
  *
  * @author ${author}
  * @since ${date}

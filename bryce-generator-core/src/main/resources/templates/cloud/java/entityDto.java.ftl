@@ -22,7 +22,7 @@ import ${item!};
 </#list>
 
 /**
- * ${tableComment}Dto
+ * ${tableComment} Dto
  *
  * @author ${author}
  * @since ${date}

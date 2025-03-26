@@ -17,7 +17,7 @@ import ${packageName}.common.enums.StatusType;
 </#list>
 
 /**
- * ${tableComment}PageDto
+ * ${tableComment} PageDto
  *
  * @author ${author}
  * @since ${date}
