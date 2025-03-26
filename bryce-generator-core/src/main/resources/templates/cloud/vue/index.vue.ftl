@@ -89,7 +89,7 @@
       style="width: 100%"
       @selection-change="handleSelectionChange"
     >
-      <el-table-column type="selection" header-align="center" align="center" min-width="50" />
+      <el-table-column type="selection" header-align="center" align="center" width="50" />
     <#list gridList as field>
       <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
       <#if fieldCommentEnd == -1>
