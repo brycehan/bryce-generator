@@ -59,11 +59,11 @@
     },
     {
       "templateName": "vue/index.vue.ftl",
-      "generatorPath": "${frontendPath}/src/views/${moduleName}/${functionName}/index.vue"
+      "generatorPath": "${frontendPath}/src/views/${moduleName}/${hyphenName}/index.vue"
     },
     {
       "templateName": "vue/add-or-edit.vue.ftl",
-      "generatorPath": "${frontendPath}/src/views/${moduleName}/${functionName}/add-or-edit.vue"
+      "generatorPath": "${frontendPath}/src/views/${moduleName}/${hyphenName}/add-or-edit.vue"
     }
   ]
 }

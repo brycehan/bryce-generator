@@ -147,15 +147,15 @@ public class TableUtils {
     }
 
     /**
-     * 获取模块名
+     * 获取模块名称
      *
      * @param tableName 表名
-     * @return 模块名
+     * @return 模块名称
      */
     public static String getModuleName(String tableName, String tablePrefix) {
 
         String moduleName = StrUtil.subBefore(tableName, "_", false);
-        // 获取模块名
+        // 获取模块名称
         String[] prefixArray = tablePrefix.split(",");
         if(ArrayUtil.isNotEmpty(prefixArray)){
             for (String  prefix : prefixArray) {
@@ -176,7 +176,7 @@ public class TableUtils {
      * 获取前端函数名
      *
      * @param tableName 表名
-     * @return 功能名
+     * @return 功能名称
      */
     public static String getFunctionName(String tableName, String tablePrefix) {
         String functionName = NamingCase.toPascalCase(tableName);
@@ -201,7 +201,7 @@ public class TableUtils {
      * 获取表说明
      *
      * @param rawTableComment 表说明
-     * @return 功能名
+     * @return 功能名称
      */
     public static String getTableComment(String rawTableComment) {
         if(rawTableComment.endsWith("表")){

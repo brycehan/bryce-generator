@@ -140,6 +140,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         dataModel.put("moduleName", table.getModuleName());
         dataModel.put("ModuleName", StrUtil.upperFirst(table.getModuleName()));
         dataModel.put("functionName", table.getFunctionName());
+        dataModel.put("hyphenName", StrUtil.toSymbolCase(table.getFunctionName(), '-'));
         dataModel.put("FunctionName", StrUtil.upperFirst(table.getFunctionName()));
         dataModel.put("formLayout", table.getFormLayout());
 

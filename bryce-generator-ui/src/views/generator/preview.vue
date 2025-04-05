@@ -26,6 +26,7 @@ import java from 'highlight.js/lib/languages/java';
 import sql from 'highlight.js/lib/languages/sql';
 import 'highlight.js/styles/github.css'
 import {DocumentCopy} from "@element-plus/icons-vue";
+
 hljs.registerLanguage('xml', xml);
 hljs.registerLanguage('html', xml);
 hljs.registerLanguage('vue', xml);

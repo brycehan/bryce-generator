@@ -88,13 +88,13 @@ public class TablePageDto extends BasePageDto {
     private String frontendPath;
 
     /**
-     * 模块名
+     * 模块名称
      */
     @Length(max = 100, groups = QueryGroup.class)
     private String moduleName;
 
     /**
-     * 功能名
+     * 功能名称
      */
     @Length(max = 100, groups = QueryGroup.class)
     private String functionName;

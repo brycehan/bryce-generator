@@ -40,13 +40,13 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <el-form-item label="模块名" prop="moduleName">
-            <el-input v-model="dataForm.moduleName" placeholder="模块名" />
+          <el-form-item label="模块名称" prop="moduleName">
+            <el-input v-model="dataForm.moduleName" placeholder="模块名称" />
           </el-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="功能名" prop="functionName">
-            <el-input v-model="dataForm.functionName" placeholder="功能名" />
+          <el-form-item label="功能名称" prop="functionName">
+            <el-input v-model="dataForm.functionName" placeholder="功能名称" />
           </el-form-item>
         </el-col>
       </el-row>

@@ -98,13 +98,13 @@ public class Table implements Serializable {
     private String frontendPath;
 
     /**
-     * 模块名
+     * 模块名称
      */
     @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String moduleName;
 
     /**
-     * 功能名
+     * 功能名称
      */
     @Length(max = 100, groups = {SaveGroup.class, UpdateGroup.class})
     private String functionName;
@@ -122,7 +122,7 @@ public class Table implements Serializable {
     /**
      * 基类ID
      */
-    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    @TableField(updateStrategy = FieldStrategy.ALWAYS)
     private Long baseClassId;
 
     /**
