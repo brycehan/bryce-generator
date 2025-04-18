@@ -13,4 +13,10 @@ import ${packageName}.${moduleName}.entity.po.${entityName};
 @Mapper
 public interface ${mapperName} extends BryceBaseMapper<${entityName}> {
 
+    String columns = """
+    <#list fieldList?chunk(5) as row>
+        <#list row as field>${field.fieldName}<#sep>, </#sep></#list><#sep>,</#sep>
+    </#list>
+    """;
+
 }

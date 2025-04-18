@@ -46,10 +46,6 @@
       "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/mapper/${entityName}Mapper.java"
     },
     {
-      "templateName": "java/mapper.xml.ftl",
-      "generatorPath": "${backendPath}/src/main/java/${packagePath}/${moduleName}/mapper/xml/${entityName}Mapper.xml"
-    },
-    {
       "templateName": "sql/menu.sql.ftl",
       "generatorPath": "${backendPath}/menu/${tableName}_menu.sql"
     },

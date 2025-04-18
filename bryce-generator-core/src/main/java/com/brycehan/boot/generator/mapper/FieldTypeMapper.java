@@ -36,7 +36,7 @@ public interface FieldTypeMapper extends BaseMapper<FieldType> {
          * @return SQL
          */
         @SuppressWarnings("all")
-        public static String getPackageNameByTableId() {
+        public static String getPackageNameByTableId(Long tableId, Long baseClassId, String type) {
             return """
                     <script>
                         select distinct bgft.package_name
