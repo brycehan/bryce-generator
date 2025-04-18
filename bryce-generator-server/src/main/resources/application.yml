@@ -9,7 +9,6 @@ spring:
 
 # Mybatis Plus 配置
 mybatis-plus:
-  mapper-locations: classpath*:com/brycehan/boot/generator/mapper/xml/*Mapper.xml
   global-config:
     banner: false
     db-config:
