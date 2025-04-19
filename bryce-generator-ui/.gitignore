@@ -28,4 +28,5 @@ coverage
 *.sw?
 
 # 自定义
-/tsconfig.node.tsbuildinfo
+tsconfig.node.tsbuildinfo
+/tsconfig.app.tsbuildinfo

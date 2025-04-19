@@ -20,13 +20,12 @@ public class PageResult<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 总记录数
-     */
-    private long total;
-
-    /**
      * 列表数据
      */
     private List<T> list;
 
+    /**
+     * 总记录数
+     */
+    private long total;
 }

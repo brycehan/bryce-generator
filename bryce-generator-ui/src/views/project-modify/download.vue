@@ -11,34 +11,35 @@
         label-width="100"
         @keyup.enter="handleSubmit()"
     >
+      <el-divider content-position="left">项目信息</el-divider>
       <el-row>
         <el-form-item label="项目名" prop="projectName" style="width: 100%">
-          <el-input v-model="dataForm.projectName" disabled placeholder="项目名" />
+          <el-text> {{ dataForm.projectName }} </el-text>
         </el-form-item>
       </el-row>
       <el-row>
         <el-col :span="12">
           <el-form-item label="项目标识" prop="projectCode">
-            <el-input v-model="dataForm.projectCode" disabled placeholder="项目标识" />
+            <el-text> {{ dataForm.projectCode }} </el-text>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="标识缩写" prop="projectCode">
-            <el-input v-model="dataForm.projectCodeAbbreviate" disabled placeholder="标识缩写" />
+            <el-text> {{ dataForm.projectCodeAbbreviate }} </el-text>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="项目包名" prop="projectPackage">
-            <el-input v-model="dataForm.projectPackage" disabled placeholder="项目包名" />
+            <el-text> {{ dataForm.projectPackage }} </el-text>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="项目路径" prop="projectPath">
-            <el-input v-model="dataForm.projectPath" disabled placeholder="项目路径" />
+            <el-text> {{ dataForm.projectPath }} </el-text>
           </el-form-item>
         </el-col>
       </el-row>
-      <el-divider>变更后的信息</el-divider>
+      <el-divider content-position="left">修改后的信息</el-divider>
       <el-row>
         <el-col :span="12">
           <el-form-item label="项目名" prop="modifyProjectName">

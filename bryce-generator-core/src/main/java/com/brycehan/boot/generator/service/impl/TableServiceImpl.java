@@ -125,7 +125,7 @@ public class TableServiceImpl extends ServiceImpl<TableMapper, Table> implements
 
         IPage<Table> page = baseMapper.selectPage(tablePageDto.toPage(), getWrapper(tablePageDto));
 
-        return new PageResult<>(page.getTotal(), TableConvert.INSTANCE.convert(page.getRecords()));
+        return new PageResult<>(TableConvert.INSTANCE.convert(page.getRecords()), page.getTotal());
     }
 
     /**

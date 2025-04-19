@@ -1,2 +1,2 @@
-@import './app';
-@import './variables';
+@forward 'app';
+@forward "variables";

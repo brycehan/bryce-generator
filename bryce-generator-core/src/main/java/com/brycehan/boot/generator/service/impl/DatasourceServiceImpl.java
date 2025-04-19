@@ -91,7 +91,7 @@ public class DatasourceServiceImpl extends ServiceImpl<DatasourceMapper, Datasou
 
         IPage<Datasource> page = datasourceMapper.selectPage(datasourcePageDto.toPage(), getWrapper(datasourcePageDto));
 
-        return new PageResult<>(page.getTotal(), DatasourceConvert.INSTANCE.convert(page.getRecords()));
+        return new PageResult<>(DatasourceConvert.INSTANCE.convert(page.getRecords()), page.getTotal());
     }
 
     /**

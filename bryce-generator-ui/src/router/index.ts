@@ -49,7 +49,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         name: 'Project',
         component: () => import('@/views/project-modify/index.vue'),
         meta: {
-          title: '项目名变更',
+          title: '项目名修改',
           icon: 'Edit'
         }
       }

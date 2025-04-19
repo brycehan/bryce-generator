@@ -67,7 +67,7 @@ public class BaseClassServiceImpl extends ServiceImpl<BaseClassMapper, BaseClass
 
         IPage<BaseClass> page = baseClassMapper.selectPage(baseClassPageDto.toPage(), getWrapper(baseClassPageDto));
 
-        return new PageResult<>(page.getTotal(), BaseClassConvert.INSTANCE.convert(page.getRecords()));
+        return new PageResult<>(BaseClassConvert.INSTANCE.convert(page.getRecords()), page.getTotal());
     }
 
     /**

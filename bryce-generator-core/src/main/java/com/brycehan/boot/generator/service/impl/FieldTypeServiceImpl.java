@@ -67,7 +67,7 @@ public class FieldTypeServiceImpl extends ServiceImpl<FieldTypeMapper, FieldType
 
         IPage<FieldType> page = fieldTypeMapper.selectPage(fieldTypePageDto.toPage(), getWrapper(fieldTypePageDto));
 
-        return new PageResult<>(page.getTotal(), FieldTypeConvert.INSTANCE.convert(page.getRecords()));
+        return new PageResult<>(FieldTypeConvert.INSTANCE.convert(page.getRecords()), page.getTotal());
     }
 
     /**

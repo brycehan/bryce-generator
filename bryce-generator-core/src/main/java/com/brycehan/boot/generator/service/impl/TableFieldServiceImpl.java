@@ -98,7 +98,7 @@ public class TableFieldServiceImpl extends ServiceImpl<TableFieldMapper, TableFi
 
         IPage<TableField> page = tableFieldMapper.selectPage(tableFieldPageDto.toPage(), getWrapper());
 
-        return new PageResult<>(page.getTotal(), TableFieldConvert.INSTANCE.convert(page.getRecords()));
+        return new PageResult<>(TableFieldConvert.INSTANCE.convert(page.getRecords()), page.getTotal());
     }
 
     /**

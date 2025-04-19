@@ -75,7 +75,7 @@ public class ProjectModifyServiceImpl extends ServiceImpl<ProjectModifyMapper, P
 
         IPage<ProjectModify> page = projectModifyMapper.selectPage(projectModifyPageDto.toPage(), getWrapper(projectModifyPageDto));
 
-        return new PageResult<>(page.getTotal(), ProjectModifyConvert.INSTANCE.convert(page.getRecords()));
+        return new PageResult<>(ProjectModifyConvert.INSTANCE.convert(page.getRecords()), page.getTotal());
     }
 
     /**
