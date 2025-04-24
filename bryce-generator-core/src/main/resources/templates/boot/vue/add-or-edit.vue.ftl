@@ -161,7 +161,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
 import { getByIdApi, saveOrUpdateApi } from '@/api/${moduleName}/${functionName}'
 import type { StateOptions } from "@/utils/state";
 import { crud } from "@/utils/state";
