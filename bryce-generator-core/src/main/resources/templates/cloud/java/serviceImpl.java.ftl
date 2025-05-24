@@ -64,7 +64,7 @@ public class ${serviceImplName} extends BaseServiceImpl<${mapperName}, ${entityN
     @Override
     public PageResult<${entityName}Vo> page(${entityPageDtoName} ${entityParam}PageDto) {
         IPage<${entityName}> page = baseMapper.selectPage(${entityParam}PageDto.toPage(), getWrapper(${entityParam}PageDto));
-        return new PageResult<>(page.getTotal(), ${convertName}.INSTANCE.convert(page.getRecords()));
+        return PageResult.of(${convertName}.INSTANCE.convert(page.getRecords()), page.getTotal());
     }
 
     /**
