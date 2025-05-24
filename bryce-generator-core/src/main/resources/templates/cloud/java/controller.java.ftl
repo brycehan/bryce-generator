@@ -101,7 +101,7 @@ public class ${controllerName} {
      * @return ${tableComment}分页列表
      */
     @Operation(summary = "${tableComment}分页查询")
-    @PreAuthorize("@auth.hasAuthority('${moduleName}:${hyphenName}:page')")
+    @PreAuthorize("@auth.hasAuthority('${moduleName}:${hyphenName}:query')")
     @PostMapping(path = "/page")
     public ResponseResult<PageResult<${entityName}Vo>> page(@Validated @RequestBody ${entityPageDtoName} ${entityParam}PageDto) {
         PageResult<${entityName}Vo> page = ${serviceParam}.page(${entityParam}PageDto);
