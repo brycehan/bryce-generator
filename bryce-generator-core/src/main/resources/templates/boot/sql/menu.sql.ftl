@@ -8,7 +8,7 @@
 </#if>
 <#assign menuName = "${(tableComment!?length > 2)?string(tableComment?remove_beginning('系统'), tableComment!)}">
 -- 添加菜单
-INSERT INTO brc_sys_menu (id, name, type, parent_id, url, authority, icon, open_style, sort, remark, visible, status, deleted, created_user_id, created_time, updated_user_id, updated_time) VALUES (${nextId}, '${menuName}管理', 'M', 2, '${moduleName}/${hyphenName}/index', '${moduleName}:${hyphenName}:page', 'icon-menu', 0, 0, null, 1, 1, null, 1, ${now}, 1, ${now});
+INSERT INTO brc_sys_menu (id, name, type, parent_id, url, authority, icon, open_style, sort, remark, visible, status, deleted, created_user_id, created_time, updated_user_id, updated_time) VALUES (${nextId}, '${menuName}管理', 'M', 2, '${moduleName}/${hyphenName}/index', '${moduleName}:${hyphenName}:query', 'icon-menu', 0, 0, null, 1, 1, null, 1, ${now}, 1, ${now});
 
 -- 按钮父菜单ID
 set @parentId := (select max(id) from brc_sys_menu);
