@@ -80,9 +80,8 @@
   </#list>
 </#if>
 <#if formLayout == 2>
-  <#list formList?chunk(2) as row>
       <el-row>
-    <#list row as field>
+  <#list formList as field>
       <#assign fieldCommentEnd = field.fieldComment!?index_of("（")>
       <#if fieldCommentEnd == -1>
         <#assign fieldComment = field.fieldComment!>
@@ -148,9 +147,8 @@
           </el-form-item>
         </#if>
         </el-col>
-    </#list>
-      </el-row>
   </#list>
+      </el-row>
 </#if>
     </el-form>
     <template #footer>
@@ -161,7 +159,6 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
 import { getByIdApi, saveOrUpdateApi } from '@/api/${moduleName}/${functionName}'
 import type { StateOptions } from "@/utils/state";
 import { crud } from "@/utils/state";
